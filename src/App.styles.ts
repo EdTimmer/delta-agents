@@ -2,12 +2,13 @@ import styled from 'styled-components';
 import colors from './styles/colors';
 
 export const AppContainer = styled.div`
+  background-color: ${colors.eerieBlack};
   position: relative;
   z-index: 1;
   font-family: 'Roboto Mono', monospace;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  // background-size: cover;
+  // background-position: center;
+  // background-repeat: no-repeat;
   width: 100vw;
   min-height: 100vh;
   display: flex;

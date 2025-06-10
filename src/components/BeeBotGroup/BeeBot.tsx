@@ -41,15 +41,15 @@ const BeeBot = forwardRef<THREE.Group, Props>(
     }, [actions]);
 
     // set initial rotation
-    useEffect(() => {
-      if (groupRef.current) {
-        groupRef.current.rotation.set(
-          rotation[0],
-          rotation[1],
-          rotation[2]
-        );
-      }
-    }, [rotation]);
+    // useEffect(() => {
+    //   if (groupRef.current) {
+    //     groupRef.current.rotation.set(
+    //       rotation[0],
+    //       rotation[1],
+    //       rotation[2]
+    //     );
+    //   }
+    // }, [rotation]);
 
     // animate around Y
     useFrame(() => {

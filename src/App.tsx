@@ -10,6 +10,7 @@ import {
   LinkContainer
 } from './App.styles'
 import BeeBotGroup from './components/BeeBotGroup';
+import BeeBot from './components/BeeBotGroup/BeeBot';
 ;
 
 function useIsMobile(breakpoint = 768) {
@@ -35,26 +36,43 @@ function App() {
   const [isGroupClockwise, setIsGroupClockwise] = useState(true);
   const [isBotClockwise, setIsBotClockwise] = useState(true);
   const isMobile = useIsMobile();
+  const [cursorRotation, setCursorRotation] = useState<[number, number, number]>([0, 0, 0]);
 
-  const { groupSpeed, botSpeed, minRadius, maxRadius, period } = useControls({
-    groupSpeed: { value: 0.3, min: 0, max: 1, step: 0.01, label: 'Group speed' },
-    botSpeed: { value: 0.0075, min: 0, max: 0.1, step: 0.0001, label: 'Bot spin speed' },
-    groupDirection: {
-      value: isGroupClockwise,
-      onChange: (value) => setIsGroupClockwise(value),
-      label: 'Group direction',
-      options: { clockwise: true, counterclockwise: false }
-    },
-    botSpinDirection: {
-      value: isBotClockwise,
-      onChange: (value) => setIsBotClockwise(value),
-      label: 'Bot spin direction',
-      options: { clockwise: true, counterclockwise: false }
-    },
-    minRadius: { value: 2, min: 0, max: 5, step: 0.1, label: 'Group min radius' },
-    maxRadius: { value: 5, min: 0, max: 10, step: 0.1, label: 'Group max radius' },
-    period: { value: 10, min: 1, max: 30, step: 1, label: 'Fluctuation period (s)' }
-  })
+  // Track cursor position and update rotation
+  useEffect(() => {
+    const handleMouseMove = (event: { clientY: number; clientX: number; }) => {
+      // Convert cursor position to rotation values
+      // Map x position to Y-axis rotation
+      // Map y position to X-axis rotation
+      const rotX = ((event.clientY / window.innerHeight) - 0.5) * Math.PI;
+      const rotY = ((event.clientX / window.innerWidth) - 0.5) * Math.PI * 2;
+      
+      setCursorRotation([rotX, rotY, 0]);
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
+  // const { groupSpeed, botSpeed, minRadius, maxRadius, period } = useControls({
+  //   groupSpeed: { value: 0.3, min: 0, max: 1, step: 0.01, label: 'Group speed' },
+  //   botSpeed: { value: 0.0075, min: 0, max: 0.1, step: 0.0001, label: 'Bot spin speed' },
+  //   groupDirection: {
+  //     value: isGroupClockwise,
+  //     onChange: (value) => setIsGroupClockwise(value),
+  //     label: 'Group direction',
+  //     options: { clockwise: true, counterclockwise: false }
+  //   },
+  //   botSpinDirection: {
+  //     value: isBotClockwise,
+  //     onChange: (value) => setIsBotClockwise(value),
+  //     label: 'Bot spin direction',
+  //     options: { clockwise: true, counterclockwise: false }
+  //   },
+  //   minRadius: { value: 2, min: 0, max: 5, step: 0.1, label: 'Group min radius' },
+  //   maxRadius: { value: 5, min: 0, max: 10, step: 0.1, label: 'Group max radius' },
+  //   period: { value: 10, min: 1, max: 30, step: 1, label: 'Fluctuation period (s)' }
+  // })
 
   return (
     <>
@@ -72,12 +90,12 @@ function App() {
                 gl.toneMappingExposure = 1.0;
               }}
             >
-              <PerspectiveCamera makeDefault fov={20} position={[-18, 2, 0]} />
+              <PerspectiveCamera makeDefault fov={20} position={[0, 0, 10]} />
 
               <directionalLight position={[0, 5, 5]} />
               <directionalLight position={[0, -5, 5]} /> 
 
-              <BeeBotGroup
+              {/* <BeeBotGroup
                 position={[0, -1.5, 0]}
                 rotation={[0, 0, 0]}
                 speed={groupSpeed}
@@ -87,9 +105,18 @@ function App() {
                 minRadius={minRadius}
                 maxRadius={maxRadius}
                 period={period}
+              /> */}
+              <BeeBot
+                position={[1, 0, 0]}
+                rotation={cursorRotation}
+                scale={1}
+                rotationSpeed={0}
+                fileName={'bee_bot12_blue.glb'}
+                isBotClockwise={isBotClockwise}
               />
+              
 
-              <Environment background preset="forest" backgroundIntensity={0.3} />
+              <Environment preset="forest" backgroundIntensity={0.3} />
               {/* <Environment preset="forest" backgroundIntensity={0.3} /> */}
               <OrbitControls enableDamping={true} />
             </Canvas>
