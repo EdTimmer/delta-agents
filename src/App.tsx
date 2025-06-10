@@ -41,11 +41,17 @@ function App() {
   // Track cursor position and update rotation
   useEffect(() => {
     const handleMouseMove = (event: { clientY: number; clientX: number; }) => {
-      // Convert cursor position to rotation values
-      // Map x position to Y-axis rotation
-      // Map y position to X-axis rotation
-      const rotX = ((event.clientY / window.innerHeight) - 0.5) * Math.PI;
-      const rotY = ((event.clientX / window.innerWidth) - 0.5) * Math.PI * 2;
+      // Define maximum rotation limits (in radians)
+      const MAX_ROT_X = Math.PI / 5; // Limit X rotation
+      const MAX_ROT_Y = Math.PI / 5; // Limit Y rotation
+      
+      // Calculate raw rotation values
+      const rawRotX = ((event.clientY / window.innerHeight) - 0.5) * Math.PI;
+      const rawRotY = ((event.clientX / window.innerWidth) - 0.5) * Math.PI * 2;
+      
+      // Clamp rotation values within limits
+      const rotX = Math.max(-MAX_ROT_X, Math.min(rawRotX, MAX_ROT_X));
+      const rotY = Math.max(-MAX_ROT_Y, Math.min(rawRotY, MAX_ROT_Y));
       
       setCursorRotation([rotX, rotY, 0]);
     };
