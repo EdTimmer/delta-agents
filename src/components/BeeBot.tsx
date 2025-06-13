@@ -3,7 +3,7 @@ import { useGLTF, useAnimations } from "@react-three/drei";
 import * as THREE from "three";
 
 interface Props {
-  fileName: string;
+  agentFileName: string;
   scale?: number;
   position?: [number, number, number];
   rotation?: [number, number, number];
@@ -13,7 +13,7 @@ interface Props {
 const BeeBot = (
   (
     {
-      fileName = "bee_bot12_blue.glb",
+      agentFileName = "bee_bot12_blue.glb",
       scale = 1,
       position = [0, 0, 0],
       rotation = [0, 0, 0],
@@ -25,9 +25,9 @@ const BeeBot = (
 
     // Load the GLTF model with its animations
     const { animations, scene } = useGLTF(
-      "../../models/" + fileName
+      "../../models/" + agentFileName
     );
-
+    console.log("Loaded GLTF model:", agentFileName);
     const { actions } = useAnimations(animations, parentGroupRef);
 
      useEffect(() => {

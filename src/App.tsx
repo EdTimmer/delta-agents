@@ -10,6 +10,7 @@ import {
   InputContainer,
   StyledInput,
   SubmitButton,
+  ChangeAgentButton,
   OutputText,
 } from './App.styles'
 import BeeBot from './components/BeeBot';
@@ -21,6 +22,15 @@ function App() {
   const [inputText, setInputText] = useState('');
   const [outputText, setOutputText] = useState('initial text output');
   const [isSpinning, setIsSpinning] = useState(false);
+  const [currentAgentIndex, setCurrentAgentIndex] = useState(0);
+
+  const agents = [
+    'bee_bot12_blue.glb',
+    'bee_bot12_green.glb',
+    'bee_bot12_yellow.glb',
+    'bee_bot12_red.glb',    
+    'bee_bot12_purple.glb'
+  ];
 
   const { rotation } = useSpring({
     rotation: inputIsFocused ? -Math.PI / 4 : 0,
@@ -48,6 +58,10 @@ function App() {
     setInputText('');
   };
 
+  // cycle through five different agents
+  const handleChangeAgent = () => {
+    setCurrentAgentIndex((prevIndex) => (prevIndex + 1) % agents.length);
+  }
 
   return (
     <>
@@ -68,6 +82,11 @@ function App() {
             >
               Submit
             </SubmitButton>
+
+            <ChangeAgentButton 
+              type="button"
+              onClick={() => {handleChangeAgent()}}
+            >Change Agent</ChangeAgentButton>
           </form>
 
           <OutputText>{outputText}</OutputText>
@@ -92,10 +111,11 @@ function App() {
 
               <animated.group rotation-y={isSpinning ? spinRotation : rotation} position={[1, 0, 0]}>
                 <BeeBot
+                  agentFileName={agents[currentAgentIndex]}
                   position={[0, 0, 0]}
                   rotation={[0, 0, 0]}
                   scale={1}
-                  fileName={'bee_bot12_blue.glb'}
+                  // fileName={'bee_bot12_blue.glb'}
                   animationSpeed={inputIsFocused ? 4 : 1} // Speed up animation when input is focused
                 />
               </animated.group>

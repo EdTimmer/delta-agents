@@ -234,6 +234,31 @@ export const StyledInput = styled.input`
     }
   `;
 
+  export const ChangeAgentButton = styled.button`
+    background-color:rgb(122, 108, 125);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 10px;
+    transition: background-color 0.3s ease;
+    &:hover {
+      background-color:rgb(161, 109, 162); /* Darker shade on hover */
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(108, 117, 125, 0.5); /* Focus ring */
+    }
+
+    &:disabled {
+      background-color: #ccc; /* Lighter shade when disabled */
+      cursor: not-allowed;
+    }
+  `;
+
   export const OutputText = styled.p`
     color: ${colors.seasalt};
     font-family: 'Roboto Mono', monospace;
