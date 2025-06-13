@@ -13,7 +13,8 @@ export const AppContainer = styled.div`
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
+  align-items: center;
   overflow: hidden;
 `;
 
@@ -27,6 +28,10 @@ export const Row = styled.div`
 `;
 
 export const SceneContent = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -35,6 +40,8 @@ export const SceneContent = styled.div`
   padding: 0;
   /* margin-top: -10rem; */
   flex-wrap: wrap;
+  pointer-events: none; /* Prevents interaction with the scene */
+
 
   @media (min-width: 1024px) {
     gap: 40rem;
@@ -179,3 +186,60 @@ export const LinkContainer = styled.div`
     }
   }
 `;
+
+export const InputContainer = styled.div`
+  margin-bottom: 400px;
+  z-index: 10;
+  margin-right: 400px;
+`;
+
+export const StyledInput = styled.input`
+  width: 400px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: #000;
+  font-size: 16px;
+`; 
+
+  // &:focus {
+  //   background-color: rgba(255, 255, 255, 0.15);
+  //   outline: none;
+  //   border-color: #6c757dff; /* Change border color on focus */
+  // }
+
+  export const SubmitButton = styled.button`
+    background-color: #6c757dff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 10px;
+    transition: background-color 0.3s ease;
+    &:hover {
+      background-color: #5a6268ff; /* Darker shade on hover */
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(108, 117, 125, 0.5); /* Focus ring */
+    }
+
+    &:disabled {
+      background-color: #ccc; /* Lighter shade when disabled */
+      cursor: not-allowed;
+    }
+  `;
+
+  export const OutputText = styled.p`
+    color: ${colors.seasalt};
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1.6rem;
+    margin: 0;
+    padding: 0;
+    margin-top: 10px;
+    white-space: pre-wrap; /* Preserve whitespace and line breaks */
+  `;

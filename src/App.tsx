@@ -1,91 +1,81 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Canvas } from '@react-three/fiber';
-import { Environment, OrbitControls, PerspectiveCamera } from '@react-three/drei';
+import { CameraShake, Environment, PerspectiveCamera } from '@react-three/drei';
 import * as THREE from 'three';
-import { Leva, useControls } from 'leva'
 import { 
   AppContainer,
   MainContainer,
   SceneContent,
-  LinkContainer
+  LinkContainer,
+  InputContainer,
+  StyledInput,
+  SubmitButton,
+  OutputText,
 } from './App.styles'
-import BeeBotGroup from './components/BeeBotGroup';
-import BeeBot from './components/BeeBotGroup/BeeBot';
+import BeeBot from './components/BeeBot';
+import { useSpring, animated } from '@react-spring/three';
 ;
 
-function useIsMobile(breakpoint = 768) {
-  const [isMobile, setIsMobile] = useState(false);
-  
-  useEffect(() => {
-    // Set the initial value on mount
-    setIsMobile(window.innerWidth < breakpoint);
-    
-    function onResize() {
-      setIsMobile(window.innerWidth < breakpoint);
-    }
-    
-    window.addEventListener('resize', onResize);
-    return () => window.removeEventListener('resize', onResize);
-  }, [breakpoint]);
-  
-  return isMobile;
-}
-
-
 function App() {
-  const [isGroupClockwise, setIsGroupClockwise] = useState(true);
-  const [isBotClockwise, setIsBotClockwise] = useState(true);
-  const isMobile = useIsMobile();
-  const [cursorRotation, setCursorRotation] = useState<[number, number, number]>([0, 0, 0]);
+  const [inputIsFocused, setInputIsFocused] = useState(false);
+  const [inputText, setInputText] = useState('');
+  const [outputText, setOutputText] = useState('initial text output');
+  const [isSpinning, setIsSpinning] = useState(false);
 
-  // Track cursor position and update rotation
-  useEffect(() => {
-    const handleMouseMove = (event: { clientY: number; clientX: number; }) => {
-      // Define maximum rotation limits (in radians)
-      const MAX_ROT_X = Math.PI / 5; // Limit X rotation
-      const MAX_ROT_Y = Math.PI / 5; // Limit Y rotation
-      
-      // Calculate raw rotation values
-      const rawRotX = ((event.clientY / window.innerHeight) - 0.5) * Math.PI;
-      const rawRotY = ((event.clientX / window.innerWidth) - 0.5) * Math.PI * 2;
-      
-      // Clamp rotation values within limits
-      const rotX = Math.max(-MAX_ROT_X, Math.min(rawRotX, MAX_ROT_X));
-      const rotY = Math.max(-MAX_ROT_Y, Math.min(rawRotY, MAX_ROT_Y));
-      
-      setCursorRotation([rotX, rotY, 0]);
-    };
+  const { rotation } = useSpring({
+    rotation: inputIsFocused ? -Math.PI / 4 : 0,
+    config: { mass: 1, tension: 120, friction: 14 } // Adjust these values to control animation feel
+  });
 
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
+  const { spinRotation } = useSpring({
+    spinRotation: isSpinning ? Math.PI * 2 : 0,
+    config: { mass: 2.5, tension: 40, friction: 10 },
+    onRest: () => {
+      if (isSpinning) {
+        setIsSpinning(false); // Reset after animation completes
+      }
+    },
+  });
 
-  // const { groupSpeed, botSpeed, minRadius, maxRadius, period } = useControls({
-  //   groupSpeed: { value: 0.3, min: 0, max: 1, step: 0.01, label: 'Group speed' },
-  //   botSpeed: { value: 0.0075, min: 0, max: 0.1, step: 0.0001, label: 'Bot spin speed' },
-  //   groupDirection: {
-  //     value: isGroupClockwise,
-  //     onChange: (value) => setIsGroupClockwise(value),
-  //     label: 'Group direction',
-  //     options: { clockwise: true, counterclockwise: false }
-  //   },
-  //   botSpinDirection: {
-  //     value: isBotClockwise,
-  //     onChange: (value) => setIsBotClockwise(value),
-  //     label: 'Bot spin direction',
-  //     options: { clockwise: true, counterclockwise: false }
-  //   },
-  //   minRadius: { value: 2, min: 0, max: 5, step: 0.1, label: 'Group min radius' },
-  //   maxRadius: { value: 5, min: 0, max: 10, step: 0.1, label: 'Group max radius' },
-  //   period: { value: 10, min: 1, max: 30, step: 1, label: 'Fluctuation period (s)' }
-  // })
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log('Message submitted:', inputText);
+    setIsSpinning(true);
+    setOutputText(`Processing: ${inputText}`); // Optional: Update output text
+
+    // Process the input here - connect to AI backend, etc.
+    // Clear input after submission
+    setInputText('');
+  };
+
 
   return (
     <>
-      {!isMobile && <Leva theme={{ sizes: { rootWidth: '350px' } }} />}
       <AppContainer>
+        <InputContainer>
+          <form onSubmit={handleSubmit}>
+            <StyledInput
+              type="text"
+              placeholder="Ask me anything..."
+              value={inputText}
+              onChange={(e) => setInputText(e.target.value)}
+              onFocus={() => setInputIsFocused(true)}
+              onBlur={() => setInputIsFocused(false)}
+            />
+            <SubmitButton 
+              type="submit"
+              disabled={!inputText.trim()}
+            >
+              Submit
+            </SubmitButton>
+          </form>
+
+          <OutputText>{outputText}</OutputText>
+        </InputContainer>
+
         <SceneContent>
           <MainContainer>
+
             <Canvas
               gl={{
                 antialias: true,
@@ -94,37 +84,35 @@ function App() {
               onCreated={({ gl }) => {
                 gl.toneMapping = THREE.ACESFilmicToneMapping;
                 gl.toneMappingExposure = 1.0;
-              }}
-            >
-              <PerspectiveCamera makeDefault fov={20} position={[0, 0, 10]} />
+                }}
+              >
+                <PerspectiveCamera makeDefault fov={20} position={[0, 0, 10]} />
 
-              <directionalLight position={[0, 5, 5]} />
-              <directionalLight position={[0, -5, 5]} /> 
+                <directionalLight position={[0, -2, 5]} color={'#ffe6b3'} />
 
-              {/* <BeeBotGroup
-                position={[0, -1.5, 0]}
-                rotation={[0, 0, 0]}
-                speed={groupSpeed}
-                isGroupClockwise={isGroupClockwise}
-                isBotClockwise={isBotClockwise}
-                botAxisRotationSpeed={botSpeed}
-                minRadius={minRadius}
-                maxRadius={maxRadius}
-                period={period}
-              /> */}
-              <BeeBot
-                position={[1, 0, 0]}
-                rotation={cursorRotation}
-                scale={1}
-                rotationSpeed={0}
-                fileName={'bee_bot12_blue.glb'}
-                isBotClockwise={isBotClockwise}
-              />
+              <animated.group rotation-y={isSpinning ? spinRotation : rotation} position={[1, 0, 0]}>
+                <BeeBot
+                  position={[0, 0, 0]}
+                  rotation={[0, 0, 0]}
+                  scale={1}
+                  fileName={'bee_bot12_blue.glb'}
+                  animationSpeed={inputIsFocused ? 4 : 1} // Speed up animation when input is focused
+                />
+              </animated.group>
               
 
-              <Environment preset="forest" backgroundIntensity={0.3} />
-              {/* <Environment preset="forest" backgroundIntensity={0.3} /> */}
-              <OrbitControls enableDamping={true} />
+              <Environment preset="forest" backgroundIntensity={0.2} />
+              {/* <OrbitControls enableDamping={true} /> */}
+              <CameraShake
+                maxYaw={0.1} // Max amount camera can yaw in either direction
+                maxPitch={0.05} // Max amount camera can pitch in either direction
+                maxRoll={0.1} // Max amount camera can roll in either direction
+                yawFrequency={0.1} // Frequency of the the yaw rotation
+                pitchFrequency={0.1} // Frequency of the pitch rotation
+                rollFrequency={0.1} // Frequency of the roll rotation
+                intensity={0.5} // initial intensity of the shake
+                decayRate={0.65} // if decay = true this is the rate at which intensity will reduce at />
+              />
             </Canvas>
           </MainContainer>
         </SceneContent>
