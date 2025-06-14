@@ -12,9 +12,9 @@ export const AppContainer = styled.div`
   width: 100vw;
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   overflow: hidden;
 `;
 
@@ -25,20 +25,34 @@ export const Row = styled.div`
   align-items: center;
   margin: 0;
   padding: 0;
+  gap: 30px;
 `;
 
-export const SceneContent = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 0;
+export const Column = styled.div`
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
   margin: 0;
   padding: 0;
+`;
+
+export const BotScene = styled.div`
+  /* position: absolute;
+  top: 0;
+  left: 0; */
+  z-index: 0;
+  /* display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center; */
+  width: 500px;
+  height: 600px;
+  margin-right: -100px;
   /* margin-top: -10rem; */
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
   flex-wrap: wrap;
   pointer-events: none; /* Prevents interaction with the scene */
 
@@ -73,11 +87,6 @@ export const PetriDishContainer = styled.div`
   cursor: pointer;
 `;
 
-export const MainContainer = styled.div`
-  width: 100vw;
-  height: 100vh;
-`;
-
 export const MilSatContainer = styled.div`
   position: absolute;
   top: 0;
@@ -94,13 +103,16 @@ export const ThreeDWebGroupContainer = styled.div`
 `;
 
 export const LogoContainer = styled.div`
-  position: absolute;
-  top: 50;
-  left: 50;
-  width: 80rem;
-  height: 40rem;
-  margin-top: 5rem;
-  margin-left: 2rem;
+  /* position: absolute;
+  top: 0;
+  left: 0; */
+  width: 100vw;
+  height: 120px;
+  /* margin-top: -70px; */
+  background-color: #111;
+  /* margin-bottom: -100px; */
+  /* margin-top: 3rem;
+  margin-left: 60px; */
   z-index: 1;
 
 
@@ -116,13 +128,24 @@ export const LogoContainer = styled.div`
 `;
 
 export const BackgroundCanvas = styled.div`
+  /* position: fixed;
+  top: -400px;
+  left: 0; */
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1; /* Ensure background canvas is behind other content */
+  pointer-events: none; /* Prevent canvas from intercepting pointer events */
+`;
+
+export const WavesContainer = styled.div`
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
-  z-index: 0; /* Ensure background canvas is behind other content */
-  pointer-events: none; /* Prevent canvas from intercepting pointer events */
+  height: 300px;
+  overflow: hidden;
+  z-index: 0; /* Ensure waves are behind other content */
 `;
 
 export const Title = styled.h1`
@@ -188,18 +211,19 @@ export const LinkContainer = styled.div`
 `;
 
 export const InputContainer = styled.div`
-  margin-bottom: 400px;
+  /* margin-bottom: 400px;
+  margin-left: 200px; */
   z-index: 10;
-  margin-right: 400px;
+  /* margin-right: 400px; */
 `;
 
 export const StyledInput = styled.input`
   width: 400px;
   padding: 10px;
   border-radius: 5px;
-  border: 1px solid #ccc;
-  background-color: #fff;
-  color: #000;
+  border: 1px solid ${colors.onyx};
+  background-color: ${colors.onyx};
+  color: ${colors.seasalt};
   font-size: 16px;
 `; 
 
@@ -210,8 +234,8 @@ export const StyledInput = styled.input`
   // }
 
   export const SubmitButton = styled.button`
-    background-color: #6c757dff;
-    color: #fff;
+    background-color: ${colors.onyx}; // #6c757dff;
+    color: ${colors.frenchGray};
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
@@ -220,7 +244,7 @@ export const StyledInput = styled.input`
     margin-left: 10px;
     transition: background-color 0.3s ease;
     &:hover {
-      background-color: #5a6268ff; /* Darker shade on hover */
+      background-color: ${colors.outerSpace};  // #5a6268ff; /* Darker shade on hover */
     }
 
     &:focus {
@@ -228,14 +252,19 @@ export const StyledInput = styled.input`
       box-shadow: 0 0 0 2px rgba(108, 117, 125, 0.5); /* Focus ring */
     }
 
+    &:active {
+      background-color: ${colors.onyx}; /* Even darker shade when clicked */
+      transform: scale(0.98); /* Slight scale down effect */
+    }
+
     &:disabled {
-      background-color: #ccc; /* Lighter shade when disabled */
-      cursor: not-allowed;
+      color:  ${colors.eerieBlack}; /* Lighter shade when disabled */
+      cursor: default;
     }
   `;
 
   export const ChangeAgentButton = styled.button`
-    background-color:rgb(122, 108, 125);
+    background-color: ${colors.slateGray};
     color: #fff;
     border: none;
     padding: 10px 20px;
@@ -245,12 +274,17 @@ export const StyledInput = styled.input`
     margin-left: 10px;
     transition: background-color 0.3s ease;
     &:hover {
-      background-color:rgb(161, 109, 162); /* Darker shade on hover */
+      background-color:  ${colors.outerSpace}; /* Darker shade on hover */
     }
 
     &:focus {
       outline: none;
       box-shadow: 0 0 0 2px rgba(108, 117, 125, 0.5); /* Focus ring */
+    }
+
+    &:active {
+      background-color: ${colors.onyx}; /* Even darker shade when clicked */
+      transform: scale(0.98); /* Slight scale down effect */
     }
 
     &:disabled {

@@ -4,18 +4,22 @@ import { CameraShake, Environment, PerspectiveCamera } from '@react-three/drei';
 import * as THREE from 'three';
 import { 
   AppContainer,
-  MainContainer,
-  SceneContent,
+  BotScene,
   LinkContainer,
   InputContainer,
   StyledInput,
   SubmitButton,
-  ChangeAgentButton,
   OutputText,
+  BackgroundCanvas,
+  LogoContainer,
+  Column,
+  Row,
+  WavesContainer,
 } from './App.styles'
 import BeeBot from './components/BeeBot';
 import { useSpring, animated } from '@react-spring/three';
-;
+import Waves from './components/Waves';
+import LogoGroup from './components/LogoGroup';
 
 function App() {
   const [inputIsFocused, setInputIsFocused] = useState(false);
@@ -66,35 +70,69 @@ function App() {
   return (
     <>
       <AppContainer>
-        <InputContainer>
-          <form onSubmit={handleSubmit}>
-            <StyledInput
-              type="text"
-              placeholder="Ask me anything..."
-              value={inputText}
-              onChange={(e) => setInputText(e.target.value)}
-              onFocus={() => setInputIsFocused(true)}
-              onBlur={() => setInputIsFocused(false)}
-            />
-            <SubmitButton 
-              type="submit"
-              disabled={!inputText.trim()}
-            >
-              Submit
-            </SubmitButton>
+        {/* <WavesContainer>
+          <BackgroundCanvas>
+            <Canvas camera={{ position: [0, -0.25, 3], fov: 75 }}>
+              <Waves />
+            </Canvas>
+          </BackgroundCanvas>
+        </WavesContainer> */}
 
-            <ChangeAgentButton 
-              type="button"
-              onClick={() => {handleChangeAgent()}}
-            >Change Agent</ChangeAgentButton>
-          </form>
+      <Column>
+        <LogoContainer>
+          <Canvas gl={{ antialias: true }}>
+            <PerspectiveCamera makeDefault fov={20} position={[0, 0, 20]} />
+            <ambientLight intensity={1} />
 
-          <OutputText>{outputText}</OutputText>
-        </InputContainer>
+            <directionalLight position={[-2, 0, 5]} color={'white'} intensity={0.5} />
+            <directionalLight position={[0, 0, 5]} color={'white'} intensity={0.5} />
+            <directionalLight position={[2, 0, 5]} color={'white'} intensity={0.5} />
+            
+            {/* <directionalLight position={[5, 4, 10]} color={'white'} intensity={0.5} />
+            <directionalLight position={[6, 4, 10]} color={'white'} intensity={0.5} />
+            <directionalLight position={[7, 4, 10]} color={'white'} intensity={0.5} />
+            <directionalLight position={[8, 4, 10]} color={'white'} intensity={0.5} />
+            <directionalLight position={[9, 4, 10]} color={'white'} intensity={0.5} />
+            <directionalLight position={[10, 4, 10]} color={'white'} intensity={0.5} />
+            <directionalLight position={[11, 4, 10]} color={'white'} intensity={0.5} />         
 
-        <SceneContent>
-          <MainContainer>
+            <directionalLight position={[2, 0, -10]} />
+            <directionalLight position={[-2, 0, -10]} /> */}
+            <LogoGroup />
+            <Environment preset="sunset" />
+          </Canvas>
+        </LogoContainer>  
 
+        <Row>
+          <InputContainer>
+            <form onSubmit={handleSubmit}>
+              <StyledInput
+                type="text"
+                placeholder="Ask me anything..."
+                value={inputText}
+                onChange={(e) => setInputText(e.target.value)}
+                onFocus={() => setInputIsFocused(true)}
+                onBlur={() => setInputIsFocused(false)}
+              />
+              <SubmitButton 
+                type="submit"
+                disabled={!inputText.trim()}
+              >
+                Submit
+              </SubmitButton>
+
+              <SubmitButton 
+                type="button"
+                onClick={() => {handleChangeAgent()}}
+              >
+                Change Agent
+              </SubmitButton>
+            </form>
+
+            <OutputText>{outputText}</OutputText>
+          </InputContainer>
+
+          <BotScene>
             <Canvas
               gl={{
                 antialias: true,
@@ -107,22 +145,19 @@ function App() {
               >
                 <PerspectiveCamera makeDefault fov={20} position={[0, 0, 10]} />
 
-                <directionalLight position={[0, -2, 5]} color={'#ffe6b3'} />
+                <directionalLight position={[-1, -2, 5]} color={'#fff'} />
 
-              <animated.group rotation-y={isSpinning ? spinRotation : rotation} position={[1, 0, 0]}>
+              <animated.group rotation-y={isSpinning ? spinRotation : rotation} position={[0, -1.2, 0]}>
                 <BeeBot
                   agentFileName={agents[currentAgentIndex]}
                   position={[0, 0, 0]}
                   rotation={[0, 0, 0]}
-                  scale={1}
-                  // fileName={'bee_bot12_blue.glb'}
-                  animationSpeed={inputIsFocused ? 4 : 1} // Speed up animation when input is focused
+                  scale={2.6}
+                  animationSpeed={inputIsFocused ? 4 : 1}
                 />
-              </animated.group>
-              
+              </animated.group>              
 
               <Environment preset="forest" backgroundIntensity={0.2} />
-              {/* <OrbitControls enableDamping={true} /> */}
               <CameraShake
                 maxYaw={0.1} // Max amount camera can yaw in either direction
                 maxPitch={0.05} // Max amount camera can pitch in either direction
@@ -134,8 +169,9 @@ function App() {
                 decayRate={0.65} // if decay = true this is the rate at which intensity will reduce at />
               />
             </Canvas>
-          </MainContainer>
-        </SceneContent>
+          </BotScene>
+        </Row>
+      </Column>
 
         <LinkContainer>
           <a href="https://www.edtimmer.com/" target="_blank" aria-label="Link to portfolio" title="Link to portfolio">edtimmer.com</a>
