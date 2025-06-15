@@ -6,15 +6,21 @@ import {
   AppContainer,
   BotScene,
   LinkContainer,
-  InputContainer,
+  InterfaceContainer,
   StyledInput,
   SubmitButton,
+  ChangeAgentButton,
   OutputText,
   BackgroundCanvas,
   LogoContainer,
   Column,
   Row,
   WavesContainer,
+  OutputContainer,
+  FlexEndRow,
+  StyledForm,
+  CenteredRow,
+  FlexStartRow,
 } from './App.styles'
 import BeeBot from './components/BeeBot';
 import { useSpring, animated } from '@react-spring/three';
@@ -66,17 +72,17 @@ function App() {
   const handleChangeAgent = () => {
     setCurrentAgentIndex((prevIndex) => (prevIndex + 1) % agents.length);
   }
-
+  // console.log('currentAgentIndex in App.tsx :>> ', currentAgentIndex);
   return (
     <>
       <AppContainer>
-        {/* <WavesContainer>
+        <WavesContainer>
           <BackgroundCanvas>
-            <Canvas camera={{ position: [0, -0.25, 3], fov: 75 }}>
+            <Canvas camera={{ position: [0, 0.25, 0.4], fov: 75 }}>
               <Waves />
             </Canvas>
           </BackgroundCanvas>
-        </WavesContainer> */}
+        </WavesContainer>
 
       <Column>
         <LogoContainer>
@@ -84,53 +90,42 @@ function App() {
             <PerspectiveCamera makeDefault fov={20} position={[0, 0, 20]} />
             <ambientLight intensity={1} />
 
-            <directionalLight position={[-2, 0, 5]} color={'white'} intensity={0.5} />
-            <directionalLight position={[0, 0, 5]} color={'white'} intensity={0.5} />
-            <directionalLight position={[2, 0, 5]} color={'white'} intensity={0.5} />
-            
-            {/* <directionalLight position={[5, 4, 10]} color={'white'} intensity={0.5} />
-            <directionalLight position={[6, 4, 10]} color={'white'} intensity={0.5} />
-            <directionalLight position={[7, 4, 10]} color={'white'} intensity={0.5} />
-            <directionalLight position={[8, 4, 10]} color={'white'} intensity={0.5} />
-            <directionalLight position={[9, 4, 10]} color={'white'} intensity={0.5} />
-            <directionalLight position={[10, 4, 10]} color={'white'} intensity={0.5} />
-            <directionalLight position={[11, 4, 10]} color={'white'} intensity={0.5} />         
-
-            <directionalLight position={[2, 0, -10]} />
-            <directionalLight position={[-2, 0, -10]} /> */}
             <LogoGroup />
-            <Environment preset="sunset" />
+            {/* <Environment files="/public/images/mud_road_puresky_2k.hdr" environmentIntensity={1}/> */}
+            <directionalLight position={[-3, 0, 5]} color={'#fff'} />
+            <directionalLight position={[-2, 0, 5]} color={'#fff'} />
+            <directionalLight position={[-1, 0, 5]} color={'#fff'} />
+            <Environment preset="apartment" backgroundIntensity={2.0} />
           </Canvas>
         </LogoContainer>  
 
         <Row>
-          <InputContainer>
-            <form onSubmit={handleSubmit}>
-              <StyledInput
-                type="text"
-                placeholder="Ask me anything..."
-                value={inputText}
-                onChange={(e) => setInputText(e.target.value)}
-                onFocus={() => setInputIsFocused(true)}
-                onBlur={() => setInputIsFocused(false)}
-              />
+          <InterfaceContainer>
+            <FlexStartRow>
+              <StyledForm onSubmit={handleSubmit}>
+                <StyledInput
+                  type="text"
+                  placeholder="Ask me anything..."
+                  value={inputText}
+                  onChange={(e) => setInputText(e.target.value)}
+                  onFocus={() => setInputIsFocused(true)}
+                  onBlur={() => setInputIsFocused(false)}
+                />              
+              </StyledForm>
+            
               <SubmitButton 
                 type="submit"
                 disabled={!inputText.trim()}
+                onClick={handleSubmit}
               >
                 Submit
               </SubmitButton>
+            </FlexStartRow>
 
-              <SubmitButton 
-                type="button"
-                onClick={() => {handleChangeAgent()}}
-              >
-                Change Agent
-              </SubmitButton>
-            </form>
-
-            <OutputText>{outputText}</OutputText>
-          </InputContainer>
+            <OutputContainer>
+              <OutputText>{outputText}</OutputText>
+            </OutputContainer>
+          </InterfaceContainer>
 
           <BotScene>
             <Canvas
@@ -152,7 +147,7 @@ function App() {
                   agentFileName={agents[currentAgentIndex]}
                   position={[0, 0, 0]}
                   rotation={[0, 0, 0]}
-                  scale={2.6}
+                  scale={2.4}
                   animationSpeed={inputIsFocused ? 4 : 1}
                 />
               </animated.group>              
@@ -169,6 +164,15 @@ function App() {
                 decayRate={0.65} // if decay = true this is the rate at which intensity will reduce at />
               />
             </Canvas>
+
+            <CenteredRow>
+              <ChangeAgentButton 
+                type="button"
+                onClick={handleChangeAgent}
+              >
+                Change Agent
+              </ChangeAgentButton>
+            </CenteredRow>
           </BotScene>
         </Row>
       </Column>

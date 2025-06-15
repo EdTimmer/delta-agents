@@ -10,7 +10,7 @@ const colors = {
   onyx: '#343a40',
   eerieBlack: '#212529',
 
-  veryDark: '#212529',
+  veryDark: '#0d1b2a',
   // Bright Blues
   federalBlue: '#03045e',
   honoluluBlue: '#0077b6',
@@ -29,6 +29,13 @@ const colors = {
   carnationPink: '#ffafcc',
   uranianBlue: '#bde0fe',
   lightSkyBlue: '#a2d2ff',
+
+  // Primaries
+  bittersweet: '#ff595e',
+  sunglow: '#ffca3a',
+  yellowGreen: '#8ac926',
+  steelBlue: '#1982c4',
+  ultraViolet: '#6a4c93',
 }
 
 export default colors;

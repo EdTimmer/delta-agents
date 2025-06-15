@@ -14,13 +14,13 @@ const darkColor = colors.eerieBlack;
 const WaterMaterial = shaderMaterial(
   {
     uTime: 0,
-    uBigWavesElevation: 0.15,
-    uBigWavesFrequency: new THREE.Vector2(1.5, 1.5),
-    uBigWavesSpeed: 0.05,
+    uBigWavesElevation: 0.127,
+    uBigWavesFrequency: new THREE.Vector2(1.2, 0.8),
+    uBigWavesSpeed: 0.1,
     uSmallWavesElevation: 0.13,
     uSmallWavesFrequency: 0,
-    uSmallWavesSpeed: 0.15,
-    uSmallWavesIterations: 1,
+    uSmallWavesSpeed: 0.08,
+    uSmallWavesIterations: 0,
     // use declare lightColor
     uSurfaceColor: new Color(lightColor),
     uDepthColor: new Color(darkColor),
@@ -50,6 +50,7 @@ declare global {
 const Water = () => {
   const meshRef = useRef<THREE.Mesh>(null!)
   const materialRef = useRef<THREE.ShaderMaterial>(null!)
+
 
   // Update the time in the shader on each frame
   useFrame(({ clock }) => {
@@ -117,7 +118,7 @@ const Water = () => {
       <waterMaterial
         ref={materialRef}
         attach="material"
-        wireframe={false}
+        wireframe={true}
         side={THREE.DoubleSide}
         // opacity={0.001}
       />

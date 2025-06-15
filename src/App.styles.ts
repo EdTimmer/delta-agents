@@ -28,6 +28,14 @@ export const Row = styled.div`
   gap: 30px;
 `;
 
+export const CenteredRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+`;
+
 export const Column = styled.div`
   display: flex;
   flex-direction: column;
@@ -54,7 +62,7 @@ export const BotScene = styled.div`
   justify-content: center;
   align-items: flex-end;
   flex-wrap: wrap;
-  pointer-events: none; /* Prevents interaction with the scene */
+  /* pointer-events: none; Prevents interaction with the scene */
 
 
   @media (min-width: 1024px) {
@@ -109,10 +117,13 @@ export const LogoContainer = styled.div`
   width: 100vw;
   height: 120px;
   /* margin-top: -70px; */
-  background-color: #111;
+  /* background-color: #000; */
   /* margin-bottom: -100px; */
   /* margin-top: 3rem;
   margin-left: 60px; */
+  /* border-bottom: 1px solid ${colors.outerSpace}; */
+  background-color: ${colors.onyx};
+  border-bottom: 1px solid ${colors.yinmnBlue};
   z-index: 1;
 
 
@@ -140,7 +151,7 @@ export const BackgroundCanvas = styled.div`
 
 export const WavesContainer = styled.div`
   position: fixed;
-  top: 0;
+  bottom: 0;
   left: 0;
   width: 100vw;
   height: 300px;
@@ -196,7 +207,7 @@ export const LinkContainer = styled.div`
   bottom: 30px;
   right: 40px;
   font-size: 16px;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   z-index: 30;
 
   a {
@@ -210,22 +221,55 @@ export const LinkContainer = styled.div`
   }
 `;
 
-export const InputContainer = styled.div`
+export const InterfaceContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 800px;
   /* margin-bottom: 400px;
   margin-left: 200px; */
   z-index: 10;
   /* margin-right: 400px; */
+  gap: 10px;
+`;
+
+export const StyledForm = styled.form`
+  width: 100%;
 `;
 
 export const StyledInput = styled.input`
-  width: 400px;
+  width: 100%;
   padding: 10px;
   border-radius: 5px;
   border: 1px solid ${colors.onyx};
   background-color: ${colors.onyx};
   color: ${colors.seasalt};
   font-size: 16px;
+
+  &:focus {
+    border: 1px solid #4a90e2;
+    outline: none; /* Remove default browser outline */
+  }
 `; 
+
+export const FlexEndRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+`;
+
+export const FlexStartRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+`;
 
   // &:focus {
   //   background-color: rgba(255, 255, 255, 0.15);
@@ -234,22 +278,25 @@ export const StyledInput = styled.input`
   // }
 
   export const SubmitButton = styled.button`
-    background-color: ${colors.onyx}; // #6c757dff;
+    background-color: ${colors.onyx};
     color: ${colors.frenchGray};
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
+    font-family: 'Roboto Mono', monospace;
     font-size: 16px;
-    margin-left: 10px;
+    /* margin-left: 10px; */
     transition: background-color 0.3s ease;
     &:hover {
-      background-color: ${colors.outerSpace};  // #5a6268ff; /* Darker shade on hover */
+      background-color: ${colors.outerSpace};
+      border: 1px solid ${colors.yinmnBlue};
     }
 
     &:focus {
       outline: none;
-      box-shadow: 0 0 0 2px rgba(108, 117, 125, 0.5); /* Focus ring */
+      /* box-shadow: 0 0 0 1px rgba(108, 117, 125, 0.5); */
+      
     }
 
     &:active {
@@ -264,22 +311,25 @@ export const StyledInput = styled.input`
   `;
 
   export const ChangeAgentButton = styled.button`
-    background-color: ${colors.slateGray};
-    color: #fff;
+    background-color: ${colors.onyx}; // #6c757dff;
+    color: ${colors.frenchGray};
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
+    color: ${colors.seasalt};
+    font-family: 'Roboto Mono', monospace;
     font-size: 16px;
-    margin-left: 10px;
+    /* margin-left: 10px; */
     transition: background-color 0.3s ease;
     &:hover {
-      background-color:  ${colors.outerSpace}; /* Darker shade on hover */
+      background-color: ${colors.outerSpace};  // #5a6268ff; /* Darker shade on hover */
+      border: 1px solid ${colors.yinmnBlue};
     }
 
     &:focus {
       outline: none;
-      box-shadow: 0 0 0 2px rgba(108, 117, 125, 0.5); /* Focus ring */
+      box-shadow: 0 0 0 1px rgba(108, 117, 125, 0.5); /* Focus ring */
     }
 
     &:active {
@@ -288,8 +338,8 @@ export const StyledInput = styled.input`
     }
 
     &:disabled {
-      background-color: #ccc; /* Lighter shade when disabled */
-      cursor: not-allowed;
+      color:  ${colors.eerieBlack}; /* Lighter shade when disabled */
+      cursor: default;
     }
   `;
 
@@ -299,6 +349,32 @@ export const StyledInput = styled.input`
     font-size: 1.6rem;
     margin: 0;
     padding: 0;
-    margin-top: 10px;
+    /* margin-top: 10px; */
     white-space: pre-wrap; /* Preserve whitespace and line breaks */
   `;
+
+  export const OutputContainer = styled.div`
+    background-color: ${colors.onyx};
+    padding: 20px;
+    border-radius: 5px;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow-y: auto; /* Enable scrolling for long outputs */
+    max-height: 300px; /* Limit height to prevent overflow */
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: ${colors.frenchGray2};
+      border-radius: 4px;
+    }
+    &::-webkit-scrollbar-track {
+      background-color: ${colors.onyx};
+    }
+
+    @media (max-width: 600px) {
+      width: 100%;
+      max-width: 100%;
+    }
+`;
+  
