@@ -6,9 +6,6 @@ export const AppContainer = styled.div`
   position: relative;
   z-index: 1;
   font-family: 'Roboto Mono', monospace;
-  // background-size: cover;
-  // background-position: center;
-  // background-repeat: no-repeat;
   width: 100vw;
   min-height: 100vh;
   display: flex;
@@ -18,14 +15,14 @@ export const AppContainer = styled.div`
   overflow: hidden;
 `;
 
-export const Row = styled.div`
+export const SpaceBetweenRow = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
+  width: 100%;
   margin: 0;
   padding: 0;
-  gap: 30px;
 `;
 
 export const CenteredRow = styled.div`
@@ -45,85 +42,46 @@ export const Column = styled.div`
   padding: 0;
 `;
 
-export const BotScene = styled.div`
-  /* position: absolute;
-  top: 0;
-  left: 0; */
-  z-index: 0;
-  /* display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center; */
+export const LeftColumn = styled.div`
   width: 500px;
-  height: 600px;
-  margin-right: -100px;
-  /* margin-top: -10rem; */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+`;
+
+export const ColumnWithGap = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  gap: 10px;
+`;
+
+export const BotScene = styled.div`
+  z-index: 0;
+  width: 500px;
+  height: 500px;
+  /* margin-right: -100px; */
   flex-direction: row;
   justify-content: center;
   align-items: flex-end;
   flex-wrap: wrap;
-  /* pointer-events: none; Prevents interaction with the scene */
-
-
   @media (min-width: 1024px) {
     gap: 40rem;
   }
 `;
 
-export const Header = styled.h1`
-  color: ${colors.seasalt};
-  font-family: 'Carlito', 'Roboto Mono', monospace;
-  font-size: 2.6rem;
-  margin: 0;
-  padding: 0;
-  font-weight: 400;
-  text-align: center;
-`;
-
-export const HeaderContainer = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-`;
-
-export const PetriDishContainer = styled.div`
-  width: 35rem;
-  height: 40rem;
-  cursor: pointer;
-`;
-
-export const MilSatContainer = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 3;
-`;
-
-export const ThreeDWebGroupContainer = styled.div`
-  width: 50rem;
-  height: 25rem;
-  cursor: pointer;
-`;
-
 export const LogoContainer = styled.div`
-  /* position: absolute;
-  top: 0;
-  left: 0; */
   width: 100vw;
   height: 120px;
-  /* margin-top: -70px; */
-  /* background-color: #000; */
-  /* margin-bottom: -100px; */
-  /* margin-top: 3rem;
-  margin-left: 60px; */
-  /* border-bottom: 1px solid ${colors.outerSpace}; */
-  background-color: ${colors.onyx};
-  border-bottom: 1px solid ${colors.yinmnBlue};
+  background-color: #000;
+  /* border-bottom: 1px solid ${colors.yinmnBlue}; */
   z-index: 1;
 
 
@@ -139,14 +97,11 @@ export const LogoContainer = styled.div`
 `;
 
 export const BackgroundCanvas = styled.div`
-  /* position: fixed;
-  top: -400px;
-  left: 0; */
   position: relative;
   width: 100vw;
   height: 100vh;
-  z-index: -1; /* Ensure background canvas is behind other content */
-  pointer-events: none; /* Prevent canvas from intercepting pointer events */
+  z-index: -1;
+  pointer-events: none;
 `;
 
 export const WavesContainer = styled.div`
@@ -157,49 +112,6 @@ export const WavesContainer = styled.div`
   height: 300px;
   overflow: hidden;
   z-index: 0; /* Ensure waves are behind other content */
-`;
-
-export const Title = styled.h1`
-  color: ${colors.seasalt};
-  font-size: 3.8rem;
-  margin: 0;
-  letter-spacing: 1.0rem;
-  text-transform: lowercase;
-  padding: 0;
-  font-weight: 300;
-`;
-
-export const ContactRow = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 3rem;
-  align-items: flex-start;
-  margin-bottom: 3rem;
-`;
-
-export const WebLink = styled.a`
-  color: ${colors.seasalt};
-  font-family: 'Carlito', 'Roboto Mono', monospace;
-  font-size: 2.6rem;
-  text-decoration-line: underline;
-  text-underline-offset: 5px;
-  margin-left: 0.4rem;
-`;
-
-export const Email = styled.p`
-  color: ${colors.seasalt};
-  margin: 0;
-  padding: 0;
-  font-size: 1.6rem;
-  text-decoration: none;
-  z-index: 3;
-`;
-
-export const CenterSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
 `;
 
 export const LinkContainer = styled.div`
@@ -227,10 +139,7 @@ export const InterfaceContainer = styled.div`
   justify-content: center;
   align-items: center;
   width: 800px;
-  /* margin-bottom: 400px;
-  margin-left: 200px; */
   z-index: 10;
-  /* margin-right: 400px; */
   gap: 10px;
 `;
 
@@ -249,18 +158,9 @@ export const StyledInput = styled.input`
 
   &:focus {
     border: 1px solid #4a90e2;
-    outline: none; /* Remove default browser outline */
+    outline: none;
   }
 `; 
-
-export const FlexEndRow = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: center;
-  width: 100%;
-  gap: 10px;
-`;
 
 export const FlexStartRow = styled.div`
   display: flex;
@@ -270,12 +170,6 @@ export const FlexStartRow = styled.div`
   width: 100%;
   gap: 10px;
 `;
-
-  // &:focus {
-  //   background-color: rgba(255, 255, 255, 0.15);
-  //   outline: none;
-  //   border-color: #6c757dff; /* Change border color on focus */
-  // }
 
   export const SubmitButton = styled.button`
     background-color: ${colors.onyx};
@@ -290,7 +184,7 @@ export const FlexStartRow = styled.div`
     transition: background-color 0.3s ease;
     &:hover {
       background-color: ${colors.outerSpace};
-      border: 1px solid ${colors.yinmnBlue};
+      /* border: 1px solid ${colors.yinmnBlue}; */
     }
 
     &:focus {
@@ -324,7 +218,7 @@ export const FlexStartRow = styled.div`
     transition: background-color 0.3s ease;
     &:hover {
       background-color: ${colors.outerSpace};  // #5a6268ff; /* Darker shade on hover */
-      border: 1px solid ${colors.yinmnBlue};
+      /* border: 1px solid ${colors.yinmnBlue}; */
     }
 
     &:focus {

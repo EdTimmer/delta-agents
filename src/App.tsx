@@ -14,13 +14,14 @@ import {
   BackgroundCanvas,
   LogoContainer,
   Column,
-  Row,
+  ColumnWithGap,
   WavesContainer,
   OutputContainer,
-  FlexEndRow,
   StyledForm,
   CenteredRow,
   FlexStartRow,
+  SpaceBetweenRow,
+  LeftColumn,
 } from './App.styles'
 import BeeBot from './components/BeeBot';
 import { useSpring, animated } from '@react-spring/three';
@@ -66,24 +67,18 @@ function App() {
     // Process the input here - connect to AI backend, etc.
     // Clear input after submission
     setInputText('');
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
   };
 
   // cycle through five different agents
-  const handleChangeAgent = () => {
-    setCurrentAgentIndex((prevIndex) => (prevIndex + 1) % agents.length);
+  const handleChangeAgent = (index: number) => {
+    setCurrentAgentIndex(index);
   }
   // console.log('currentAgentIndex in App.tsx :>> ', currentAgentIndex);
-  return (
-    <>
-      <AppContainer>
-        <WavesContainer>
-          <BackgroundCanvas>
-            <Canvas camera={{ position: [0, 0.25, 0.4], fov: 75 }}>
-              <Waves />
-            </Canvas>
-          </BackgroundCanvas>
-        </WavesContainer>
-
+  return (    
+    <AppContainer>
       <Column>
         <LogoContainer>
           <Canvas gl={{ antialias: true }}>
@@ -99,7 +94,9 @@ function App() {
           </Canvas>
         </LogoContainer>  
 
-        <Row>
+        <CenteredRow>
+          <LeftColumn></LeftColumn>
+
           <InterfaceContainer>
             <FlexStartRow>
               <StyledForm onSubmit={handleSubmit}>
@@ -166,22 +163,55 @@ function App() {
             </Canvas>
 
             <CenteredRow>
-              <ChangeAgentButton 
-                type="button"
-                onClick={handleChangeAgent}
-              >
-                Change Agent
-              </ChangeAgentButton>
+              <ColumnWithGap>
+                <ChangeAgentButton 
+                  type="button"
+                  onClick={() => handleChangeAgent(0)}
+                >
+                  Agent 01
+                </ChangeAgentButton>
+                <ChangeAgentButton 
+                  type="button"
+                  onClick={() => handleChangeAgent(1)}
+                >
+                  Agent 03
+                </ChangeAgentButton>
+                <ChangeAgentButton 
+                  type="button"
+                  onClick={() => handleChangeAgent(2)}
+                >
+                  Agent 05
+                </ChangeAgentButton>
+                <ChangeAgentButton 
+                  type="button"
+                  onClick={() => handleChangeAgent(3)}
+                >
+                  Agent 07
+                </ChangeAgentButton>
+                <ChangeAgentButton 
+                  type="button"
+                  onClick={() => handleChangeAgent(4)}
+                >
+                  Agent 11
+                </ChangeAgentButton>
+              </ColumnWithGap>
             </CenteredRow>
           </BotScene>
-        </Row>
+        </CenteredRow>
       </Column>
+
+      <WavesContainer>
+          <BackgroundCanvas>
+            <Canvas camera={{ position: [0, 0.25, 0.4], fov: 75 }}>
+              <Waves />
+            </Canvas>
+          </BackgroundCanvas>
+        </WavesContainer>
 
         <LinkContainer>
           <a href="https://www.edtimmer.com/" target="_blank" aria-label="Link to portfolio" title="Link to portfolio">edtimmer.com</a>
         </LinkContainer>
-      </AppContainer>
-    </>
+    </AppContainer>    
   )
 }
 
