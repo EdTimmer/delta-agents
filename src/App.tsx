@@ -9,7 +9,6 @@ import {
   InterfaceContainer,
   StyledInput,
   SubmitButton,
-  ChangeAgentButton,
   OutputText,
   BackgroundCanvas,
   LogoContainer,
@@ -22,7 +21,6 @@ import {
   FlexStartRow,
   SpaceBetweenRow,
   LeftColumn,
-  AddContainer,
 } from './App.styles'
 import BeeBot from './components/BeeBot';
 import { useSpring, animated } from '@react-spring/three';
@@ -33,6 +31,7 @@ import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
 import colors from './styles/colors';
+import AgentButton from './components/AgentButton/AgentButton';
 
 function App() {
   const [inputIsFocused, setInputIsFocused] = useState(false);
@@ -102,40 +101,45 @@ function App() {
 
         <CenteredRow>
           <LeftColumn>
-            <AddContainer
-              type="button"
-              onClick={() => handleChangeAgent(0)}
+            <AgentButton
+              setCurrentAgentIndex={setCurrentAgentIndex}
+              assignedIndex={0}
+              currentAgentIndex={currentAgentIndex}
             >
               Agent 01
-            </AddContainer>
+            </AgentButton>
 
-            <AddContainer
-              type="button"
-              onClick={() => handleChangeAgent(1)}
+            <AgentButton
+              setCurrentAgentIndex={setCurrentAgentIndex}
+              assignedIndex={1}
+              currentAgentIndex={currentAgentIndex}
             >
               Agent 03
-            </AddContainer>
+            </AgentButton>
 
-            <AddContainer
-              type="button"
-              onClick={() => handleChangeAgent(2)}
+            <AgentButton
+              setCurrentAgentIndex={setCurrentAgentIndex}
+              assignedIndex={2}
+              currentAgentIndex={currentAgentIndex}
             >
               Agent 05
-            </AddContainer>
+            </AgentButton>
 
-            <AddContainer
-              type="button"
-              onClick={() => handleChangeAgent(3)}
+            <AgentButton
+              setCurrentAgentIndex={setCurrentAgentIndex}
+              assignedIndex={3}
+              currentAgentIndex={currentAgentIndex}
             >
               Agent 07
-            </AddContainer>
+            </AgentButton>
 
-            <AddContainer
-              type="button"
-              onClick={() => handleChangeAgent(4)}
+            <AgentButton
+              setCurrentAgentIndex={setCurrentAgentIndex}
+              assignedIndex={4}
+              currentAgentIndex={currentAgentIndex}
             >
               Agent 11
-            </AddContainer>
+            </AgentButton>
           </LeftColumn>
 
           <InterfaceContainer>
@@ -208,41 +212,6 @@ function App() {
                 decayRate={0.65} // if decay = true this is the rate at which intensity will reduce at />
               />
             </Canvas>
-
-            {/* <CenteredRow>
-              <ColumnWithGap>
-                <ChangeAgentButton 
-                  type="button"
-                  onClick={() => handleChangeAgent(0)}
-                >
-                  Agent 01
-                </ChangeAgentButton>
-                <ChangeAgentButton 
-                  type="button"
-                  onClick={() => handleChangeAgent(1)}
-                >
-                  Agent 03
-                </ChangeAgentButton>
-                <ChangeAgentButton 
-                  type="button"
-                  onClick={() => handleChangeAgent(2)}
-                >
-                  Agent 05
-                </ChangeAgentButton>
-                <ChangeAgentButton 
-                  type="button"
-                  onClick={() => handleChangeAgent(3)}
-                >
-                  Agent 07
-                </ChangeAgentButton>
-                <ChangeAgentButton 
-                  type="button"
-                  onClick={() => handleChangeAgent(4)}
-                >
-                  Agent 11
-                </ChangeAgentButton>
-              </ColumnWithGap>
-            </CenteredRow> */}
           </BotScene>
         </CenteredRow>
       </Column>

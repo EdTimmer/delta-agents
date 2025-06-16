@@ -36,6 +36,13 @@ const colors = {
   yellowGreen: '#8ac926',
   steelBlue: '#1982c4',
   ultraViolet: '#6a4c93',
+
+  // Blender Bot Colors
+  blenderBotBlue: '#00B4CEFF',
+  blenderBotGreen: '#00E721FF',
+  blenderBotYellow: '#FFE500FF',
+  blenderBotRed: '#E50013FF', 
+  blenderBotPurple: '#E600E7FF',
 }
 
 export default colors;
