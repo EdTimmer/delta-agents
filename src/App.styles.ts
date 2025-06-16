@@ -5,7 +5,7 @@ export const AppContainer = styled.div`
   background-color: ${colors.eerieBlack};
   position: relative;
   z-index: 1;
-  font-family: 'Roboto Mono', monospace;
+  font-family: 'Comfortaa', 'Roboto Mono', monospace;
   width: 100vw;
   min-height: 100vh;
   display: flex;
@@ -29,7 +29,7 @@ export const CenteredRow = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   width: 100%;
 `;
 
@@ -49,8 +49,10 @@ export const LeftColumn = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  margin: 0;
-  padding: 0;
+  margin-top: 120px;
+  padding-left: 120px;
+  padding-right: 120px;
+  gap: 20px;;
 `;
 
 export const ColumnWithGap = styled.div`
@@ -60,7 +62,7 @@ export const ColumnWithGap = styled.div`
   align-items: center;
   margin: 0;
   padding: 0;
-  gap: 10px;
+  gap: 20px;;
 `;
 
 export const BotScene = styled.div`
@@ -72,6 +74,8 @@ export const BotScene = styled.div`
   justify-content: center;
   align-items: flex-end;
   flex-wrap: wrap;
+  /* margin-top: -30px; */
+  margin-top: 40px;
   @media (min-width: 1024px) {
     gap: 40rem;
   }
@@ -138,69 +142,73 @@ export const InterfaceContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 120px;
   width: 800px;
   z-index: 10;
-  gap: 10px;
+  gap: 20px;;
 `;
 
 export const StyledForm = styled.form`
   width: 100%;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
 `;
 
 export const StyledInput = styled.input`
   width: 100%;
   padding: 10px;
-  border-radius: 5px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
   border: 1px solid ${colors.onyx};
   background-color: ${colors.onyx};
   color: ${colors.seasalt};
   font-size: 16px;
 
   &:focus {
-    border: 1px solid #4a90e2;
+    /* border: 1px solid #4a90e2; */
     outline: none;
   }
 `; 
 
 export const FlexStartRow = styled.div`
+  position: relative;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   width: 100%;
-  gap: 10px;
+  gap: 20px;;
 `;
 
   export const SubmitButton = styled.button`
+    /* position: absolute;
+    right: 10px;
+    top: 8px; */
+    background-color: transparent;
+    border: 1px solid ${colors.onyx};
     background-color: ${colors.onyx};
-    color: ${colors.frenchGray};
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-family: 'Roboto Mono', monospace;
-    font-size: 16px;
-    /* margin-left: 10px; */
-    transition: background-color 0.3s ease;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    margin: 0;
+    padding: 10px;
+    max-height: 40px;;
     &:hover {
-      background-color: ${colors.outerSpace};
-      /* border: 1px solid ${colors.yinmnBlue}; */
+      cursor: pointer;
+      /* border: 1px solid #4a90e2; */
     }
-
+    &:disabled {
+      cursor: default;
+    }
     &:focus {
       outline: none;
-      /* box-shadow: 0 0 0 1px rgba(108, 117, 125, 0.5); */
-      
+      box-shadow: 0 0 0 1px rgba(108, 117, 125, 0.5); /* Focus ring */
     }
-
     &:active {
-      background-color: ${colors.onyx}; /* Even darker shade when clicked */
+      background-color: ${colors.veryDark}; /* Even darker shade when clicked */
       transform: scale(0.98); /* Slight scale down effect */
-    }
-
-    &:disabled {
-      color:  ${colors.eerieBlack}; /* Lighter shade when disabled */
-      cursor: default;
     }
   `;
 
@@ -212,7 +220,7 @@ export const FlexStartRow = styled.div`
     border-radius: 5px;
     cursor: pointer;
     color: ${colors.seasalt};
-    font-family: 'Roboto Mono', monospace;
+    font-family: 'Comfortaa', 'Roboto Mono', monospace;
     font-size: 16px;
     /* margin-left: 10px; */
     transition: background-color 0.3s ease;
@@ -239,7 +247,7 @@ export const FlexStartRow = styled.div`
 
   export const OutputText = styled.p`
     color: ${colors.seasalt};
-    font-family: 'Roboto Mono', monospace;
+    font-family: 'Comfortaa', 'Roboto Mono', monospace;
     font-size: 1.6rem;
     margin: 0;
     padding: 0;
@@ -252,9 +260,9 @@ export const FlexStartRow = styled.div`
     padding: 20px;
     border-radius: 5px;
     width: 100%;
+    height: 520px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     overflow-y: auto; /* Enable scrolling for long outputs */
-    max-height: 300px; /* Limit height to prevent overflow */
     &::-webkit-scrollbar {
       width: 8px;
     }
@@ -272,3 +280,37 @@ export const FlexStartRow = styled.div`
     }
 `;
   
+  export const AddContainer = styled.button`
+    background-color: ${colors.onyx}; // #6c757dff;
+    color: ${colors.frenchGray};
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    width: 100%;
+    height: 100px;
+    cursor: pointer;
+    color: ${colors.seasalt};
+    font-family: 'Comfortaa', 'Roboto Mono', monospace;
+    font-size: 16px;
+    /* margin-left: 10px; */
+    transition: background-color 0.3s ease;
+    &:hover {
+      background-color: ${colors.outerSpace};  // #5a6268ff; /* Darker shade on hover */
+      /* border: 1px solid ${colors.yinmnBlue}; */
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 1px rgba(108, 117, 125, 0.5); /* Focus ring */
+    }
+
+    &:active {
+      background-color: ${colors.onyx}; /* Even darker shade when clicked */
+      transform: scale(0.98); /* Slight scale down effect */
+    }
+
+    &:disabled {
+      color:  ${colors.eerieBlack}; /* Lighter shade when disabled */
+      cursor: default;
+    }
+  `;

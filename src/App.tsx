@@ -22,11 +22,17 @@ import {
   FlexStartRow,
   SpaceBetweenRow,
   LeftColumn,
+  AddContainer,
 } from './App.styles'
 import BeeBot from './components/BeeBot';
 import { useSpring, animated } from '@react-spring/three';
 import Waves from './components/Waves';
 import LogoGroup from './components/LogoGroup';
+import { Add } from '@mui/icons-material';
+import TextField from '@mui/material/TextField';
+import InputAdornment from '@mui/material/InputAdornment';
+import SearchIcon from '@mui/icons-material/Search';
+import colors from './styles/colors';
 
 function App() {
   const [inputIsFocused, setInputIsFocused] = useState(false);
@@ -95,7 +101,42 @@ function App() {
         </LogoContainer>  
 
         <CenteredRow>
-          <LeftColumn></LeftColumn>
+          <LeftColumn>
+            <AddContainer
+              type="button"
+              onClick={() => handleChangeAgent(0)}
+            >
+              Agent 01
+            </AddContainer>
+
+            <AddContainer
+              type="button"
+              onClick={() => handleChangeAgent(1)}
+            >
+              Agent 03
+            </AddContainer>
+
+            <AddContainer
+              type="button"
+              onClick={() => handleChangeAgent(2)}
+            >
+              Agent 05
+            </AddContainer>
+
+            <AddContainer
+              type="button"
+              onClick={() => handleChangeAgent(3)}
+            >
+              Agent 07
+            </AddContainer>
+
+            <AddContainer
+              type="button"
+              onClick={() => handleChangeAgent(4)}
+            >
+              Agent 11
+            </AddContainer>
+          </LeftColumn>
 
           <InterfaceContainer>
             <FlexStartRow>
@@ -108,15 +149,21 @@ function App() {
                   onFocus={() => setInputIsFocused(true)}
                   onBlur={() => setInputIsFocused(false)}
                 />              
-              </StyledForm>
+              
             
               <SubmitButton 
                 type="submit"
                 disabled={!inputText.trim()}
                 onClick={handleSubmit}
-              >
-                Submit
+              >                
+                <SearchIcon
+                  sx={{
+                    color: colors.seasalt,
+                    fontSize: 20
+                  }}
+                />               
               </SubmitButton>
+              </StyledForm>
             </FlexStartRow>
 
             <OutputContainer>
@@ -162,7 +209,7 @@ function App() {
               />
             </Canvas>
 
-            <CenteredRow>
+            {/* <CenteredRow>
               <ColumnWithGap>
                 <ChangeAgentButton 
                   type="button"
@@ -195,7 +242,7 @@ function App() {
                   Agent 11
                 </ChangeAgentButton>
               </ColumnWithGap>
-            </CenteredRow>
+            </CenteredRow> */}
           </BotScene>
         </CenteredRow>
       </Column>
