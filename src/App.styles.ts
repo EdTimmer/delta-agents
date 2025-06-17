@@ -76,6 +76,7 @@ export const BotScene = styled.div`
   flex-wrap: wrap;
   /* margin-top: -30px; */
   margin-top: 40px;
+  margin-left: -40px;
   @media (min-width: 1024px) {
     gap: 40rem;
   }
@@ -150,7 +151,7 @@ export const InterfaceContainer = styled.div`
 
 export const StyledForm = styled.form`
   width: 100%;
-  border-radius: 5px;
+  border-radius: 12px;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -159,9 +160,9 @@ export const StyledForm = styled.form`
 
 export const StyledInput = styled.input`
   width: 100%;
-  padding: 10px;
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
+  padding: 14px;
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
   border: 1px solid ${colors.onyx};
   background-color: ${colors.onyx};
   color: ${colors.seasalt};
@@ -190,11 +191,11 @@ export const FlexStartRow = styled.div`
     background-color: transparent;
     border: 1px solid ${colors.onyx};
     background-color: ${colors.onyx};
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
     margin: 0;
-    padding: 10px;
-    max-height: 40px;;
+    padding: 14px;
+    max-height: 48px;;
     &:hover {
       cursor: pointer;
       /* border: 1px solid #4a90e2; */
@@ -225,7 +226,7 @@ export const FlexStartRow = styled.div`
   export const OutputContainer = styled.div`
     background-color: ${colors.onyx};
     padding: 20px;
-    border-radius: 5px;
+    border-radius: 12px;
     width: 100%;
     height: 520px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -235,7 +236,7 @@ export const FlexStartRow = styled.div`
     }
     &::-webkit-scrollbar-thumb {
       background-color: ${colors.frenchGray2};
-      border-radius: 4px;
+      border-radius: 12px;
     }
     &::-webkit-scrollbar-track {
       background-color: ${colors.onyx};

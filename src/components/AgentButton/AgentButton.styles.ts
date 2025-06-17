@@ -23,7 +23,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
     color: ${colors.frenchGray};
     border: none;
     padding: 10px 20px;
-    border-radius: 5px;
+    border-radius: 12px;
     width: 100%;
     height: 100px;
     cursor: pointer;

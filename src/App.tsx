@@ -26,12 +26,13 @@ import BeeBot from './components/BeeBot';
 import { useSpring, animated } from '@react-spring/three';
 import Waves from './components/Waves';
 import LogoGroup from './components/LogoGroup';
-import { Add } from '@mui/icons-material';
+import { Add, Light } from '@mui/icons-material';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
 import colors from './styles/colors';
 import AgentButton from './components/AgentButton/AgentButton';
+import Lights from './components/Lights';
 
 function App() {
   const [inputIsFocused, setInputIsFocused] = useState(false);
@@ -92,9 +93,11 @@ function App() {
 
             <LogoGroup />
             {/* <Environment files="/public/images/mud_road_puresky_2k.hdr" environmentIntensity={1}/> */}
-            <directionalLight position={[-3, 0, 5]} color={'#fff'} />
+            {/* <directionalLight position={[-3, 0, 5]} color={'#fff'} />
             <directionalLight position={[-2, 0, 5]} color={'#fff'} />
             <directionalLight position={[-1, 0, 5]} color={'#fff'} />
+            <directionalLight position={[0, 0, 5]} color={'#fff'} /> */}
+            <Lights />
             <Environment preset="apartment" backgroundIntensity={2.0} />
           </Canvas>
         </LogoContainer>  
