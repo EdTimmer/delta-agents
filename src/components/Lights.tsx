@@ -10,7 +10,7 @@ function LightsGroup() {
   useFrame(({ clock }) => {
     if (groupRef.current) {
       const time = clock.getElapsedTime();
-      groupRef.current.rotation.y = Math.sin(time * 0.4) * 0.2;
+      groupRef.current.rotation.y = Math.sin(time * 0.5) * 0.2;
     }
   });
 

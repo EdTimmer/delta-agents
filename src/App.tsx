@@ -37,7 +37,7 @@ import Lights from './components/Lights';
 function App() {
   const [inputIsFocused, setInputIsFocused] = useState(false);
   const [inputText, setInputText] = useState('');
-  const [outputText, setOutputText] = useState('initial text output');
+  const [outputText, setOutputText] = useState('');
   const [isSpinning, setIsSpinning] = useState(false);
   const [currentAgentIndex, setCurrentAgentIndex] = useState(0);
 
@@ -78,11 +78,6 @@ function App() {
     }
   };
 
-  // cycle through five different agents
-  const handleChangeAgent = (index: number) => {
-    setCurrentAgentIndex(index);
-  }
-  // console.log('currentAgentIndex in App.tsx :>> ', currentAgentIndex);
   return (    
     <AppContainer>
       <Column>
@@ -90,13 +85,7 @@ function App() {
           <Canvas gl={{ antialias: true }}>
             <PerspectiveCamera makeDefault fov={20} position={[0, 0, 20]} />
             <ambientLight intensity={1} />
-
             <LogoGroup />
-            {/* <Environment files="/public/images/mud_road_puresky_2k.hdr" environmentIntensity={1}/> */}
-            {/* <directionalLight position={[-3, 0, 5]} color={'#fff'} />
-            <directionalLight position={[-2, 0, 5]} color={'#fff'} />
-            <directionalLight position={[-1, 0, 5]} color={'#fff'} />
-            <directionalLight position={[0, 0, 5]} color={'#fff'} /> */}
             <Lights />
             <Environment preset="apartment" backgroundIntensity={2.0} />
           </Canvas>
