@@ -1,12 +1,11 @@
 import styled from 'styled-components';
 import colors from '../../styles/colors';
-import { color } from 'three/webgpu';
 
 interface StyledButtonProps {
-  hoverBorderColor?: string;
-  currentBorderColor?: string;
-  assignedIndex: number;
-  currentAgentIndex: number;
+  $hoverBorderColor?: string;
+  $currentBorderColor?: string;
+  $assignedIndex: number;
+  $currentAgentIndex: number;
 }
 
 const borderColorMap = [
@@ -18,7 +17,7 @@ const borderColorMap = [
 ];
   
 export const StyledButton = styled.button<StyledButtonProps>`
-    background-color:  ${props => props.currentAgentIndex === props.assignedIndex
+    background-color:  ${props => props.$currentAgentIndex === props.$assignedIndex
       ? colors.eerieBlack : colors.onyx};
     color: ${colors.frenchGray};
     border: none;
@@ -32,9 +31,9 @@ export const StyledButton = styled.button<StyledButtonProps>`
     font-size: 16px;
     border-width: 1px;
     border-style: solid;
-    border-color: ${props => props.currentAgentIndex === props.assignedIndex
-      ? borderColorMap[props.assignedIndex] : colors.onyx};
-    /* margin-left: 10px; */
+    border-color: ${props => props.$currentAgentIndex === props.$assignedIndex
+      ? borderColorMap[props.$assignedIndex] : colors.onyx};
+    z-index: 25;
 
     transition: background-color 0.3s ease;
 
@@ -42,7 +41,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
       background-color: ${colors.eerieBlack}; /* Lighter shade on hover */
       border-width: 1px;
       border-style: solid;
-      border-color: ${props => borderColorMap[props.assignedIndex]}; /* Change border color on hover */
+      border-color: ${props => borderColorMap[props.$assignedIndex]}; /* Change border color on hover */
     }
 
     &:focus {

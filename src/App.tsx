@@ -13,33 +13,125 @@ import {
   BackgroundCanvas,
   LogoContainer,
   Column,
-  ColumnWithGap,
   WavesContainer,
   OutputContainer,
   StyledForm,
   CenteredRow,
   FlexStartRow,
-  SpaceBetweenRow,
   LeftColumn,
 } from './App.styles'
 import BeeBot from './components/BeeBot';
 import { useSpring, animated } from '@react-spring/three';
 import Waves from './components/Waves';
 import LogoGroup from './components/LogoGroup';
-import { Add, Light } from '@mui/icons-material';
-import TextField from '@mui/material/TextField';
-import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
 import colors from './styles/colors';
 import AgentButton from './components/AgentButton/AgentButton';
 import Lights from './components/Lights';
+import { z } from 'zod'
+import { fromZodError } from 'zod-validation-error'
+import CatOutput from './components/CatOutput/CatOutput';
+import DogOutput from './components/DogOutput/DogOutput';
+
+const CatSchema = z.array(
+  z.object({
+    url: z.string().url(),
+    breeds: z.array(
+      z.object({
+        name: z.string(),
+        description: z.string(),
+        temperament: z.string(),
+        affection_level: z.number(),
+        energy_level: z.number(),
+        // score: z.number(),
+      }),
+    ),
+  }),
+)
+
+const DogSchema = z.array(
+  z.object({
+    url: z.string().url(),
+    breeds: z.array(
+      z.object({
+        name: z.string(),
+        bred_for: z.string(),
+        breed_group: z.string(),
+      }),
+    ),
+  }),
+)
+
+export type CatType = z.infer<typeof CatSchema>
+export type DogType = z.infer<typeof DogSchema>
 
 function App() {
   const [inputIsFocused, setInputIsFocused] = useState(false);
   const [inputText, setInputText] = useState('');
-  const [outputText, setOutputText] = useState('');
   const [isSpinning, setIsSpinning] = useState(false);
   const [currentAgentIndex, setCurrentAgentIndex] = useState(0);
+  const [parsedCatData, setParsedCatData] = useState<CatType>()
+  const [parsedDogData, setParsedDogData] = useState<DogType>()
+  const [isSuccess, setIsSuccess] = useState<boolean>()
+  const [imageUrl, setImageUrl] = useState<string>()
+  const [errors, setErrors] = useState<string[]>()
+
+  console.log('parsedData :>> ', parsedCatData);
+
+  const catApiKey =
+    'live_SDlCPG7Qb9dLy1ZgZo2jNek2fdwN2ZJ1uOQvwSEygdEsT7xTOYUOjJMnIczWO71E'
+
+  const fetchCat = async () => {
+    const data = await fetch(
+      `https://api.thecatapi.com/v1/images/search?has_breeds=1&api_key=${catApiKey}`,
+    ).then((res) => res.json())
+
+    console.log('raw data', data)
+    // const parsedNotSafe = CatSchema.parse(data);
+    // console.log('parsedNotSafe', parsedNotSafe)
+    const parsed = CatSchema.safeParse(data)
+    console.log('parsed data', parsed)
+    // Handle Success
+    if (parsed.success) {
+      setIsSuccess(true)
+      setErrors(undefined)
+      setImageUrl(data[0].url)
+      setParsedCatData(parsed.data)
+      // Handle Error
+    } else {
+      setIsSuccess(false)
+      const errorsMessage = fromZodError(parsed.error)
+      setParsedCatData([])
+      setErrors(String(errorsMessage).split(';'))
+    }
+  }
+
+  const dogApiKey = 'live_QtPuZBUrIaDL1DegxhM3j96hi6VrWCl0EJBJxX65Nq4p7r8md4XeqLKjehZymHvW'
+
+  const fetchDog = async () => {
+    const data = await fetch(
+      `https://api.thedogapi.com/v1/images/search?has_breeds=1&api_key=${dogApiKey}`,
+    ).then((res) => res.json())
+
+    console.log('raw data', data)
+    // const parsedNotSafe = CatSchema.parse(data);
+    // console.log('parsedNotSafe', parsedNotSafe)
+    const parsed = DogSchema.safeParse(data)
+    console.log('parsed data', parsed)
+    // Handle Success
+    if (parsed.success) {
+      setIsSuccess(true)
+      setErrors(undefined)
+      setImageUrl(data[0].url)
+      setParsedDogData(parsed.data)
+      // Handle Error
+    } else {
+      setIsSuccess(false)
+      const errorsMessage = fromZodError(parsed.error)
+      setParsedDogData([])
+      setErrors(String(errorsMessage).split(';'))
+    }
+  }
 
   const agents = [
     'bee_bot12_blue.glb',
@@ -66,9 +158,15 @@ function App() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Message submitted:', inputText);
+    // console.log('Message submitted:', inputText);
+    if (currentAgentIndex === 0) {
+      fetchCat(); // Fetch cat data on submit
+    }
+    if (currentAgentIndex === 1) {
+      fetchDog(); // Fetch dog data on submit
+    }
+    
     setIsSpinning(true);
-    setOutputText(`Processing: ${inputText}`); // Optional: Update output text
 
     // Process the input here - connect to AI backend, etc.
     // Clear input after submission
@@ -96,7 +194,7 @@ function App() {
             <AgentButton
               setCurrentAgentIndex={setCurrentAgentIndex}
               assignedIndex={0}
-              currentAgentIndex={currentAgentIndex}
+              currentAgentIndex={currentAgentIndex}              
             >
               Agent 01
             </AgentButton>
@@ -163,7 +261,29 @@ function App() {
             </FlexStartRow>
 
             <OutputContainer>
-              <OutputText>{outputText}</OutputText>
+             {isSuccess && parsedCatData && currentAgentIndex === 0 &&
+                <CatOutput
+                  name={parsedCatData[0].breeds[0].name}
+                  description={parsedCatData[0].breeds[0].description}
+                  temperament={parsedCatData[0].breeds[0].temperament}
+                  affectionLevel={parsedCatData[0].breeds[0].affection_level}
+                  energyLevel={parsedCatData[0].breeds[0].energy_level}
+                  catUrl={imageUrl ?? ''}
+                />
+             }
+              {isSuccess && parsedDogData && currentAgentIndex === 1 &&
+                  <DogOutput
+                    name={parsedDogData[0].breeds[0].name}
+                    bredFor={parsedDogData[0].breeds[0].bred_for}
+                    breedGroup={parsedDogData[0].breeds[0].breed_group}
+                    // description={parsedDogData[0].breeds[0].bred_for}
+                    // temperament={parsedDogData[0].breeds[0].breed_group}
+                    // affectionLevel={0} // Placeholder, as Dog API does not provide this
+                    // energyLevel={0} // Placeholder, as Dog API does not provide this
+                    dogUrl={imageUrl ?? ''}
+                  />
+              }
+                
             </OutputContainer>
           </InterfaceContainer>
 
@@ -209,16 +329,16 @@ function App() {
       </Column>
 
       <WavesContainer>
-          <BackgroundCanvas>
-            <Canvas camera={{ position: [0, 0.25, 0.4], fov: 75 }}>
-              <Waves />
-            </Canvas>
-          </BackgroundCanvas>
-        </WavesContainer>
+        <BackgroundCanvas>
+          <Canvas camera={{ position: [0, 0.25, 0.4], fov: 75 }}>
+            <Waves />
+          </Canvas>
+        </BackgroundCanvas>
+      </WavesContainer>
 
-        <LinkContainer>
-          <a href="https://www.edtimmer.com/" target="_blank" aria-label="Link to portfolio" title="Link to portfolio">edtimmer.com</a>
-        </LinkContainer>
+      <LinkContainer>
+        <a href="https://www.edtimmer.com/" target="_blank" aria-label="Link to portfolio" title="Link to portfolio">edtimmer.com</a>
+      </LinkContainer>
     </AppContainer>    
   )
 }

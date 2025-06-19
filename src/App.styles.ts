@@ -52,7 +52,14 @@ export const LeftColumn = styled.div`
   margin-top: 120px;
   padding-left: 120px;
   padding-right: 120px;
-  gap: 20px;;
+  gap: 20px;
+
+  @media (max-width: 1500px) {
+    width: 400px;
+    padding-left: 60px;
+    padding-right: 60px;
+    margin-top: 60px;
+  }
 `;
 
 export const ColumnWithGap = styled.div`
@@ -77,9 +84,14 @@ export const BotScene = styled.div`
   /* margin-top: -30px; */
   margin-top: 40px;
   margin-left: -40px;
-  @media (min-width: 1024px) {
-    gap: 40rem;
+
+  @media (max-width: 1500px) {
+    width: 400px;
+    height: 400px;
+    margin-top: 20px;
+    margin-left: -30px;
   }
+  
 `;
 
 export const LogoContainer = styled.div`
@@ -146,7 +158,13 @@ export const InterfaceContainer = styled.div`
   margin-top: 120px;
   width: 800px;
   z-index: 10;
-  gap: 20px;;
+  gap: 20px;
+
+  @media (max-width: 1500px) {
+    width: 600px;
+    padding: 0 20px;
+    margin-top: 60px;
+  }
 `;
 
 export const StyledForm = styled.form`
@@ -242,6 +260,9 @@ export const FlexStartRow = styled.div`
       background-color: ${colors.onyx};
     }
 
+    @media (min-width: 1500px) {
+      height: 800px;
+    }
     @media (max-width: 600px) {
       width: 100%;
       max-width: 100%;
