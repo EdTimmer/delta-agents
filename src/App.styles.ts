@@ -261,7 +261,7 @@ export const FlexStartRow = styled.div`
     }
 
     @media (min-width: 1500px) {
-      height: 800px;
+      height: 620px;
     }
     @media (max-width: 600px) {
       width: 100%;
