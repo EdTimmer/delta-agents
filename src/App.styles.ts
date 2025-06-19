@@ -82,7 +82,7 @@ export const BotScene = styled.div`
   align-items: flex-end;
   flex-wrap: wrap;
   /* margin-top: -30px; */
-  margin-top: 40px;
+  margin-top: 10px;
   margin-left: -40px;
 
   @media (max-width: 1500px) {
