@@ -89,7 +89,7 @@ function App() {
     // const parsedNotSafe = CatSchema.parse(data);
     // console.log('parsedNotSafe', parsedNotSafe)
     const parsed = CatSchema.safeParse(data)
-    // console.log('parsed data', parsed)
+    console.log('parsed cat data', parsed)
     // Handle Success
     if (parsed.success) {
       setIsSuccess(true)
@@ -115,7 +115,7 @@ function App() {
     // const parsedNotSafe = CatSchema.parse(data);
     // console.log('parsedNotSafe', parsedNotSafe)
     const parsed = DogSchema.safeParse(data)
-    // console.log('parsed data', parsed)
+    console.log('parsed dog data', parsed)
     // Handle Success
     if (parsed.success) {
       setIsSuccess(true)
