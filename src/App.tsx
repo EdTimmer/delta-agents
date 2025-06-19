@@ -160,11 +160,10 @@ function App() {
     e.preventDefault();
     // console.log('Message submitted:', inputText);
     setIsReset(false); // Reset the state when submitting
-    if (currentAgentIndex === 0) {
-      fetchCat(); // Fetch cat data on submit
-    }
-    if (currentAgentIndex === 1) {
-      fetchDog(); // Fetch dog data on submit
+    if (currentAgentIndex % 2 === 0) {
+      fetchCat(); // Fetch cat data for index 0 and even numbers (0, 2, 4)
+    } else {
+      fetchDog(); // Fetch dog data for odd numbers (1, 3)
     }
 
     setIsSpinning(true);
@@ -268,7 +267,7 @@ function App() {
             </FlexStartRow>
 
             <OutputContainer>
-             {!isReset && isSuccess && parsedCatData && currentAgentIndex === 0 &&
+             {!isReset && isSuccess && parsedCatData && currentAgentIndex % 2 === 0 &&
                 <CatOutput
                   name={parsedCatData[0].breeds[0].name}
                   description={parsedCatData[0].breeds[0].description}
@@ -279,7 +278,7 @@ function App() {
                   prompt={prompt}
                 />
              }
-              {!isReset && isSuccess && parsedDogData && currentAgentIndex === 1 &&
+              {!isReset && isSuccess && parsedDogData && currentAgentIndex % 2 === 1 &&
                   <DogOutput
                     name={parsedDogData[0].breeds[0].name}
                     bredFor={parsedDogData[0].breeds[0].bred_for}
