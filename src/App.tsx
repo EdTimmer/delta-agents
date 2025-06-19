@@ -78,8 +78,7 @@ function App() {
 
   // console.log('parsedData :>> ', parsedCatData);
 
-  const catApiKey =
-    'live_SDlCPG7Qb9dLy1ZgZo2jNek2fdwN2ZJ1uOQvwSEygdEsT7xTOYUOjJMnIczWO71E'
+  const catApiKey = import.meta.env.VITE_CAT_API_KEY
 
   const fetchCat = async () => {
     const data = await fetch(
@@ -106,8 +105,7 @@ function App() {
     }
   }
 
-  const dogApiKey = 'live_QtPuZBUrIaDL1DegxhM3j96hi6VrWCl0EJBJxX65Nq4p7r8md4XeqLKjehZymHvW'
-
+  const dogApiKey = import.meta.env.VITE_DOG_API_KEY
   const fetchDog = async () => {
     const data = await fetch(
       `https://api.thedogapi.com/v1/images/search?has_breeds=1&api_key=${dogApiKey}`,
