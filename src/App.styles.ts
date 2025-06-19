@@ -49,7 +49,7 @@ export const LeftColumn = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  margin-top: 120px;
+  margin-top: 80px;
   padding-left: 120px;
   padding-right: 120px;
   gap: 20px;
@@ -155,7 +155,7 @@ export const InterfaceContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 120px;
+  margin-top: 80px;
   width: 800px;
   z-index: 10;
   gap: 20px;
