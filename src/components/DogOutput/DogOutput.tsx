@@ -10,12 +10,14 @@ interface DogOutputProps {
   bredFor: string;
   breedGroup: string;
   dogUrl: string;
+  prompt?: string; // Optional input text prop
 }
 
-const DogOutput = ({ name, bredFor, breedGroup, dogUrl }: DogOutputProps) => {
+const DogOutput = ({ name, bredFor, breedGroup, dogUrl, prompt }: DogOutputProps) => {
   console.log('dogUrl :>> ', dogUrl);
   return (
     <OutputContainer>
+      <DogText>{prompt}</DogText>
       <DogText>After careful consideration of your request, Agent Hive AI recommends getting a dog, perhaps this one:</DogText>
       
       <Image src={dogUrl} alt="dog" /> 

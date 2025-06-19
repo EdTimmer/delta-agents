@@ -9,7 +9,6 @@ import {
   InterfaceContainer,
   StyledInput,
   SubmitButton,
-  OutputText,
   BackgroundCanvas,
   LogoContainer,
   Column,
@@ -29,7 +28,7 @@ import colors from './styles/colors';
 import AgentButton from './components/AgentButton/AgentButton';
 import Lights from './components/Lights';
 import { z } from 'zod'
-import { fromZodError } from 'zod-validation-error'
+// import { fromZodError } from 'zod-validation-error'
 import CatOutput from './components/CatOutput/CatOutput';
 import DogOutput from './components/DogOutput/DogOutput';
 
@@ -43,7 +42,6 @@ const CatSchema = z.array(
         temperament: z.string(),
         affection_level: z.number(),
         energy_level: z.number(),
-        // score: z.number(),
       }),
     ),
   }),
@@ -68,15 +66,17 @@ export type DogType = z.infer<typeof DogSchema>
 function App() {
   const [inputIsFocused, setInputIsFocused] = useState(false);
   const [inputText, setInputText] = useState('');
+  const [prompt, setPrompt] = useState('');
   const [isSpinning, setIsSpinning] = useState(false);
   const [currentAgentIndex, setCurrentAgentIndex] = useState(0);
   const [parsedCatData, setParsedCatData] = useState<CatType>()
   const [parsedDogData, setParsedDogData] = useState<DogType>()
   const [isSuccess, setIsSuccess] = useState<boolean>()
   const [imageUrl, setImageUrl] = useState<string>()
-  const [errors, setErrors] = useState<string[]>()
+  const [isReset, setIsReset] = useState(false);
+  // const [errors, setErrors] = useState<string[]>()
 
-  console.log('parsedData :>> ', parsedCatData);
+  // console.log('parsedData :>> ', parsedCatData);
 
   const catApiKey =
     'live_SDlCPG7Qb9dLy1ZgZo2jNek2fdwN2ZJ1uOQvwSEygdEsT7xTOYUOjJMnIczWO71E'
@@ -86,23 +86,23 @@ function App() {
       `https://api.thecatapi.com/v1/images/search?has_breeds=1&api_key=${catApiKey}`,
     ).then((res) => res.json())
 
-    console.log('raw data', data)
+    // console.log('raw data', data)
     // const parsedNotSafe = CatSchema.parse(data);
     // console.log('parsedNotSafe', parsedNotSafe)
     const parsed = CatSchema.safeParse(data)
-    console.log('parsed data', parsed)
+    // console.log('parsed data', parsed)
     // Handle Success
     if (parsed.success) {
       setIsSuccess(true)
-      setErrors(undefined)
+      // setErrors(undefined)
       setImageUrl(data[0].url)
       setParsedCatData(parsed.data)
       // Handle Error
     } else {
       setIsSuccess(false)
-      const errorsMessage = fromZodError(parsed.error)
+      // const errorsMessage = fromZodError(parsed.error)
       setParsedCatData([])
-      setErrors(String(errorsMessage).split(';'))
+      // setErrors(String(errorsMessage).split(';'))
     }
   }
 
@@ -113,23 +113,23 @@ function App() {
       `https://api.thedogapi.com/v1/images/search?has_breeds=1&api_key=${dogApiKey}`,
     ).then((res) => res.json())
 
-    console.log('raw data', data)
+    // console.log('raw data', data)
     // const parsedNotSafe = CatSchema.parse(data);
     // console.log('parsedNotSafe', parsedNotSafe)
     const parsed = DogSchema.safeParse(data)
-    console.log('parsed data', parsed)
+    // console.log('parsed data', parsed)
     // Handle Success
     if (parsed.success) {
       setIsSuccess(true)
-      setErrors(undefined)
+      // setErrors(undefined)
       setImageUrl(data[0].url)
       setParsedDogData(parsed.data)
       // Handle Error
     } else {
       setIsSuccess(false)
-      const errorsMessage = fromZodError(parsed.error)
+      // const errorsMessage = fromZodError(parsed.error)
       setParsedDogData([])
-      setErrors(String(errorsMessage).split(';'))
+      // setErrors(String(errorsMessage).split(';'))
     }
   }
 
@@ -159,17 +159,19 @@ function App() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // console.log('Message submitted:', inputText);
+    setIsReset(false); // Reset the state when submitting
     if (currentAgentIndex === 0) {
       fetchCat(); // Fetch cat data on submit
     }
     if (currentAgentIndex === 1) {
       fetchDog(); // Fetch dog data on submit
     }
-    
+
     setIsSpinning(true);
 
     // Process the input here - connect to AI backend, etc.
     // Clear input after submission
+    setPrompt(inputText);
     setInputText('');
     if (document.activeElement instanceof HTMLElement) {
       document.activeElement.blur();
@@ -194,7 +196,8 @@ function App() {
             <AgentButton
               setCurrentAgentIndex={setCurrentAgentIndex}
               assignedIndex={0}
-              currentAgentIndex={currentAgentIndex}              
+              currentAgentIndex={currentAgentIndex}    
+              setIsReset={setIsReset}          
             >
               Agent 01
             </AgentButton>
@@ -203,6 +206,7 @@ function App() {
               setCurrentAgentIndex={setCurrentAgentIndex}
               assignedIndex={1}
               currentAgentIndex={currentAgentIndex}
+              setIsReset={setIsReset}
             >
               Agent 03
             </AgentButton>
@@ -211,6 +215,7 @@ function App() {
               setCurrentAgentIndex={setCurrentAgentIndex}
               assignedIndex={2}
               currentAgentIndex={currentAgentIndex}
+              setIsReset={setIsReset}
             >
               Agent 05
             </AgentButton>
@@ -219,6 +224,7 @@ function App() {
               setCurrentAgentIndex={setCurrentAgentIndex}
               assignedIndex={3}
               currentAgentIndex={currentAgentIndex}
+              setIsReset={setIsReset}
             >
               Agent 07
             </AgentButton>
@@ -227,6 +233,7 @@ function App() {
               setCurrentAgentIndex={setCurrentAgentIndex}
               assignedIndex={4}
               currentAgentIndex={currentAgentIndex}
+              setIsReset={setIsReset}
             >
               Agent 11
             </AgentButton>
@@ -261,7 +268,7 @@ function App() {
             </FlexStartRow>
 
             <OutputContainer>
-             {isSuccess && parsedCatData && currentAgentIndex === 0 &&
+             {!isReset && isSuccess && parsedCatData && currentAgentIndex === 0 &&
                 <CatOutput
                   name={parsedCatData[0].breeds[0].name}
                   description={parsedCatData[0].breeds[0].description}
@@ -269,9 +276,10 @@ function App() {
                   affectionLevel={parsedCatData[0].breeds[0].affection_level}
                   energyLevel={parsedCatData[0].breeds[0].energy_level}
                   catUrl={imageUrl ?? ''}
+                  prompt={prompt}
                 />
              }
-              {isSuccess && parsedDogData && currentAgentIndex === 1 &&
+              {!isReset && isSuccess && parsedDogData && currentAgentIndex === 1 &&
                   <DogOutput
                     name={parsedDogData[0].breeds[0].name}
                     bredFor={parsedDogData[0].breeds[0].bred_for}
@@ -281,6 +289,7 @@ function App() {
                     // affectionLevel={0} // Placeholder, as Dog API does not provide this
                     // energyLevel={0} // Placeholder, as Dog API does not provide this
                     dogUrl={imageUrl ?? ''}
+                    prompt={prompt}
                   />
               }
                 

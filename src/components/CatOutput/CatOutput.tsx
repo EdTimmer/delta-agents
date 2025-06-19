@@ -12,11 +12,14 @@ interface CatOutputProps {
   affectionLevel: number;
   energyLevel: number;
   catUrl: string;
+  prompt?: string; // Optional input text prop
 }
 
-const CatOutput = ({ name, description, temperament, affectionLevel, energyLevel, catUrl }: CatOutputProps) => {
+const CatOutput = ({ name, description, temperament, affectionLevel, energyLevel, catUrl, prompt }: CatOutputProps) => {
+  console.log('prompt :>> ', prompt);
   return (
     <OutputContainer>
+      <CatText>{prompt}</CatText>
       <CatText>After careful consideration of your request, Agent Hive AI recommends getting a cat, perhaps this one:</CatText>
       
       <Image src={catUrl} alt="cat" /> 
