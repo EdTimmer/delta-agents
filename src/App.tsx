@@ -379,8 +379,10 @@ function App() {
               
               <PerspectiveCamera makeDefault fov={20} position={[0, 0, 10]} />
 
-              <directionalLight position={[0, -0.5, 1]} color={'#fff'} intensity={0.01} />
-
+              <directionalLight position={[-0.02, -0.5, 1]} color={'#fff'} intensity={0.0025} />
+              <directionalLight position={[0, -0.5, 1]} color={'#fff'} intensity={0.0025} />
+              <directionalLight position={[0.02, -0.5, 1]} color={'#fff'} intensity={0.0025} />
+              
               <animated.group rotation-y={isSpinning ? spinRotation : rotation} position={[0, -1.2, 0]}>
                 <BeeBot
                   agentFileName={agents[currentAgentIndex]}
