@@ -1,9 +1,10 @@
 import {
   OutputContainer,
-  CatTextTitle,
-  CatText,
+  StyledTitle,
+  StyledText,
   Image,
-} from './CatOutput.styles';
+  StyledTextMarginBottom,
+} from './Output.styles';
 
 interface OutputProps {
   prompt: string;
@@ -16,20 +17,21 @@ interface OutputProps {
 const Output = ({ name, description, imageUrl, prompt, variableText }: OutputProps) => {
   return (
     <OutputContainer>
-      <CatText>{prompt}</CatText>
-      <CatText>After careful consideration of your request, Agent Hive AI recommends {variableText}, perhaps this one:</CatText>
+      <StyledText>{prompt}</StyledText>
+      <StyledTextMarginBottom>...</StyledTextMarginBottom>
+      <StyledText>After careful consideration of your request, Agent Hive AI recommends {variableText}, perhaps this one:</StyledText>
       
       <Image src={imageUrl} alt="animal" /> 
       
       {name && name.length > 0 && (<>
-          <CatTextTitle>Breed</CatTextTitle>
-          <CatText>{name}</CatText>
+          <StyledTitle>Breed</StyledTitle>
+          <StyledText>{name}</StyledText>
         </>)}
 
       {description && description.length > 0 && 
       (<>
-      <CatTextTitle>Description</CatTextTitle>
-      <CatText>{description}</CatText>
+      <StyledTitle>Description</StyledTitle>
+      <StyledText>{description}</StyledText>
       </>)}
     </OutputContainer>
   );

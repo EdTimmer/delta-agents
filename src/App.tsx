@@ -29,7 +29,7 @@ import AgentButton from './components/AgentButton/AgentButton';
 import Lights from './components/Lights';
 import { z } from 'zod'
 // import { fromZodError } from 'zod-validation-error'
-import Output from './components/CatOutput/CatOutput';
+import Output from './components/Output/Output';
 
 const CatSchema = z.array(
   z.object({
@@ -347,7 +347,7 @@ function App() {
                 <Output
                   imageUrl={imageUrl ?? ''}
                   prompt={prompt}
-                  variableText={'gazing onto a landscape'}
+                  variableText={'getting a cats'}
                 />
               }
               {!isReset && isSuccess && parsedCatData && currentAgentIndex === 4 &&

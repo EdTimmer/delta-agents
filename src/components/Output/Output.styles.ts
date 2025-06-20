@@ -13,14 +13,14 @@ export const OutputContainer = styled.div`
   gap: 10px;
 `;
 
-export const CatImage = styled.img`
+export const StyledImage = styled.img`
   width: 100%;
   height: auto;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 `;
 
-export const CatTextTitle = styled.p`
+export const StyledTitle = styled.p`
   color: ${colors.seasalt};
   font-family: 'Comfortaa', 'Roboto Mono', monospace;
   font-size: 18px;
@@ -28,7 +28,14 @@ export const CatTextTitle = styled.p`
   margin-top: 10px;
 `;
 
-export const CatText = styled.p`
+export const StyledTextMarginBottom = styled.p`
+  color: ${colors.seasalt};
+  font-family: 'Comfortaa', 'Roboto Mono', monospace;
+  font-size: 16px;
+  margin-bottom: 10px;
+`;
+
+export const StyledText = styled.p`
   color: ${colors.seasalt};
   font-family: 'Comfortaa', 'Roboto Mono', monospace;
   font-size: 16px;
