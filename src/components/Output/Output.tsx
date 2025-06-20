@@ -3,7 +3,6 @@ import {
   StyledTitle,
   StyledText,
   Image,
-  StyledTextMarginBottom,
   PromptContainer,
 } from './Output.styles';
 
