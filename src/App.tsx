@@ -27,7 +27,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import colors from './styles/colors';
 import AgentButton from './components/AgentButton/AgentButton';
 import Lights from './components/Lights';
-import { z } from 'zod'
+import { set, z } from 'zod'
 // import { fromZodError } from 'zod-validation-error'
 import Output from './components/Output/Output';
 
@@ -83,7 +83,7 @@ function App() {
   const [parsedFoxData, setParsedFoxData] = useState<FoxType>()
   // const [parsedLandscapeData, setParsedLandscapeData] = useState<LandscapeType>()
   const [isSuccess, setIsSuccess] = useState<boolean>()
-  const [imageUrl, setImageUrl] = useState<string>()
+  // const [imageUrl, setImageUrl] = useState<string>()
   const [isReset, setIsReset] = useState(false);
   // const [errors, setErrors] = useState<string[]>()
 
@@ -92,6 +92,7 @@ function App() {
   const catApiKey = import.meta.env.VITE_CAT_API_KEY
 
   const fetchCat = async () => {
+    setParsedCatData(undefined) // Reset parsed data before fetching
     const data = await fetch(
       `https://api.thecatapi.com/v1/images/search?has_breeds=1&api_key=${catApiKey}`,
     ).then((res) => res.json())
@@ -105,7 +106,7 @@ function App() {
     if (parsed.success) {
       setIsSuccess(true)
       // setErrors(undefined)
-      setImageUrl(parsed.data[0].url)
+      // setImageUrl(parsed.data[0].url)
       setParsedCatData(parsed.data)
       // Handle Error
     } else {
@@ -118,6 +119,7 @@ function App() {
 
   const dogApiKey = import.meta.env.VITE_DOG_API_KEY
   const fetchDog = async () => {
+    setParsedDogData(undefined) // Reset parsed data before fetching
     const data = await fetch(
       `https://api.thedogapi.com/v1/images/search?has_breeds=1&api_key=${dogApiKey}`,
     ).then((res) => res.json())
@@ -131,7 +133,7 @@ function App() {
     if (parsed.success) {
       setIsSuccess(true)
       // setErrors(undefined)
-      setImageUrl(parsed.data[0].url)
+      // setImageUrl(parsed.data[0].url)
       setParsedDogData(parsed.data)
       // Handle Error
     } else {
@@ -143,13 +145,14 @@ function App() {
   }
 
   const fetchFox = async () => {
+    setParsedFoxData(undefined) // Reset parsed data before fetching
     const data = await fetch(
       `https://randomfox.ca/floof/`,
     ).then((res) => res.json())
     const parsed = FoxSchema.safeParse(data)
     if (parsed.success) {
       setIsSuccess(true)
-      setImageUrl(parsed.data.image)
+      // setImageUrl(parsed.data.image)
       setParsedFoxData(parsed.data)
     } else {
       setIsSuccess(false)
@@ -323,7 +326,7 @@ function App() {
                 <Output
                   name={parsedCatData[0].breeds[0].name}
                   description={parsedCatData[0].breeds[0].description}
-                  imageUrl={imageUrl ?? ''}
+                  imageUrl={parsedCatData[0].url ?? ''}
                   prompt={prompt}
                   variableText={'getting a cat'}
                 />
@@ -331,28 +334,28 @@ function App() {
               {!isReset && isSuccess && parsedDogData && currentAgentIndex === 1 &&
                 <Output
                   name={parsedDogData[0].breeds[0].name}
-                  imageUrl={imageUrl ?? ''}
+                  imageUrl={parsedDogData[0].url ?? ''}
                   prompt={prompt}
                   variableText={'getting a dog'}
                 />
               }
               {!isReset && isSuccess && parsedFoxData && currentAgentIndex === 2 &&
                 <Output
-                  imageUrl={imageUrl ?? ''}
+                  imageUrl={parsedFoxData.image ?? ''}
                   prompt={prompt}
                   variableText={'admiring a fox'}
                 />
               }
               {!isReset && isSuccess && parsedCatData && currentAgentIndex === 3 &&
                 <Output
-                  imageUrl={imageUrl ?? ''}
+                  imageUrl={parsedCatData[0].url ?? ''}
                   prompt={prompt}
                   variableText={'getting a cat'}
                 />
               }
               {!isReset && isSuccess && parsedCatData && currentAgentIndex === 4 &&
                 <Output
-                  imageUrl={imageUrl ?? ''}
+                  imageUrl={parsedCatData[0].url ?? ''}
                   prompt={prompt}
                   variableText={'getting a cat'}
                 />
