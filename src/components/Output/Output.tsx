@@ -4,6 +4,7 @@ import {
   StyledText,
   Image,
   StyledTextMarginBottom,
+  PromptContainer,
 } from './Output.styles';
 
 interface OutputProps {
@@ -18,8 +19,10 @@ interface OutputProps {
 const Output = ({ name, description, imageUrl, prompt, variableText, text }: OutputProps) => {
   return (
     <OutputContainer>
-      <StyledText>{prompt}</StyledText>
-      <StyledTextMarginBottom>...</StyledTextMarginBottom>
+      <PromptContainer>
+        <StyledText>{prompt}</StyledText>
+      </PromptContainer>      
+      
       <StyledText>After careful consideration of your request, Agent Hive AI recommends {variableText}, perhaps this one:</StyledText>
       
       {imageUrl && <Image src={imageUrl} alt="animal" /> }

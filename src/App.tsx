@@ -30,6 +30,7 @@ import Lights from './components/Lights';
 import { z } from 'zod'
 // import { fromZodError } from 'zod-validation-error'
 import Output from './components/Output/Output';
+import { taoTeChing } from './utils/textData';
 
 const CatSchema = z.array(
   z.object({
@@ -86,6 +87,7 @@ function App() {
   const [parsedCatData, setParsedCatData] = useState<CatType>()
   const [parsedDogData, setParsedDogData] = useState<DogType>()
   const [parsedFoxData, setParsedFoxData] = useState<FoxType>()
+  const [taoTeChingChapter, setTaoTeChingChapter] = useState<string>();
   // const [parsedLandscapeData, setParsedLandscapeData] = useState<LandscapeType>()
   const [parsedRandomFactsData, setParsedRandomFactsData] = useState<RandomFactsType>()
   const [isSuccess, setIsSuccess] = useState<boolean>()
@@ -94,11 +96,18 @@ function App() {
   // const [errors, setErrors] = useState<string[]>()
 
   // console.log('parsedData :>> ', parsedCatData);
+  const handleCleanUp = () => {
+    setParsedCatData(undefined)
+    setParsedDogData(undefined)
+    setParsedFoxData(undefined)
+    setTaoTeChingChapter(undefined)
+    setParsedRandomFactsData(undefined)
+  }
 
   const catApiKey = import.meta.env.VITE_CAT_API_KEY
 
   const fetchCat = async () => {
-    setParsedCatData(undefined) // Reset parsed data before fetching
+    handleCleanUp()
     const data = await fetch(
       `https://api.thecatapi.com/v1/images/search?has_breeds=1&api_key=${catApiKey}`,
     ).then((res) => res.json())
@@ -125,7 +134,7 @@ function App() {
 
   const dogApiKey = import.meta.env.VITE_DOG_API_KEY
   const fetchDog = async () => {
-    setParsedDogData(undefined) // Reset parsed data before fetching
+    handleCleanUp()
     const data = await fetch(
       `https://api.thedogapi.com/v1/images/search?has_breeds=1&api_key=${dogApiKey}`,
     ).then((res) => res.json())
@@ -151,7 +160,7 @@ function App() {
   }
 
   const fetchFox = async () => {
-    setParsedFoxData(undefined) // Reset parsed data before fetching
+    handleCleanUp()
     const data = await fetch(
       `https://randomfox.ca/floof/`,
     ).then((res) => res.json())
@@ -169,7 +178,7 @@ function App() {
   }
 
   const fetchRandomFacts = async () => {
-    setParsedRandomFactsData(undefined) // Reset parsed data before fetching
+    handleCleanUp()
     const data = await fetch(
       `https://uselessfacts.jsph.pl/random.json?language=en`,
     ).then((res) => res.json())
@@ -186,9 +195,17 @@ function App() {
       // setErrors(String(errorsMessage).split(';'))
     }
   }
-    // const parsed = RandomFactsSchema.safeParse(data) 
+  
+  const getRandomElementFromArray = (array: string[]) => {
+    const randomIndex = Math.floor(Math.random() * array.length);
+    return array[randomIndex];
+  };
 
-    // console.log('raw data', data)
+  const setNewTaoTeChingChapter = () => {
+    handleCleanUp()
+    const randomChapter = getRandomElementFromArray(taoTeChing);
+    setTaoTeChingChapter(randomChapter);
+  };
 
 
   const agents = [
@@ -227,7 +244,7 @@ function App() {
     } else if (currentAgentIndex === 3) {
       fetchRandomFacts();
     } else if (currentAgentIndex === 4) {
-      fetchCat(); // Default to cat if no specific agent is selected
+      setNewTaoTeChingChapter(); // Default to cat if no specific agent is selected
     }
       // Handle other agents or default case
 
@@ -369,6 +386,13 @@ function App() {
                   imageUrl={parsedCatData[0].url ?? ''}
                   prompt={prompt}
                   variableText={'getting a cat'}
+                />
+              }
+              {!isReset && taoTeChingChapter && currentAgentIndex === 4 &&
+                <Output
+                  prompt={prompt}
+                  variableText={'reading a chapter from the Tao Te Ching'}
+                  text={taoTeChingChapter}
                 />
               }
               

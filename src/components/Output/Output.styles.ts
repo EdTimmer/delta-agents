@@ -26,6 +26,8 @@ export const StyledTitle = styled.p`
   font-size: 18px;
   font-weight: bold;
   margin-top: 10px;
+  line-height: 28px;
+  /* white-space: pre-wrap;s */
 `;
 
 export const StyledTextMarginBottom = styled.p`
@@ -39,6 +41,7 @@ export const StyledText = styled.p`
   color: ${colors.seasalt};
   font-family: 'Comfortaa', 'Roboto Mono', monospace;
   font-size: 16px;
+  line-height: 20px;
 `;
 
 export const Image = styled.img`
@@ -46,4 +49,11 @@ export const Image = styled.img`
   max-height: 60rem;
   height: auto;
   padding: 2rem;
+`
+
+export const PromptContainer = styled.div`
+  width: 100%;
+  border-bottom: 1px solid ${colors.seasalt};
+  padding-bottom: 20px;
+  margin-bottom: 20px;
 `
