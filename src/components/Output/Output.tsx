@@ -9,19 +9,22 @@ import {
 interface OutputProps {
   prompt: string;
   name?: string;
-  imageUrl: string;
+  imageUrl?: string;
   variableText: string;
   description?: string;
+  text?: string;
 }
 
-const Output = ({ name, description, imageUrl, prompt, variableText }: OutputProps) => {
+const Output = ({ name, description, imageUrl, prompt, variableText, text }: OutputProps) => {
   return (
     <OutputContainer>
       <StyledText>{prompt}</StyledText>
       <StyledTextMarginBottom>...</StyledTextMarginBottom>
       <StyledText>After careful consideration of your request, Agent Hive AI recommends {variableText}, perhaps this one:</StyledText>
       
-      <Image src={imageUrl} alt="animal" /> 
+      {imageUrl && <Image src={imageUrl} alt="animal" /> }
+
+      {text && <StyledText>{text}</StyledText>}
       
       {name && name.length > 0 && (<>
           <StyledTitle>Breed</StyledTitle>

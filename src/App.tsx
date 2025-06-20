@@ -67,10 +67,15 @@ const LandscapeSchema = z.object({
   image: z.string().url(),
 })
 
+const RandomFactsSchema = z.object({
+  text: z.string(),
+});
+
 export type CatType = z.infer<typeof CatSchema>
 export type DogType = z.infer<typeof DogSchema>
 export type FoxType = z.infer<typeof FoxSchema>
 export type LandscapeType = z.infer<typeof LandscapeSchema>
+export type RandomFactsType = z.infer<typeof RandomFactsSchema>
 
 function App() {
   const [inputIsFocused, setInputIsFocused] = useState(false);
@@ -82,6 +87,7 @@ function App() {
   const [parsedDogData, setParsedDogData] = useState<DogType>()
   const [parsedFoxData, setParsedFoxData] = useState<FoxType>()
   // const [parsedLandscapeData, setParsedLandscapeData] = useState<LandscapeType>()
+  const [parsedRandomFactsData, setParsedRandomFactsData] = useState<RandomFactsType>()
   const [isSuccess, setIsSuccess] = useState<boolean>()
   // const [imageUrl, setImageUrl] = useState<string>()
   const [isReset, setIsReset] = useState(false);
@@ -162,22 +168,27 @@ function App() {
     }
   }
 
-  // const fetchZooAnimal = async () => {
-  //   const data = await fetch(
-  //     `https://shibe.online/api/fox?count=1`,
-  //   ).then((res) => res.json())   
-  //   const parsed = LandscapeSchema.safeParse(data)
-  //   if (parsed.success) {
-  //     setIsSuccess(true)
-  //     setImageUrl(parsed.data.image)
-  //     setParsedLandscapeData(parsed.data)
-  //   } else {
-  //     setIsSuccess(false)
-  //     // const errorsMessage = fromZodError(parsed.error)
-  //     setParsedLandscapeData({ image: '' })
-  //     // setErrors(String(errorsMessage).split(';'))
-  //   }
-  // }
+  const fetchRandomFacts = async () => {
+    setParsedRandomFactsData(undefined) // Reset parsed data before fetching
+    const data = await fetch(
+      `https://uselessfacts.jsph.pl/random.json?language=en`,
+    ).then((res) => res.json())
+    console.log('data :>> ', data);
+    const parsed = RandomFactsSchema.safeParse(data)
+
+    if (parsed.success) {
+      setIsSuccess(true)
+      setParsedRandomFactsData(parsed.data)
+    } else {
+      setIsSuccess(false)
+      // const errorsMessage = fromZodError(parsed.error)
+      setParsedRandomFactsData({ text: '' })
+      // setErrors(String(errorsMessage).split(';'))
+    }
+  }
+    // const parsed = RandomFactsSchema.safeParse(data) 
+
+    // console.log('raw data', data)
 
 
   const agents = [
@@ -214,7 +225,7 @@ function App() {
     } else if (currentAgentIndex === 2) {
       fetchFox();
     } else if (currentAgentIndex === 3) {
-      fetchCat();
+      fetchRandomFacts();
     } else if (currentAgentIndex === 4) {
       fetchCat(); // Default to cat if no specific agent is selected
     }
@@ -346,11 +357,11 @@ function App() {
                   variableText={'admiring a fox'}
                 />
               }
-              {!isReset && isSuccess && parsedCatData && currentAgentIndex === 3 &&
+              {!isReset && isSuccess && parsedRandomFactsData && currentAgentIndex === 3 &&
                 <Output
-                  imageUrl={parsedCatData[0].url ?? ''}
                   prompt={prompt}
-                  variableText={'getting a cat'}
+                  variableText={'reading a random fact'}
+                  text={parsedRandomFactsData?.text ?? ''}
                 />
               }
               {!isReset && isSuccess && parsedCatData && currentAgentIndex === 4 &&

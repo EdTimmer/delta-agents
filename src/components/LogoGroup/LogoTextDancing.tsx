@@ -17,7 +17,7 @@ const LogoTextDancing = ({ position, rotation, text, color, scale, size }: Props
 
   useEffect(() => {
     const loader = new FontLoader();
-    loader.load('/fonts/imperial_script_regular.typeface.json', (loadedFont) => {
+    loader.load('/fonts/michroma_regular.json', (loadedFont) => {
       setFont(loadedFont);
     });
   }, []);
