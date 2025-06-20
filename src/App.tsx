@@ -27,7 +27,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import colors from './styles/colors';
 import AgentButton from './components/AgentButton/AgentButton';
 import Lights from './components/Lights';
-import { set, z } from 'zod'
+import { z } from 'zod'
 // import { fromZodError } from 'zod-validation-error'
 import Output from './components/Output/Output';
 
