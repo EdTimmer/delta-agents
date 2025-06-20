@@ -14,7 +14,6 @@ interface DogOutputProps {
 }
 
 const DogOutput = ({ name, bredFor, breedGroup, dogUrl, prompt }: DogOutputProps) => {
-  console.log('dogUrl :>> ', dogUrl);
   return (
     <OutputContainer>
       <DogText>{prompt}</DogText>

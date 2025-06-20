@@ -29,8 +29,7 @@ import AgentButton from './components/AgentButton/AgentButton';
 import Lights from './components/Lights';
 import { z } from 'zod'
 // import { fromZodError } from 'zod-validation-error'
-import CatOutput from './components/CatOutput/CatOutput';
-import DogOutput from './components/DogOutput/DogOutput';
+import Output from './components/CatOutput/CatOutput';
 
 const CatSchema = z.array(
   z.object({
@@ -60,17 +59,29 @@ const DogSchema = z.array(
   }),
 )
 
+const FoxSchema = z.object({
+  image: z.string().url(),
+})
+
+const LandscapeSchema = z.object({
+  image: z.string().url(),
+})
+
 export type CatType = z.infer<typeof CatSchema>
 export type DogType = z.infer<typeof DogSchema>
+export type FoxType = z.infer<typeof FoxSchema>
+export type LandscapeType = z.infer<typeof LandscapeSchema>
 
 function App() {
   const [inputIsFocused, setInputIsFocused] = useState(false);
   const [inputText, setInputText] = useState('');
   const [prompt, setPrompt] = useState('');
   const [isSpinning, setIsSpinning] = useState(false);
-  const [currentAgentIndex, setCurrentAgentIndex] = useState(0);
+  const [currentAgentIndex, setCurrentAgentIndex] = useState(0)
   const [parsedCatData, setParsedCatData] = useState<CatType>()
   const [parsedDogData, setParsedDogData] = useState<DogType>()
+  const [parsedFoxData, setParsedFoxData] = useState<FoxType>()
+  // const [parsedLandscapeData, setParsedLandscapeData] = useState<LandscapeType>()
   const [isSuccess, setIsSuccess] = useState<boolean>()
   const [imageUrl, setImageUrl] = useState<string>()
   const [isReset, setIsReset] = useState(false);
@@ -94,7 +105,7 @@ function App() {
     if (parsed.success) {
       setIsSuccess(true)
       // setErrors(undefined)
-      setImageUrl(data[0].url)
+      setImageUrl(parsed.data[0].url)
       setParsedCatData(parsed.data)
       // Handle Error
     } else {
@@ -120,7 +131,7 @@ function App() {
     if (parsed.success) {
       setIsSuccess(true)
       // setErrors(undefined)
-      setImageUrl(data[0].url)
+      setImageUrl(parsed.data[0].url)
       setParsedDogData(parsed.data)
       // Handle Error
     } else {
@@ -130,6 +141,41 @@ function App() {
       // setErrors(String(errorsMessage).split(';'))
     }
   }
+
+  const fetchFox = async () => {
+    const data = await fetch(
+      `https://randomfox.ca/floof/`,
+    ).then((res) => res.json())
+    const parsed = FoxSchema.safeParse(data)
+    if (parsed.success) {
+      setIsSuccess(true)
+      setImageUrl(parsed.data.image)
+      setParsedFoxData(parsed.data)
+    } else {
+      setIsSuccess(false)
+      // const errorsMessage = fromZodError(parsed.error)
+      setParsedFoxData({ image: '' })
+      // setErrors(String(errorsMessage).split(';'))
+    }
+  }
+
+  // const fetchZooAnimal = async () => {
+  //   const data = await fetch(
+  //     `https://shibe.online/api/fox?count=1`,
+  //   ).then((res) => res.json())   
+  //   const parsed = LandscapeSchema.safeParse(data)
+  //   if (parsed.success) {
+  //     setIsSuccess(true)
+  //     setImageUrl(parsed.data.image)
+  //     setParsedLandscapeData(parsed.data)
+  //   } else {
+  //     setIsSuccess(false)
+  //     // const errorsMessage = fromZodError(parsed.error)
+  //     setParsedLandscapeData({ image: '' })
+  //     // setErrors(String(errorsMessage).split(';'))
+  //   }
+  // }
+
 
   const agents = [
     'bee_bot12_blue.glb',
@@ -158,11 +204,19 @@ function App() {
     e.preventDefault();
     // console.log('Message submitted:', inputText);
     setIsReset(false); // Reset the state when submitting
-    if (currentAgentIndex % 2 === 0) {
-      fetchCat(); // Fetch cat data for index 0 and even numbers (0, 2, 4)
-    } else {
-      fetchDog(); // Fetch dog data for odd numbers (1, 3)
+    if (currentAgentIndex === 0) {
+      fetchCat();
+    } else if (currentAgentIndex === 1) {
+      fetchDog();
+    } else if (currentAgentIndex === 2) {
+      fetchFox();
+    } else if (currentAgentIndex === 3) {
+      fetchCat();
+    } else if (currentAgentIndex === 4) {
+      fetchCat(); // Default to cat if no specific agent is selected
     }
+      // Handle other agents or default case
+
 
     setIsSpinning(true);
 
@@ -265,30 +319,45 @@ function App() {
             </FlexStartRow>
 
             <OutputContainer>
-             {!isReset && isSuccess && parsedCatData && currentAgentIndex % 2 === 0 &&
-                <CatOutput
+             {!isReset && isSuccess && parsedCatData && currentAgentIndex === 0 &&
+                <Output
                   name={parsedCatData[0].breeds[0].name}
                   description={parsedCatData[0].breeds[0].description}
-                  temperament={parsedCatData[0].breeds[0].temperament}
-                  affectionLevel={parsedCatData[0].breeds[0].affection_level}
-                  energyLevel={parsedCatData[0].breeds[0].energy_level}
-                  catUrl={imageUrl ?? ''}
+                  imageUrl={imageUrl ?? ''}
                   prompt={prompt}
+                  variableText={'getting a cat'}
                 />
              }
-              {!isReset && isSuccess && parsedDogData && currentAgentIndex % 2 === 1 &&
-                  <DogOutput
-                    name={parsedDogData[0].breeds[0].name}
-                    bredFor={parsedDogData[0].breeds[0].bred_for}
-                    breedGroup={parsedDogData[0].breeds[0].breed_group}
-                    // description={parsedDogData[0].breeds[0].bred_for}
-                    // temperament={parsedDogData[0].breeds[0].breed_group}
-                    // affectionLevel={0} // Placeholder, as Dog API does not provide this
-                    // energyLevel={0} // Placeholder, as Dog API does not provide this
-                    dogUrl={imageUrl ?? ''}
-                    prompt={prompt}
-                  />
+              {!isReset && isSuccess && parsedDogData && currentAgentIndex === 1 &&
+                <Output
+                  name={parsedDogData[0].breeds[0].name}
+                  imageUrl={imageUrl ?? ''}
+                  prompt={prompt}
+                  variableText={'getting a dog'}
+                />
               }
+              {!isReset && isSuccess && parsedFoxData && currentAgentIndex === 2 &&
+                <Output
+                  imageUrl={imageUrl ?? ''}
+                  prompt={prompt}
+                  variableText={'admiring a fox'}
+                />
+              }
+              {!isReset && isSuccess && parsedCatData && currentAgentIndex === 3 &&
+                <Output
+                  imageUrl={imageUrl ?? ''}
+                  prompt={prompt}
+                  variableText={'gazing onto a landscape'}
+                />
+              }
+              {!isReset && isSuccess && parsedCatData && currentAgentIndex === 4 &&
+                <Output
+                  imageUrl={imageUrl ?? ''}
+                  prompt={prompt}
+                  variableText={'getting a cat'}
+                />
+              }
+              
                 
             </OutputContainer>
           </InterfaceContainer>

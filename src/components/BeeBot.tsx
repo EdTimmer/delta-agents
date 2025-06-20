@@ -27,7 +27,7 @@ const BeeBot = (
     const { animations, scene } = useGLTF(
       "../../models/" + agentFileName
     );
-    console.log("Loaded GLTF model:", agentFileName);
+
     const { actions } = useAnimations(animations, parentGroupRef);
 
      useEffect(() => {

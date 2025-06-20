@@ -5,41 +5,34 @@ import {
   Image,
 } from './CatOutput.styles';
 
-interface CatOutputProps {
-  name: string;
-  description: string;
-  temperament: string;
-  affectionLevel: number;
-  energyLevel: number;
-  catUrl: string;
-  prompt?: string; // Optional input text prop
+interface OutputProps {
+  prompt: string;
+  name?: string;
+  imageUrl: string;
+  variableText: string;
+  description?: string;
 }
 
-const CatOutput = ({ name, description, temperament, affectionLevel, energyLevel, catUrl, prompt }: CatOutputProps) => {
-  console.log('prompt :>> ', prompt);
+const Output = ({ name, description, imageUrl, prompt, variableText }: OutputProps) => {
   return (
     <OutputContainer>
       <CatText>{prompt}</CatText>
-      <CatText>After careful consideration of your request, Agent Hive AI recommends getting a cat, perhaps this one:</CatText>
+      <CatText>After careful consideration of your request, Agent Hive AI recommends {variableText}, perhaps this one:</CatText>
       
-      <Image src={catUrl} alt="cat" /> 
+      <Image src={imageUrl} alt="animal" /> 
       
-      <CatTextTitle>Breed</CatTextTitle>
-      <CatText>{name}</CatText>
+      {name && name.length > 0 && (<>
+          <CatTextTitle>Breed</CatTextTitle>
+          <CatText>{name}</CatText>
+        </>)}
 
-      <CatTextTitle>Temperament</CatTextTitle>
-      <CatText>{temperament}</CatText>
-
-      <CatTextTitle>Affection Level</CatTextTitle>
-      <CatText>{affectionLevel}</CatText>
-
-      <CatTextTitle>Energy Level</CatTextTitle>
-      <CatText>{energyLevel}</CatText>
-
+      {description && description.length > 0 && 
+      (<>
       <CatTextTitle>Description</CatTextTitle>
-      <CatText>{description}</CatText>    
+      <CatText>{description}</CatText>
+      </>)}
     </OutputContainer>
   );
 }
 
-export default CatOutput;
+export default Output;
