@@ -8,14 +8,16 @@ interface Props {
   rotation: THREE.Euler;
   text: string;
   color: string;
+  scale:[number, number, number];
+  size: number;
 }
 
-const LogoTextLight = ({ position, rotation, text, color }: Props) => {
+const LogoTextDancing = ({ position, rotation, text, color, scale, size }: Props) => {
   const [font, setFont] = useState<Font | null>(null);
 
   useEffect(() => {
     const loader = new FontLoader();
-    loader.load('/fonts/comfortaa/comfortaa_light_regular.json', (loadedFont) => {
+    loader.load('/fonts/imperial_script_regular.typeface.json', (loadedFont) => {
       setFont(loadedFont);
     });
   }, []);
@@ -24,7 +26,7 @@ const LogoTextLight = ({ position, rotation, text, color }: Props) => {
       if (!font) return null;  
       const textOptions = {
         font,
-        size: 1.2,
+        size: size,
         depth: 0.2,
         curveSegments: 12,
         bevelEnabled: false,
@@ -45,7 +47,7 @@ const LogoTextLight = ({ position, rotation, text, color }: Props) => {
     if (!font || !textGeometry) return null;
 
   return (
-    <mesh geometry={textGeometry} rotation={rotation} position={position}>
+    <mesh geometry={textGeometry} rotation={rotation} position={position} scale={scale}>
       <meshStandardMaterial
         color={color}
         roughness={0}
@@ -55,4 +57,4 @@ const LogoTextLight = ({ position, rotation, text, color }: Props) => {
   );
 };
 
-export default LogoTextLight;
+export default LogoTextDancing;

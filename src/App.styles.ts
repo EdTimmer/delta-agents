@@ -49,7 +49,7 @@ export const LeftColumn = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  margin-top: 80px;
+  margin-top: 40px;
   padding-left: 120px;
   padding-right: 120px;
   gap: 20px;
@@ -58,7 +58,7 @@ export const LeftColumn = styled.div`
     width: 400px;
     padding-left: 60px;
     padding-right: 60px;
-    margin-top: 60px;
+    /* margin-top: 60px; */
   }
 `;
 
@@ -82,13 +82,13 @@ export const BotScene = styled.div`
   align-items: flex-end;
   flex-wrap: wrap;
   /* margin-top: -30px; */
-  margin-top: 10px;
+  margin-top: 0;
   margin-left: -40px;
 
   @media (max-width: 1500px) {
     width: 400px;
     height: 400px;
-    margin-top: 20px;
+    /* margin-top: 20px; */
     margin-left: -30px;
   }
   
@@ -96,12 +96,12 @@ export const BotScene = styled.div`
 
 export const LogoContainer = styled.div`
   width: 100vw;
-  height: 120px;
+  height: 160px;
   background-color: #000;
   /* border-bottom: 1px solid ${colors.yinmnBlue}; */
   z-index: 1;
 
-
+/* 
   @media (max-width: 450px) {
     width: 45rem;
     height: 25rem;
@@ -110,7 +110,7 @@ export const LogoContainer = styled.div`
 
   @media (max-width: 650px) {
     margin-bottom: 5rem;
-  }
+  } */
 `;
 
 export const BackgroundCanvas = styled.div`
@@ -155,7 +155,7 @@ export const InterfaceContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 80px;
+  margin-top: 40px;
   width: 800px;
   z-index: 10;
   gap: 20px;
@@ -163,7 +163,7 @@ export const InterfaceContainer = styled.div`
   @media (max-width: 1500px) {
     width: 600px;
     padding: 0 20px;
-    margin-top: 60px;
+    /* margin-top: 60px; */
   }
 `;
 
