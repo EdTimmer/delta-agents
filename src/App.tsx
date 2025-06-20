@@ -379,7 +379,7 @@ function App() {
               
               <PerspectiveCamera makeDefault fov={20} position={[0, 0, 10]} />
 
-              <directionalLight position={[-2, 3, 5]} color={'#fff'} />
+              <directionalLight position={[0, -0.5, 1]} color={'#fff'} intensity={0.01} />
 
               <animated.group rotation-y={isSpinning ? spinRotation : rotation} position={[0, -1.2, 0]}>
                 <BeeBot
