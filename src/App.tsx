@@ -347,7 +347,7 @@ function App() {
                 <Output
                   imageUrl={imageUrl ?? ''}
                   prompt={prompt}
-                  variableText={'getting a cats'}
+                  variableText={'getting a cat'}
                 />
               }
               {!isReset && isSuccess && parsedCatData && currentAgentIndex === 4 &&
