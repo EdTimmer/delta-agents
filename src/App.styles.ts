@@ -49,17 +49,11 @@ export const LeftColumn = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  margin-top: 40px;
-  padding-left: 120px;
-  padding-right: 120px;
+  margin-top: 60px;
+  /* margin-right: 100px; */
+  padding-left: 180px;
+  padding-right: 94px;
   gap: 20px;
-
-  @media (max-width: 1500px) {
-    width: 400px;
-    padding-left: 60px;
-    padding-right: 60px;
-    /* margin-top: 60px; */
-  }
 `;
 
 export const ColumnWithGap = styled.div`
@@ -155,7 +149,7 @@ export const InterfaceContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 40px;
+  margin-top: 60px;
   width: 800px;
   z-index: 10;
   gap: 20px;
