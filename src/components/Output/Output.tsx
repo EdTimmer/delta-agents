@@ -24,7 +24,7 @@ const Output = ({ name, description, imageUrl, prompt, variableText, text }: Out
       
       {imageUrl && <Image src={imageUrl} alt="animal" /> }
 
-      {text && <StyledText>{text}</StyledText>}
+      {text && <StyledTitle>{text}</StyledTitle>}
       
       {name && name.length > 0 && (<>
           <StyledTitle>Breed</StyledTitle>
