@@ -373,9 +373,10 @@ function App() {
                 gl.toneMappingExposure = 1.0;
                 }}
               >
-                <PerspectiveCamera makeDefault fov={20} position={[0, 0, 10]} />
+              
+              <PerspectiveCamera makeDefault fov={20} position={[0, 0, 10]} />
 
-                <directionalLight position={[-1, -2, 5]} color={'#fff'} />
+              <directionalLight position={[-2, 3, 5]} color={'#fff'} />
 
               <animated.group rotation-y={isSpinning ? spinRotation : rotation} position={[0, -1.2, 0]}>
                 <BeeBot
