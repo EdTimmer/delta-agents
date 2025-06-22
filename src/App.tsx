@@ -18,6 +18,7 @@ import {
   CenteredRow,
   FlexStartRow,
   LeftColumn,
+  ButtonContainer,
 } from './App.styles'
 import BeeBot from './components/BeeBot';
 import { useSpring, animated } from '@react-spring/three';
@@ -25,12 +26,12 @@ import Waves from './components/Waves';
 import LogoGroup from './components/LogoGroup';
 import SearchIcon from '@mui/icons-material/Search';
 import colors from './styles/colors';
-import AgentButton from './components/AgentButton/AgentButton';
 import Lights from './components/Lights';
 import { z } from 'zod'
 // import { fromZodError } from 'zod-validation-error'
 import Output from './components/Output/Output';
 import { taoTeChing } from './utils/textData';
+import ButtonWrapper from './components/Button/ButtonWrapper';
 
 const CatSchema = z.array(
   z.object({
@@ -275,50 +276,48 @@ function App() {
 
         <CenteredRow>
           <LeftColumn>
-            <AgentButton
+            <ButtonWrapper 
               setCurrentAgentIndex={setCurrentAgentIndex}
               assignedIndex={0}
               currentAgentIndex={currentAgentIndex}    
-              setIsReset={setIsReset}          
-            >
-              Agent 01
-            </AgentButton>
-
-            <AgentButton
-              setCurrentAgentIndex={setCurrentAgentIndex}
-              assignedIndex={1}
-              currentAgentIndex={currentAgentIndex}
               setIsReset={setIsReset}
-            >
-              Agent 03
-            </AgentButton>
+            />
 
-            <AgentButton
-              setCurrentAgentIndex={setCurrentAgentIndex}
-              assignedIndex={2}
-              currentAgentIndex={currentAgentIndex}
-              setIsReset={setIsReset}
-            >
-              Agent 05
-            </AgentButton>
+            <ButtonContainer>
+              <ButtonWrapper 
+                setCurrentAgentIndex={setCurrentAgentIndex}
+                assignedIndex={1}
+                currentAgentIndex={currentAgentIndex}    
+                setIsReset={setIsReset}
+              />
+            </ButtonContainer>
+            
+            <ButtonContainer>
+              <ButtonWrapper 
+                setCurrentAgentIndex={setCurrentAgentIndex}
+                assignedIndex={2}
+                currentAgentIndex={currentAgentIndex}    
+                setIsReset={setIsReset}
+              />
+            </ButtonContainer>
 
-            <AgentButton
-              setCurrentAgentIndex={setCurrentAgentIndex}
-              assignedIndex={3}
-              currentAgentIndex={currentAgentIndex}
-              setIsReset={setIsReset}
-            >
-              Agent 07
-            </AgentButton>
+            <ButtonContainer>
+              <ButtonWrapper 
+                setCurrentAgentIndex={setCurrentAgentIndex}
+                assignedIndex={3}
+                currentAgentIndex={currentAgentIndex}    
+                setIsReset={setIsReset}
+              />
+            </ButtonContainer>
 
-            <AgentButton
-              setCurrentAgentIndex={setCurrentAgentIndex}
-              assignedIndex={4}
-              currentAgentIndex={currentAgentIndex}
-              setIsReset={setIsReset}
-            >
-              Agent 11
-            </AgentButton>
+            <ButtonContainer>
+              <ButtonWrapper 
+                setCurrentAgentIndex={setCurrentAgentIndex}
+                assignedIndex={4}
+                currentAgentIndex={currentAgentIndex}    
+                setIsReset={setIsReset}
+              />
+            </ButtonContainer>
           </LeftColumn>
 
           <InterfaceContainer>
@@ -331,21 +330,20 @@ function App() {
                   onChange={(e) => setInputText(e.target.value)}
                   onFocus={() => setInputIsFocused(true)}
                   onBlur={() => setInputIsFocused(false)}
-                />              
-              
+                />      
             
-              <SubmitButton 
-                type="submit"
-                disabled={!inputText.trim()}
-                onClick={handleSubmit}
-              >                
-                <SearchIcon
-                  sx={{
-                    color: colors.seasalt,
-                    fontSize: 20
-                  }}
-                />               
-              </SubmitButton>
+                <SubmitButton 
+                  type="submit"
+                  disabled={!inputText.trim()}
+                  onClick={handleSubmit}
+                >                
+                  <SearchIcon
+                    sx={{
+                      color: colors.seasalt,
+                      fontSize: 20
+                    }}
+                  />               
+                </SubmitButton>
               </StyledForm>
             </FlexStartRow>
 
