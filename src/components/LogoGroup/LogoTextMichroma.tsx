@@ -12,7 +12,7 @@ interface Props {
   size: number;
 }
 
-const LogoTextDancing = ({ position, rotation, text, color, scale, size }: Props) => {
+const LogoTextMichroma = ({ position, rotation, text, color, scale, size }: Props) => {
   const [font, setFont] = useState<Font | null>(null);
 
   useEffect(() => {
@@ -57,4 +57,4 @@ const LogoTextDancing = ({ position, rotation, text, color, scale, size }: Props
   );
 };
 
-export default LogoTextDancing;
+export default LogoTextMichroma;

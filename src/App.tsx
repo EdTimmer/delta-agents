@@ -31,6 +31,7 @@ import { z } from 'zod'
 // import { fromZodError } from 'zod-validation-error'
 import Output from './components/Output/Output';
 import { taoTeChing } from './utils/textData';
+import ButtonWrapper from './components/Button/ButtonWrapper';
 
 const CatSchema = z.array(
   z.object({
@@ -275,6 +276,25 @@ function App() {
 
         <CenteredRow>
           <LeftColumn>
+            {/* <Canvas gl={{ antialias: true }}>
+              <PerspectiveCamera makeDefault fov={20} position={[0, 0, 20]} />
+              <RingBlue scale={[22, 22, 22]} position={[0, 0, 0]} rotation={[0, Math.PI, 0]} />
+              <Environment preset="apartment" backgroundIntensity={0.2} />
+            </Canvas> */}
+            <ButtonWrapper 
+              setCurrentAgentIndex={setCurrentAgentIndex}
+              assignedIndex={0}
+              currentAgentIndex={currentAgentIndex}    
+              setIsReset={setIsReset}
+            />
+
+            <ButtonWrapper 
+              setCurrentAgentIndex={setCurrentAgentIndex}
+              assignedIndex={1}
+              currentAgentIndex={currentAgentIndex}    
+              setIsReset={setIsReset}
+            />
+
             <AgentButton
               setCurrentAgentIndex={setCurrentAgentIndex}
               assignedIndex={0}
@@ -331,21 +351,20 @@ function App() {
                   onChange={(e) => setInputText(e.target.value)}
                   onFocus={() => setInputIsFocused(true)}
                   onBlur={() => setInputIsFocused(false)}
-                />              
-              
+                />      
             
-              <SubmitButton 
-                type="submit"
-                disabled={!inputText.trim()}
-                onClick={handleSubmit}
-              >                
-                <SearchIcon
-                  sx={{
-                    color: colors.seasalt,
-                    fontSize: 20
-                  }}
-                />               
-              </SubmitButton>
+                <SubmitButton 
+                  type="submit"
+                  disabled={!inputText.trim()}
+                  onClick={handleSubmit}
+                >                
+                  <SearchIcon
+                    sx={{
+                      color: colors.seasalt,
+                      fontSize: 20
+                    }}
+                  />               
+                </SubmitButton>
               </StyledForm>
             </FlexStartRow>
 
