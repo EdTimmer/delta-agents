@@ -232,6 +232,20 @@ function App() {
     },
   });
 
+  // const { position } = useSpring({
+  //   position: isSpinning ? [0, -1.2, 1.6] : [0, -1.2, 0],
+  //   config: { mass: 3.2, tension: 80, friction: 8 }
+  // });
+  const { position } = useSpring({
+    position: isSpinning ? [0, -1.2, 1.6] : [0, -1.2, 0],
+    config: {
+      // Different physics based on direction
+      mass: isSpinning ? 2.0 : 5.0,        // Heavier mass for return = slower
+      tension: isSpinning ? 120 : 60,      // Lower tension for return = gentler
+      friction: isSpinning ? 8 : 46        // Higher friction for return = more damping
+    }
+  });
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // console.log('Message submitted:', inputText);
@@ -416,7 +430,7 @@ function App() {
               <directionalLight position={[0, -0.5, 1]} color={'#fff'} intensity={0.0025} />
               <directionalLight position={[0.02, -0.5, 1]} color={'#fff'} intensity={0.0025} />
               
-              <animated.group rotation-y={isSpinning ? spinRotation : rotation} position={[0, -1.2, 0]}>
+              <animated.group rotation-y={isSpinning ? spinRotation : rotation} position={position.to((x, y, z) => [x, y, z])}>
                 <BeeBot
                   agentFileName={agents[currentAgentIndex]}
                   position={[0, 0, 0]}
