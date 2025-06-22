@@ -52,6 +52,7 @@ export const LeftColumn = styled.div`
   margin-top: 60px;
   padding-left: 180px;
   padding-right: 94px;
+  z-index: 10;
 `;
 
 export const ColumnWithGap = styled.div`
