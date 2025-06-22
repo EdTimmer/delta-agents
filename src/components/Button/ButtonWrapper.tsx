@@ -13,7 +13,6 @@ interface Props {
 const ButtonWrapper = ({ setCurrentAgentIndex, currentAgentIndex, assignedIndex, setIsReset }: Props) => {
   const [isMouseEntered, setIsMouseEntered] = useState(false);
   const [isFacingUser, setIsFacingUser] = useState(false);
-  const [count, setCount] = useState(0);
   
   const handleOnMouseEnter = () => {
     setIsMouseEntered(true);
@@ -23,7 +22,6 @@ const ButtonWrapper = ({ setCurrentAgentIndex, currentAgentIndex, assignedIndex,
   }
 
   const handleButtonClick = (assignedIndex: number) => {
-    setCount(prevCount => prevCount + 1);
     setIsFacingUser(true);
     setCurrentAgentIndex(assignedIndex);
     setIsReset?.(true);
@@ -42,7 +40,7 @@ const ButtonWrapper = ({ setCurrentAgentIndex, currentAgentIndex, assignedIndex,
       <Canvas gl={{ antialias: true }}>
         <PerspectiveCamera makeDefault fov={20} position={[0, 0, 20]} />
         <ambientLight intensity={1} />
-        <ButtonGroup isMouseEntered={isMouseEntered} isFacingUser={isFacingUser} assignedIndex={assignedIndex} currentAgentIndex={currentAgentIndex} count={count} />
+        <ButtonGroup isMouseEntered={isMouseEntered} isFacingUser={isFacingUser} assignedIndex={assignedIndex} currentAgentIndex={currentAgentIndex} />
         <Environment preset="apartment" backgroundIntensity={2.0} />
         {assignedIndex === currentAgentIndex && (
           <>

@@ -9,7 +9,6 @@ interface Props {
   isFacingUser: boolean;
   assignedIndex: number;
   currentAgentIndex: number;
-  count: number;
 }
 
 const logoTextOptions = [
@@ -20,7 +19,7 @@ const logoTextOptions = [
   'agent 11',
 ]
 
-function ButtonGroup({ isMouseEntered, isFacingUser, assignedIndex, currentAgentIndex, count }: Props) {
+function ButtonGroup({ isMouseEntered, isFacingUser, assignedIndex, currentAgentIndex }: Props) {
   const groupRef = useRef<Group>(null);
 
   return (
@@ -43,7 +42,6 @@ function ButtonGroup({ isMouseEntered, isFacingUser, assignedIndex, currentAgent
         currentAgentIndex={currentAgentIndex}
         assignedIndex={assignedIndex}
         isButtonText={true}
-        count={count}
       />
     </group>    
   );

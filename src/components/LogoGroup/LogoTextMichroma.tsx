@@ -14,7 +14,6 @@ interface Props {
   currentAgentIndex?: number;
   assignedIndex?: number;
   isButtonText?: boolean;
-  count: number;
 }
 
 const LogoTextMichroma = ({ position, rotation, text, color, scale, size }: Props) => {
