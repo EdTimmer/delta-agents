@@ -1,6 +1,6 @@
 import { useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { forwardRef, useRef } from "react";
+import { useRef } from "react";
 import * as THREE from 'three';
 import { Group, MathUtils } from "three";
 
@@ -12,16 +12,28 @@ interface Props {
   rotation: [number, number, number];
   isMouseEntered: boolean;
   isFacingUser: boolean;
+  assignedIndex: number;
 }
 
-const RingBlue = ({scale = 1.0, position = [0, 0, 0], rotation = [0, 0, 0], isFacingUser, isMouseEntered}: Props) => {
-  const { nodes, materials } = useGLTF('../../models/ring_blue.glb');
+const filePaths = [
+  '../../models/ring_blue_3.glb',
+  '../../models/ring_green_3.glb',
+  '../../models/ring_yellow_3.glb',
+  '../../models/ring_red_3.glb',
+  '../../models/ring_purple_3.glb',
+];
+
+
+
+const RingBlue = ({scale = 1.0, position = [0, 0, 0], rotation = [0, 0, 0], isFacingUser, isMouseEntered, assignedIndex}: Props) => {
+  
+  const { nodes, materials } = useGLTF(filePaths[assignedIndex] || filePaths[0]);
   const groupRef = useRef<Group>(null);
 
-  useFrame((state, delta) => {
+  useFrame((_, delta) => {
     if (groupRef.current) {
       // Apply a "breathing" effect on the X axis.
-      groupRef.current.rotation.x = Math.sin(state.clock.getElapsedTime() * 0.5) * 0.12;
+      // groupRef.current.rotation.x = Math.sin(state.clock.getElapsedTime() * 0.5) * 0.12;
 
       // Determine the starting rotation.
       const initialRotation = isFacingUser ? 0 : Math.PI;

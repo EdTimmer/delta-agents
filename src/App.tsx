@@ -18,6 +18,7 @@ import {
   CenteredRow,
   FlexStartRow,
   LeftColumn,
+  ButtonContainer,
 } from './App.styles'
 import BeeBot from './components/BeeBot';
 import { useSpring, animated } from '@react-spring/three';
@@ -25,7 +26,6 @@ import Waves from './components/Waves';
 import LogoGroup from './components/LogoGroup';
 import SearchIcon from '@mui/icons-material/Search';
 import colors from './styles/colors';
-import AgentButton from './components/AgentButton/AgentButton';
 import Lights from './components/Lights';
 import { z } from 'zod'
 // import { fromZodError } from 'zod-validation-error'
@@ -276,11 +276,6 @@ function App() {
 
         <CenteredRow>
           <LeftColumn>
-            {/* <Canvas gl={{ antialias: true }}>
-              <PerspectiveCamera makeDefault fov={20} position={[0, 0, 20]} />
-              <RingBlue scale={[22, 22, 22]} position={[0, 0, 0]} rotation={[0, Math.PI, 0]} />
-              <Environment preset="apartment" backgroundIntensity={0.2} />
-            </Canvas> */}
             <ButtonWrapper 
               setCurrentAgentIndex={setCurrentAgentIndex}
               assignedIndex={0}
@@ -288,57 +283,41 @@ function App() {
               setIsReset={setIsReset}
             />
 
-            <ButtonWrapper 
-              setCurrentAgentIndex={setCurrentAgentIndex}
-              assignedIndex={1}
-              currentAgentIndex={currentAgentIndex}    
-              setIsReset={setIsReset}
-            />
+            <ButtonContainer>
+              <ButtonWrapper 
+                setCurrentAgentIndex={setCurrentAgentIndex}
+                assignedIndex={1}
+                currentAgentIndex={currentAgentIndex}    
+                setIsReset={setIsReset}
+              />
+            </ButtonContainer>
+            
+            <ButtonContainer>
+              <ButtonWrapper 
+                setCurrentAgentIndex={setCurrentAgentIndex}
+                assignedIndex={2}
+                currentAgentIndex={currentAgentIndex}    
+                setIsReset={setIsReset}
+              />
+            </ButtonContainer>
 
-            <AgentButton
-              setCurrentAgentIndex={setCurrentAgentIndex}
-              assignedIndex={0}
-              currentAgentIndex={currentAgentIndex}    
-              setIsReset={setIsReset}          
-            >
-              Agent 01
-            </AgentButton>
+            <ButtonContainer>
+              <ButtonWrapper 
+                setCurrentAgentIndex={setCurrentAgentIndex}
+                assignedIndex={3}
+                currentAgentIndex={currentAgentIndex}    
+                setIsReset={setIsReset}
+              />
+            </ButtonContainer>
 
-            <AgentButton
-              setCurrentAgentIndex={setCurrentAgentIndex}
-              assignedIndex={1}
-              currentAgentIndex={currentAgentIndex}
-              setIsReset={setIsReset}
-            >
-              Agent 03
-            </AgentButton>
-
-            <AgentButton
-              setCurrentAgentIndex={setCurrentAgentIndex}
-              assignedIndex={2}
-              currentAgentIndex={currentAgentIndex}
-              setIsReset={setIsReset}
-            >
-              Agent 05
-            </AgentButton>
-
-            <AgentButton
-              setCurrentAgentIndex={setCurrentAgentIndex}
-              assignedIndex={3}
-              currentAgentIndex={currentAgentIndex}
-              setIsReset={setIsReset}
-            >
-              Agent 07
-            </AgentButton>
-
-            <AgentButton
-              setCurrentAgentIndex={setCurrentAgentIndex}
-              assignedIndex={4}
-              currentAgentIndex={currentAgentIndex}
-              setIsReset={setIsReset}
-            >
-              Agent 11
-            </AgentButton>
+            <ButtonContainer>
+              <ButtonWrapper 
+                setCurrentAgentIndex={setCurrentAgentIndex}
+                assignedIndex={4}
+                currentAgentIndex={currentAgentIndex}    
+                setIsReset={setIsReset}
+              />
+            </ButtonContainer>
           </LeftColumn>
 
           <InterfaceContainer>

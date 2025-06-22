@@ -50,10 +50,8 @@ export const LeftColumn = styled.div`
   justify-content: flex-start;
   align-items: center;
   margin-top: 60px;
-  /* margin-right: 100px; */
   padding-left: 180px;
   padding-right: 94px;
-  gap: 20px;
 `;
 
 export const ColumnWithGap = styled.div`
@@ -261,5 +259,9 @@ export const FlexStartRow = styled.div`
       width: 100%;
       max-width: 100%;
     }
+`;
+
+export const ButtonContainer = styled.div`
+  margin-top: -30px;
 `;
   

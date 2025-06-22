@@ -13,37 +13,46 @@ interface Props {
 const ButtonWrapper = ({ setCurrentAgentIndex, currentAgentIndex, assignedIndex, setIsReset }: Props) => {
   const [isMouseEntered, setIsMouseEntered] = useState(false);
   const [isFacingUser, setIsFacingUser] = useState(false);
-
+  const [count, setCount] = useState(0);
   
   const handleOnMouseEnter = () => {
-    console.log('mouse entered :>> ');
     setIsMouseEntered(true);
   }
   const handleOnMouseLeave = () => {
-    console.log('mouse left :>> ');
     setIsMouseEntered(false);
   }
 
   const handleButtonClick = (assignedIndex: number) => {
+    setCount(prevCount => prevCount + 1);
     setIsFacingUser(true);
     setCurrentAgentIndex(assignedIndex);
-    setIsReset?.(true); // Reset the state when a new agent is selected
+    setIsReset?.(true);
   };
 
   useEffect(() => {
     if (currentAgentIndex !== assignedIndex) {
       setIsFacingUser(false);
+    } else {
+      setIsFacingUser(true);
     }
   }, [currentAgentIndex, assignedIndex]);
 
-
   return (
-    <div onMouseEnter={handleOnMouseEnter} onMouseLeave={handleOnMouseLeave} onClick={() => handleButtonClick(assignedIndex)} style={{ width: '100%', height: '100%' }}>
+    <div onMouseEnter={handleOnMouseEnter} onMouseLeave={handleOnMouseLeave} onClick={() => handleButtonClick(assignedIndex)} style={{ width: '100%', height: '140px' }}>
       <Canvas gl={{ antialias: true }}>
         <PerspectiveCamera makeDefault fov={20} position={[0, 0, 20]} />
         <ambientLight intensity={1} />
-        <ButtonGroup isMouseEntered={isMouseEntered} isFacingUser={isFacingUser} />
+        <ButtonGroup isMouseEntered={isMouseEntered} isFacingUser={isFacingUser} assignedIndex={assignedIndex} currentAgentIndex={currentAgentIndex} count={count} />
         <Environment preset="apartment" backgroundIntensity={2.0} />
+        {assignedIndex === currentAgentIndex && (
+          <>
+            <directionalLight position={[-0.4, 0, 2]} intensity={1} />
+            <directionalLight position={[-0.2, 0, 2]} intensity={1} />
+            <directionalLight position={[0, 0, 2]} intensity={1} />
+            <directionalLight position={[0.2, 0, 2]} intensity={1} />
+            <directionalLight position={[0.4, 0, 2]} intensity={1} />
+          </>
+        )}
       </Canvas>
     </div>   
   );

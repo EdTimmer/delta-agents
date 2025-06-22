@@ -7,44 +7,21 @@ import LogoTextMichroma from '../../LogoGroup/LogoTextMichroma';
 interface Props {
   isMouseEntered: boolean;
   isFacingUser: boolean;
-  // setIsFacingUser: (isFacingUser: boolean) => void;
-  // guiy: string;
-  // isClickToggled: boolean;
-  // isSmallScreen: boolean;
+  assignedIndex: number;
+  currentAgentIndex: number;
+  count: number;
 }
 
-function ButtonGroup({ isMouseEntered, isFacingUser }: Props) {
+const logoTextOptions = [
+  'agent 01',
+  'agent 03',
+  'agent 05',
+  'agent 07',
+  'agent 11',
+]
+
+function ButtonGroup({ isMouseEntered, isFacingUser, assignedIndex, currentAgentIndex, count }: Props) {
   const groupRef = useRef<Group>(null);
-
-  // useFrame((state, delta) => {
-  //   if (groupRef.current) {
-  //     // Apply a "breathing" effect on the X axis.
-  //     groupRef.current.rotation.x = Math.sin(state.clock.getElapsedTime() * 0.5) * 0.12;
-
-  //     // Determine the starting rotation.
-  //     const initialRotation = isFacingUser ? 0 : Math.PI;
-  //     // Set the target rotation: rotate an extra PI when the mouse enters.
-  //     // const targetY = (isMouseEntered || isClickToggled) ? initialRotation - Math.PI : initialRotation;
-
-  //     const targetY = isMouseEntered && !isFacingUser ? initialRotation - Math.PI : initialRotation;
-      
-  //     // Incorporate delta into the interpolation factor for frame rate independence.
-  //     const speed = 3; // Adjust this to control the smoothness/speed
-  //     const lerpFactor = 1 - Math.exp(-speed * delta);
-      
-  //     // Interpolate the current rotation towards the target rotation.
-  //     groupRef.current.rotation.y = MathUtils.lerp(
-  //       groupRef.current.rotation.y,
-  //       targetY,
-  //       lerpFactor
-  //     );
-
-  //     // Optionally, snap to target if very close.
-  //     if (Math.abs(groupRef.current.rotation.y - targetY) < 0.001) {
-  //       groupRef.current.rotation.y = targetY;
-  //     }
-  //   }
-  // });
 
   return (
     <group position={[0, 0, 0]} scale={[1.0, 1.0, 1.0]} ref={groupRef}>
@@ -54,14 +31,19 @@ function ButtonGroup({ isMouseEntered, isFacingUser }: Props) {
         rotation={[0, 0, 0]}
         isMouseEntered={isMouseEntered}
         isFacingUser={isFacingUser}
+        assignedIndex={assignedIndex}
       />
       <LogoTextMichroma
         position={[0, 0, 0]}
-        text={'agent'}
+        text={logoTextOptions[assignedIndex] || 'agent'}
         color={'#6a6a6a'}
         scale={[1.0, 1.0, 1.0]}
         rotation={new THREE.Euler(0, 0, 0)}
-        size={1.0}
+        size={0.9}
+        currentAgentIndex={currentAgentIndex}
+        assignedIndex={assignedIndex}
+        isButtonText={true}
+        count={count}
       />
     </group>    
   );
