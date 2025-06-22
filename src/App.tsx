@@ -232,10 +232,6 @@ function App() {
     },
   });
 
-  // const { position } = useSpring({
-  //   position: isSpinning ? [0, -1.2, 1.6] : [0, -1.2, 0],
-  //   config: { mass: 3.2, tension: 80, friction: 8 }
-  // });
   const { position } = useSpring({
     position: isSpinning ? [0, -1.2, 1.6] : [0, -1.2, 0],
     config: {
