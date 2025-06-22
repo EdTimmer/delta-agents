@@ -54,7 +54,7 @@ const LogoTextMichroma = ({ position, rotation, text, color, scale, size }: Prop
   return (
     <group position={[0, 0, 0]} scale={[1.0, 1.0, 1.0]} ref={groupRef}>
       <mesh
-        geometry={new THREE.BoxGeometry(8, 3, 3)}
+        geometry={new THREE.BoxGeometry(4.5, 2, 3)}
         position={position}
       >
       <meshBasicMaterial transparent opacity={0} />

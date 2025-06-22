@@ -25,7 +25,7 @@ function ButtonGroup({ isMouseEntered, isFacingUser, assignedIndex, currentAgent
   return (
     <group position={[0, 0, 0]} scale={[1.0, 1.0, 1.0]} ref={groupRef}>
       <RingBlue 
-        scale={22.0} 
+        scale={12.0} 
         position={[0, 0, 0]} 
         rotation={[0, 0, 0]}
         isMouseEntered={isMouseEntered}
@@ -38,7 +38,7 @@ function ButtonGroup({ isMouseEntered, isFacingUser, assignedIndex, currentAgent
         color={'#6a6a6a'}
         scale={[1.0, 1.0, 1.0]}
         rotation={new THREE.Euler(0, 0, 0)}
-        size={0.9}
+        size={0.44}
         currentAgentIndex={currentAgentIndex}
         assignedIndex={assignedIndex}
         isButtonText={true}

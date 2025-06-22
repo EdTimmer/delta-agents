@@ -38,7 +38,7 @@ const ButtonWrapper = ({ setCurrentAgentIndex, currentAgentIndex, assignedIndex,
   return (
     <div onMouseEnter={handleOnMouseEnter} onMouseLeave={handleOnMouseLeave} onClick={() => handleButtonClick(assignedIndex)} style={{ width: '100%', height: '140px' }}>
       <Canvas gl={{ antialias: true }}>
-        <PerspectiveCamera makeDefault fov={20} position={[0, 0, 20]} />
+        <PerspectiveCamera makeDefault fov={20} position={[0, 0, 10]} />
         <ambientLight intensity={1} />
         <ButtonGroup isMouseEntered={isMouseEntered} isFacingUser={isFacingUser} assignedIndex={assignedIndex} currentAgentIndex={currentAgentIndex} />
         <Environment preset="apartment" backgroundIntensity={2.0} />
