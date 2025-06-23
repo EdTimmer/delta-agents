@@ -2,6 +2,7 @@ import { Canvas } from '@react-three/fiber';
 import { Environment, PerspectiveCamera } from '@react-three/drei';
 import { useEffect, useState } from 'react';
 import ButtonGroup from './ButtonGroup';
+import { StyledButtonWrapper } from './ButtonWrapper.styles';
 
 interface Props {
   setCurrentAgentIndex: (index: number) => void;
@@ -36,7 +37,12 @@ const ButtonWrapper = ({ setCurrentAgentIndex, currentAgentIndex, assignedIndex,
   }, [currentAgentIndex, assignedIndex]);
 
   return (
-    <div onMouseEnter={handleOnMouseEnter} onMouseLeave={handleOnMouseLeave} onClick={() => handleButtonClick(assignedIndex)} style={{ width: '100%', height: '140px' }}>
+    <StyledButtonWrapper
+      onMouseEnter={handleOnMouseEnter}
+      onMouseLeave={handleOnMouseLeave}
+      onClick={() => handleButtonClick(assignedIndex)}
+      style={isFacingUser ? { cursor: 'default' } : { cursor: 'pointer' }}
+    >
       <Canvas gl={{ antialias: true }}>
         <PerspectiveCamera makeDefault fov={20} position={[0, 0, 10]} />
         <ambientLight intensity={1} />
@@ -52,7 +58,7 @@ const ButtonWrapper = ({ setCurrentAgentIndex, currentAgentIndex, assignedIndex,
           </>
         )}
       </Canvas>
-    </div>   
+    </StyledButtonWrapper>   
   );
 }
 
