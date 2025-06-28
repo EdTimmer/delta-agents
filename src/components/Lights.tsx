@@ -16,21 +16,21 @@ function LightsGroup() {
 
   return (
     <group position={[0, 0, 0]} ref={groupRef} rotation={new THREE.Euler(0, 0, 0)}>
-      <directionalLight position={[-4, 0.2, 5]} color={'#fff'} />   
-      <directionalLight position={[-3, 0.2, 5]} color={'#fff'} />
-      <directionalLight position={[-2, 0.2, 5]} color={'#fff'} />
-      <directionalLight position={[-1, 0.2, 5]} color={'#fff'} />
-      <directionalLight position={[0, 0.2, 5]} color={'#fff'} />
-      <directionalLight position={[1, 0.2, 5]} color={'#fff'} />
-      <directionalLight position={[2, 0.2, 5]} color={'#fff'} />
-      <directionalLight position={[3, 0.2, 5]} color={'#fff'} />
-      <directionalLight position={[4, 0.2, 5]} color={'#fff'} />
+      <directionalLight position={[-4, 0.2, 5]} color={'#05a3d3'} />   
+      <directionalLight position={[-3, 0.2, 5]} color={'#05a3d3'} />
+      <directionalLight position={[-2, 0.2, 5]} color={'#05a3d3'} />
+      <directionalLight position={[-1, 0.2, 5]} color={'#05a3d3'} />
+      <directionalLight position={[0, 0.2, 5]} color={'#05a3d3'} />
+      <directionalLight position={[1, 0.2, 5]} color={'#05a3d3'} />
+      <directionalLight position={[2, 0.2, 5]} color={'#05a3d3'} />
+      <directionalLight position={[3, 0.2, 5]} color={'#05a3d3'} />
+      <directionalLight position={[4, 0.2, 5]} color={'#05a3d3'} />
 
-      <directionalLight position={[-2, -0.2, 5]} color={'#fff'} />
-      <directionalLight position={[-1, -0.2, 5]} color={'#fff'} />
-      <directionalLight position={[0, -0.2, 5]} color={'#fff'} />
-      <directionalLight position={[1, -0.2, 5]} color={'#fff'} />
-      <directionalLight position={[2, -0.2, 5]} color={'#fff'} />
+      <directionalLight position={[-2, -0.2, 5]} color={'#05a3d3'} />
+      <directionalLight position={[-1, -0.2, 5]} color={'#05a3d3'} />
+      <directionalLight position={[0, -0.2, 5]} color={'#05a3d3'} />
+      <directionalLight position={[1, -0.2, 5]} color={'#05a3d3'} />
+      <directionalLight position={[2, -0.2, 5]} color={'#05a3d3'} />
     </group>    
   );
 }

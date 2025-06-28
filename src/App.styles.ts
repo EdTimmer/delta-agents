@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import colors from './styles/colors';
 
 export const AppContainer = styled.div`
-  background-color: ${colors.eerieBlack};
+  background-color: #fff;
   position: relative;
   z-index: 1;
   font-family: 'Comfortaa', 'Roboto Mono', monospace;
@@ -10,9 +10,8 @@ export const AppContainer = styled.div`
   min-height: 100vh;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-start;
-  overflow: hidden;
 `;
 
 export const SpaceBetweenRow = styled.div`
@@ -43,16 +42,18 @@ export const Column = styled.div`
 `;
 
 export const LeftColumn = styled.div`
-  width: 500px;
-  height: 100%;
+  background-color: ${colors.lightBlue};
+  width: 300px;
+  height: calc(100vh - 20px);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  margin-top: 60px;
-  padding-left: 180px;
-  padding-right: 94px;
+  margin-top: 20px;
+  padding: 20px;
   z-index: 10;
+  border-top-right-radius: 20px;
+  gap: 20px;
 `;
 
 export const ColumnWithGap = styled.div`
@@ -90,7 +91,7 @@ export const BotScene = styled.div`
 export const LogoContainer = styled.div`
   width: 100vw;
   height: 160px;
-  background-color: #000;
+  background-color: #fff;
   /* border-bottom: 1px solid ${colors.yinmnBlue}; */
   z-index: 1;
 
@@ -175,8 +176,8 @@ export const StyledInput = styled.input`
   border-top-left-radius: 12px;
   border-bottom-left-radius: 12px;
   border: 1px solid ${colors.onyx};
-  background-color: ${colors.onyx};
-  color: ${colors.seasalt};
+  background-color: #fff;
+  color: ${colors.onyx};
   font-size: 16px;
 
   &:focus {
@@ -201,7 +202,7 @@ export const FlexStartRow = styled.div`
     top: 8px; */
     background-color: transparent;
     border: 1px solid ${colors.onyx};
-    background-color: ${colors.onyx};
+    background-color: #fff;
     border-top-right-radius: 12px;
     border-bottom-right-radius: 12px;
     margin: 0;
@@ -225,7 +226,7 @@ export const FlexStartRow = styled.div`
   `;
 
   export const OutputText = styled.p`
-    color: ${colors.seasalt};
+    color: ${colors.onyx};
     font-family: 'Comfortaa', 'Roboto Mono', monospace;
     font-size: 1.6rem;
     margin: 0;
@@ -235,12 +236,13 @@ export const FlexStartRow = styled.div`
   `;
 
   export const OutputContainer = styled.div`
-    background-color: ${colors.onyx};
+    background-color: #fff;
     padding: 20px;
     border-radius: 12px;
     width: 100%;
     height: 520px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* border: 1px solid ${colors.onyx}; */
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
     overflow-y: auto; /* Enable scrolling for long outputs */
     &::-webkit-scrollbar {
       width: 8px;
@@ -265,4 +267,12 @@ export const FlexStartRow = styled.div`
 export const ButtonContainer = styled.div`
   margin-top: -10px;
 `;
-  
+
+export const ButtonLabel = styled.p`
+  color: ${colors.onyx};
+  font-family: 'Comfortaa', 'Roboto Mono', monospace;
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+`;

@@ -17,16 +17,13 @@ const borderColorMap = [
 ];
   
 export const StyledButton = styled.button<StyledButtonProps>`
-    background-color:  ${props => props.$currentAgentIndex === props.$assignedIndex
-      ? colors.eerieBlack : colors.onyx};
-    color: ${colors.frenchGray};
+    background: transparent;
+    color: ${colors.onyx};
     border: none;
     padding: 10px 20px;
     border-radius: 12px;
-    width: 100%;
-    height: 100px;
     cursor: pointer;
-    color: ${colors.seasalt};
+    color: ${colors.black};
     font-family: 'Comfortaa', 'Roboto Mono', monospace;
     font-size: 16px;
     border-width: 1px;
@@ -38,7 +35,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
     transition: background-color 0.3s ease;
 
     &:hover {
-      background-color: ${colors.eerieBlack}; /* Lighter shade on hover */
+      /* background-color: ${colors.eerieBlack}; Lighter shade on hover */
       border-width: 1px;
       border-style: solid;
       border-color: ${props => borderColorMap[props.$assignedIndex]}; /* Change border color on hover */
@@ -50,7 +47,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
     }
 
     &:active {
-        background-color: ${colors.onyx}; /* Even darker shade when clicked */
+        background-color: ${colors.white}; /* Even darker shade when clicked */
         transform: scale(0.98); /* Slight scale down effect */
     }
 

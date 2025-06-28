@@ -35,7 +35,7 @@ function ButtonGroup({ isMouseEntered, isFacingUser, assignedIndex, currentAgent
       <LogoTextMichroma
         position={[0, 0, 0]}
         text={logoTextOptions[assignedIndex] || 'agent'}
-        color={'#6a6a6a'}
+        color={'#000'}
         scale={[1.0, 1.0, 1.0]}
         rotation={new THREE.Euler(0, 0, 0)}
         size={0.44}

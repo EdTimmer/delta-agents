@@ -43,6 +43,11 @@ const colors = {
   blenderBotYellow: '#FFE500FF',
   blenderBotRed: '#E50013FF', 
   blenderBotPurple: '#E600E7FF',
+
+  // Original Colors
+  lightBlue: '#f7faff',
+  white: '#ffffff',
+  black: '#000000',
 }
 
 export default colors;

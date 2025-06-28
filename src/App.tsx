@@ -19,6 +19,7 @@ import {
   FlexStartRow,
   LeftColumn,
   ButtonContainer,
+  ButtonLabel,
 } from './App.styles'
 import BeeBot from './components/BeeBot';
 import { useSpring, animated } from '@react-spring/three';
@@ -32,6 +33,7 @@ import { z } from 'zod'
 import Output from './components/Output/Output';
 import { taoTeChing } from './utils/textData';
 import ButtonWrapper from './components/Button/ButtonWrapper';
+import AgentButton from './components/AgentButton/AgentButton';
 
 const CatSchema = z.array(
   z.object({
@@ -273,192 +275,185 @@ function App() {
 
   return (    
     <AppContainer>
-      <Column>
-        <LogoContainer>
-          <Canvas gl={{ antialias: true }}>
-            <PerspectiveCamera makeDefault fov={20} position={[0, 0, 20]} />
-            <ambientLight intensity={1} />
-            <LogoGroup />
-            <Lights />
-            <Environment preset="apartment" backgroundIntensity={2.0} />
-          </Canvas>
-        </LogoContainer>  
+      <LeftColumn>
+        {/* <ButtonWrapper 
+          setCurrentAgentIndex={setCurrentAgentIndex}
+          assignedIndex={0}
+          currentAgentIndex={currentAgentIndex}    
+          setIsReset={setIsReset}
+        /> */}
+        <AgentButton
+          setCurrentAgentIndex={setCurrentAgentIndex}
+          assignedIndex={0}
+          currentAgentIndex={currentAgentIndex}
+          setIsReset={setIsReset}
 
-        <CenteredRow>
-          <LeftColumn>
-            <ButtonWrapper 
-              setCurrentAgentIndex={setCurrentAgentIndex}
-              assignedIndex={0}
-              currentAgentIndex={currentAgentIndex}    
-              setIsReset={setIsReset}
-            />
+        >
+          <ButtonLabel>Agent 01</ButtonLabel>
+        </AgentButton>
 
-            <ButtonContainer>
-              <ButtonWrapper 
-                setCurrentAgentIndex={setCurrentAgentIndex}
-                assignedIndex={1}
-                currentAgentIndex={currentAgentIndex}    
-                setIsReset={setIsReset}
+        <AgentButton
+          setCurrentAgentIndex={setCurrentAgentIndex}
+          assignedIndex={1}
+          currentAgentIndex={currentAgentIndex}
+          setIsReset={setIsReset}
+
+        >
+          <ButtonLabel>Agent 03</ButtonLabel>
+        </AgentButton>
+
+        <AgentButton
+          setCurrentAgentIndex={setCurrentAgentIndex}
+          assignedIndex={2}
+          currentAgentIndex={currentAgentIndex}
+          setIsReset={setIsReset}
+
+        >
+          <ButtonLabel>Agent 05</ButtonLabel>
+        </AgentButton>
+
+        <AgentButton
+          setCurrentAgentIndex={setCurrentAgentIndex}
+          assignedIndex={3}
+          currentAgentIndex={currentAgentIndex}
+          setIsReset={setIsReset}
+
+        >
+          <ButtonLabel>Agent 07</ButtonLabel>
+        </AgentButton>
+
+        <AgentButton
+          setCurrentAgentIndex={setCurrentAgentIndex}
+          assignedIndex={4}
+          currentAgentIndex={currentAgentIndex}
+          setIsReset={setIsReset}
+        >
+          <ButtonLabel>Agent 11</ButtonLabel>
+        </AgentButton>
+      </LeftColumn>
+
+      <CenteredRow>
+        <InterfaceContainer>
+          <FlexStartRow>
+            <StyledForm onSubmit={handleSubmit}>
+              <StyledInput
+                type="text"
+                placeholder="Ask me anything..."
+                value={inputText}
+                onChange={(e) => setInputText(e.target.value)}
+                onFocus={() => setInputIsFocused(true)}
+                onBlur={() => setInputIsFocused(false)}
+              />      
+          
+              <SubmitButton 
+                type="submit"
+                disabled={!inputText.trim()}
+                onClick={handleSubmit}
+              >                
+                <SearchIcon
+                  sx={{
+                    color: colors.onyx,
+                    fontSize: 20
+                  }}
+                />               
+              </SubmitButton>
+            </StyledForm>
+          </FlexStartRow>
+
+          <OutputContainer>
+            {!isReset && isSuccess && parsedCatData && currentAgentIndex === 0 &&
+              <Output
+                name={parsedCatData[0].breeds[0].name}
+                description={parsedCatData[0].breeds[0].description}
+                imageUrl={parsedCatData[0].url ?? ''}
+                prompt={prompt}
+                variableText={'getting a cat'}
               />
-            </ButtonContainer>
+            }
+            {!isReset && isSuccess && parsedDogData && currentAgentIndex === 1 &&
+              <Output
+                name={parsedDogData[0].breeds[0].name}
+                imageUrl={parsedDogData[0].url ?? ''}
+                prompt={prompt}
+                variableText={'getting a dog'}
+              />
+            }
+            {!isReset && isSuccess && parsedFoxData && currentAgentIndex === 2 &&
+              <Output
+                imageUrl={parsedFoxData.image ?? ''}
+                prompt={prompt}
+                variableText={'admiring a fox'}
+              />
+            }
+            {!isReset && isSuccess && parsedRandomFactsData && currentAgentIndex === 3 &&
+              <Output
+                prompt={prompt}
+                variableText={'reading a random fact'}
+                text={parsedRandomFactsData?.text ?? ''}
+              />
+            }
+            {!isReset && isSuccess && parsedCatData && currentAgentIndex === 4 &&
+              <Output
+                imageUrl={parsedCatData[0].url ?? ''}
+                prompt={prompt}
+                variableText={'getting a cat'}
+              />
+            }
+            {!isReset && taoTeChingChapter && currentAgentIndex === 4 &&
+              <Output
+                prompt={prompt}
+                variableText={'reading a chapter from the Tao Te Ching'}
+                text={taoTeChingChapter}
+              />
+            }
             
-            <ButtonContainer>
-              <ButtonWrapper 
-                setCurrentAgentIndex={setCurrentAgentIndex}
-                assignedIndex={2}
-                currentAgentIndex={currentAgentIndex}    
-                setIsReset={setIsReset}
-              />
-            </ButtonContainer>
-
-            <ButtonContainer>
-              <ButtonWrapper 
-                setCurrentAgentIndex={setCurrentAgentIndex}
-                assignedIndex={3}
-                currentAgentIndex={currentAgentIndex}    
-                setIsReset={setIsReset}
-              />
-            </ButtonContainer>
-
-            <ButtonContainer>
-              <ButtonWrapper 
-                setCurrentAgentIndex={setCurrentAgentIndex}
-                assignedIndex={4}
-                currentAgentIndex={currentAgentIndex}    
-                setIsReset={setIsReset}
-              />
-            </ButtonContainer>
-          </LeftColumn>
-
-          <InterfaceContainer>
-            <FlexStartRow>
-              <StyledForm onSubmit={handleSubmit}>
-                <StyledInput
-                  type="text"
-                  placeholder="Ask me anything..."
-                  value={inputText}
-                  onChange={(e) => setInputText(e.target.value)}
-                  onFocus={() => setInputIsFocused(true)}
-                  onBlur={() => setInputIsFocused(false)}
-                />      
-            
-                <SubmitButton 
-                  type="submit"
-                  disabled={!inputText.trim()}
-                  onClick={handleSubmit}
-                >                
-                  <SearchIcon
-                    sx={{
-                      color: colors.seasalt,
-                      fontSize: 20
-                    }}
-                  />               
-                </SubmitButton>
-              </StyledForm>
-            </FlexStartRow>
-
-            <OutputContainer>
-             {!isReset && isSuccess && parsedCatData && currentAgentIndex === 0 &&
-                <Output
-                  name={parsedCatData[0].breeds[0].name}
-                  description={parsedCatData[0].breeds[0].description}
-                  imageUrl={parsedCatData[0].url ?? ''}
-                  prompt={prompt}
-                  variableText={'getting a cat'}
-                />
-             }
-              {!isReset && isSuccess && parsedDogData && currentAgentIndex === 1 &&
-                <Output
-                  name={parsedDogData[0].breeds[0].name}
-                  imageUrl={parsedDogData[0].url ?? ''}
-                  prompt={prompt}
-                  variableText={'getting a dog'}
-                />
-              }
-              {!isReset && isSuccess && parsedFoxData && currentAgentIndex === 2 &&
-                <Output
-                  imageUrl={parsedFoxData.image ?? ''}
-                  prompt={prompt}
-                  variableText={'admiring a fox'}
-                />
-              }
-              {!isReset && isSuccess && parsedRandomFactsData && currentAgentIndex === 3 &&
-                <Output
-                  prompt={prompt}
-                  variableText={'reading a random fact'}
-                  text={parsedRandomFactsData?.text ?? ''}
-                />
-              }
-              {!isReset && isSuccess && parsedCatData && currentAgentIndex === 4 &&
-                <Output
-                  imageUrl={parsedCatData[0].url ?? ''}
-                  prompt={prompt}
-                  variableText={'getting a cat'}
-                />
-              }
-              {!isReset && taoTeChingChapter && currentAgentIndex === 4 &&
-                <Output
-                  prompt={prompt}
-                  variableText={'reading a chapter from the Tao Te Ching'}
-                  text={taoTeChingChapter}
-                />
-              }
               
-                
-            </OutputContainer>
-          </InterfaceContainer>
+          </OutputContainer>
+        </InterfaceContainer>
 
-          <BotScene>
-            <Canvas
-              gl={{
-                antialias: true,
-                toneMapping: THREE.ACESFilmicToneMapping
+        <BotScene>
+          <Canvas
+            gl={{
+              antialias: true,
+              toneMapping: THREE.ACESFilmicToneMapping
+            }}
+            onCreated={({ gl }) => {
+              gl.toneMapping = THREE.ACESFilmicToneMapping;
+              gl.toneMappingExposure = 1.0;
               }}
-              onCreated={({ gl }) => {
-                gl.toneMapping = THREE.ACESFilmicToneMapping;
-                gl.toneMappingExposure = 1.0;
-                }}
-              >
-              
-              <PerspectiveCamera makeDefault fov={20} position={[0, 0, 10]} />
+            >
+            
+            <PerspectiveCamera makeDefault fov={20} position={[0, 0, 10]} />
 
-              <directionalLight position={[-0.02, -0.5, 1]} color={'#fff'} intensity={0.0025} />
-              <directionalLight position={[0, -0.5, 1]} color={'#fff'} intensity={0.0025} />
-              <directionalLight position={[0.02, -0.5, 1]} color={'#fff'} intensity={0.0025} />
-              
-              <animated.group rotation-y={isSpinning ? spinRotation : rotation} position={position.to((x, y, z) => [x, y, z])}>
-                <BeeBot
-                  agentFileName={agents[currentAgentIndex]}
-                  position={[0, 0, 0]}
-                  rotation={[0, 0, 0]}
-                  scale={2.4}
-                  animationSpeed={inputIsFocused ? 4 : 1}
-                />
-              </animated.group>              
-
-              <Environment preset="forest" backgroundIntensity={0.2} />
-              <CameraShake
-                maxYaw={0.1} // Max amount camera can yaw in either direction
-                maxPitch={0.05} // Max amount camera can pitch in either direction
-                maxRoll={0.1} // Max amount camera can roll in either direction
-                yawFrequency={0.1} // Frequency of the the yaw rotation
-                pitchFrequency={0.1} // Frequency of the pitch rotation
-                rollFrequency={0.1} // Frequency of the roll rotation
-                intensity={0.5} // initial intensity of the shake
-                decayRate={0.65} // if decay = true this is the rate at which intensity will reduce at />
+            <directionalLight position={[-0.02, -0.5, 1]} color={'#fff'} intensity={0.0025} />
+            <directionalLight position={[0, -0.5, 1]} color={'#fff'} intensity={0.0025} />
+            <directionalLight position={[0.02, -0.5, 1]} color={'#fff'} intensity={0.0025} />
+            
+            <animated.group rotation-y={isSpinning ? spinRotation : rotation} position={position.to((x, y, z) => [x, y, z])}>
+              <BeeBot
+                agentFileName={agents[currentAgentIndex]}
+                position={[0, 0, 0]}
+                rotation={[0, 0, 0]}
+                scale={2.4}
+                animationSpeed={inputIsFocused ? 4 : 1}
               />
-            </Canvas>
-          </BotScene>
-        </CenteredRow>
-      </Column>
+            </animated.group>              
 
-      <WavesContainer>
-        <BackgroundCanvas>
-          <Canvas camera={{ position: [0, 0.25, 0.4], fov: 75 }}>
-            <Waves />
+            <Environment preset="forest" backgroundIntensity={0.2} />
+            <CameraShake
+              maxYaw={0.1} // Max amount camera can yaw in either direction
+              maxPitch={0.05} // Max amount camera can pitch in either direction
+              maxRoll={0.1} // Max amount camera can roll in either direction
+              yawFrequency={0.1} // Frequency of the the yaw rotation
+              pitchFrequency={0.1} // Frequency of the pitch rotation
+              rollFrequency={0.1} // Frequency of the roll rotation
+              intensity={0.5} // initial intensity of the shake
+              decayRate={0.65} // if decay = true this is the rate at which intensity will reduce at />
+            />
           </Canvas>
-        </BackgroundCanvas>
-      </WavesContainer>
+        </BotScene>
+      </CenteredRow>
+
 
       <LinkContainer>
         <a href="https://www.edtimmer.com/" target="_blank" aria-label="Link to portfolio" title="Link to portfolio">edtimmer.com</a>

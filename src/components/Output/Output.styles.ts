@@ -21,7 +21,7 @@ export const StyledImage = styled.img`
 `;
 
 export const StyledTitle = styled.p`
-  color: ${colors.seasalt};
+  color: ${colors.onyx};
   font-family: 'Comfortaa', 'Roboto Mono', monospace;
   font-size: 18px;
   font-weight: bold;
@@ -31,14 +31,14 @@ export const StyledTitle = styled.p`
 `;
 
 export const StyledTextMarginBottom = styled.p`
-  color: ${colors.seasalt};
+  color: ${colors.onyx};
   font-family: 'Comfortaa', 'Roboto Mono', monospace;
   font-size: 16px;
   margin-bottom: 10px;
 `;
 
 export const StyledText = styled.p`
-  color: ${colors.seasalt};
+  color: ${colors.onyx};
   font-family: 'Comfortaa', 'Roboto Mono', monospace;
   font-size: 16px;
   line-height: 20px;
@@ -53,7 +53,7 @@ export const Image = styled.img`
 
 export const PromptContainer = styled.div`
   width: 100%;
-  border-bottom: 1px solid ${colors.seasalt};
+  border-bottom: 1px solid ${colors.onyx};
   padding-bottom: 20px;
   margin-bottom: 20px;
 `
