@@ -1,4 +1,4 @@
-import { StyledButton } from './AgentButton.styles';
+import { ButtonLabel, StyledButton } from './AgentButton.styles';
 import colors from '../../styles/colors';
 
 interface AgentButtonProps {
@@ -6,7 +6,7 @@ interface AgentButtonProps {
   currentAgentIndex: number;
   assignedIndex: number;
   setIsReset?: (value: boolean) => void;
-  children: React.ReactNode;
+  label: string;
 }
 const AgentButton = (
   {
@@ -14,7 +14,7 @@ const AgentButton = (
     currentAgentIndex,
     assignedIndex,
     setIsReset,
-    children
+    label,
   }: AgentButtonProps) => {
 
   const borderColorMap = [
@@ -38,7 +38,7 @@ const AgentButton = (
       $assignedIndex={assignedIndex}
       $currentAgentIndex={currentAgentIndex}
     >
-      {children}
+      <ButtonLabel>{label}</ButtonLabel>
     </StyledButton>
   );
 }

@@ -9,30 +9,20 @@ import {
   InterfaceContainer,
   StyledInput,
   SubmitButton,
-  BackgroundCanvas,
-  LogoContainer,
-  Column,
-  WavesContainer,
   OutputContainer,
   StyledForm,
   CenteredRow,
   FlexStartRow,
   LeftColumn,
-  ButtonContainer,
-  ButtonLabel,
+  TitleLarge,
 } from './App.styles'
 import BeeBot from './components/BeeBot';
 import { useSpring, animated } from '@react-spring/three';
-import Waves from './components/Waves';
-import LogoGroup from './components/LogoGroup';
 import SearchIcon from '@mui/icons-material/Search';
 import colors from './styles/colors';
-import Lights from './components/Lights';
 import { z } from 'zod'
-// import { fromZodError } from 'zod-validation-error'
 import Output from './components/Output/Output';
 import { taoTeChing } from './utils/textData';
-import ButtonWrapper from './components/Button/ButtonWrapper';
 import AgentButton from './components/AgentButton/AgentButton';
 
 const CatSchema = z.array(
@@ -91,14 +81,10 @@ function App() {
   const [parsedDogData, setParsedDogData] = useState<DogType>()
   const [parsedFoxData, setParsedFoxData] = useState<FoxType>()
   const [taoTeChingChapter, setTaoTeChingChapter] = useState<string>();
-  // const [parsedLandscapeData, setParsedLandscapeData] = useState<LandscapeType>()
   const [parsedRandomFactsData, setParsedRandomFactsData] = useState<RandomFactsType>()
   const [isSuccess, setIsSuccess] = useState<boolean>()
-  // const [imageUrl, setImageUrl] = useState<string>()
   const [isReset, setIsReset] = useState(false);
-  // const [errors, setErrors] = useState<string[]>()
 
-  // console.log('parsedData :>> ', parsedCatData);
   const handleCleanUp = () => {
     setParsedCatData(undefined)
     setParsedDogData(undefined)
@@ -115,23 +101,13 @@ function App() {
       `https://api.thecatapi.com/v1/images/search?has_breeds=1&api_key=${catApiKey}`,
     ).then((res) => res.json())
 
-    // console.log('raw data', data)
-    // const parsedNotSafe = CatSchema.parse(data);
-    // console.log('parsedNotSafe', parsedNotSafe)
     const parsed = CatSchema.safeParse(data)
-    // console.log('parsed cat data', parsed)
-    // Handle Success
     if (parsed.success) {
       setIsSuccess(true)
-      // setErrors(undefined)
-      // setImageUrl(parsed.data[0].url)
       setParsedCatData(parsed.data)
-      // Handle Error
     } else {
       setIsSuccess(false)
-      // const errorsMessage = fromZodError(parsed.error)
       setParsedCatData([])
-      // setErrors(String(errorsMessage).split(';'))
     }
   }
 
@@ -141,24 +117,13 @@ function App() {
     const data = await fetch(
       `https://api.thedogapi.com/v1/images/search?has_breeds=1&api_key=${dogApiKey}`,
     ).then((res) => res.json())
-
-    // console.log('raw data', data)
-    // const parsedNotSafe = CatSchema.parse(data);
-    // console.log('parsedNotSafe', parsedNotSafe)
     const parsed = DogSchema.safeParse(data)
-    // console.log('parsed dog data', parsed)
-    // Handle Success
     if (parsed.success) {
       setIsSuccess(true)
-      // setErrors(undefined)
-      // setImageUrl(parsed.data[0].url)
       setParsedDogData(parsed.data)
-      // Handle Error
     } else {
       setIsSuccess(false)
-      // const errorsMessage = fromZodError(parsed.error)
       setParsedDogData([])
-      // setErrors(String(errorsMessage).split(';'))
     }
   }
 
@@ -170,13 +135,10 @@ function App() {
     const parsed = FoxSchema.safeParse(data)
     if (parsed.success) {
       setIsSuccess(true)
-      // setImageUrl(parsed.data.image)
       setParsedFoxData(parsed.data)
     } else {
       setIsSuccess(false)
-      // const errorsMessage = fromZodError(parsed.error)
       setParsedFoxData({ image: '' })
-      // setErrors(String(errorsMessage).split(';'))
     }
   }
 
@@ -193,9 +155,7 @@ function App() {
       setParsedRandomFactsData(parsed.data)
     } else {
       setIsSuccess(false)
-      // const errorsMessage = fromZodError(parsed.error)
       setParsedRandomFactsData({ text: '' })
-      // setErrors(String(errorsMessage).split(';'))
     }
   }
   
@@ -209,7 +169,6 @@ function App() {
     const randomChapter = getRandomElementFromArray(taoTeChing);
     setTaoTeChingChapter(randomChapter);
   };
-
 
   const agents = [
     'bee_bot12_blue.glb',
@@ -246,8 +205,7 @@ function App() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // console.log('Message submitted:', inputText);
-    setIsReset(false); // Reset the state when submitting
+    setIsReset(false);
     if (currentAgentIndex === 0) {
       fetchCat();
     } else if (currentAgentIndex === 1) {
@@ -259,13 +217,8 @@ function App() {
     } else if (currentAgentIndex === 4) {
       setNewTaoTeChingChapter(); // Default to cat if no specific agent is selected
     }
-      // Handle other agents or default case
-
-
     setIsSpinning(true);
 
-    // Process the input here - connect to AI backend, etc.
-    // Clear input after submission
     setPrompt(inputText);
     setInputText('');
     if (document.activeElement instanceof HTMLElement) {
@@ -276,60 +229,47 @@ function App() {
   return (    
     <AppContainer>
       <LeftColumn>
-        {/* <ButtonWrapper 
-          setCurrentAgentIndex={setCurrentAgentIndex}
-          assignedIndex={0}
-          currentAgentIndex={currentAgentIndex}    
-          setIsReset={setIsReset}
-        /> */}
+        <TitleLarge>Design AI</TitleLarge>
         <AgentButton
           setCurrentAgentIndex={setCurrentAgentIndex}
           assignedIndex={0}
           currentAgentIndex={currentAgentIndex}
           setIsReset={setIsReset}
-
-        >
-          <ButtonLabel>Agent 01</ButtonLabel>
-        </AgentButton>
+          label={'Agent 01'}
+        />
 
         <AgentButton
           setCurrentAgentIndex={setCurrentAgentIndex}
           assignedIndex={1}
           currentAgentIndex={currentAgentIndex}
           setIsReset={setIsReset}
-
-        >
-          <ButtonLabel>Agent 03</ButtonLabel>
-        </AgentButton>
+          label={'Agent 03'}
+        />
 
         <AgentButton
           setCurrentAgentIndex={setCurrentAgentIndex}
           assignedIndex={2}
           currentAgentIndex={currentAgentIndex}
           setIsReset={setIsReset}
-
-        >
-          <ButtonLabel>Agent 05</ButtonLabel>
-        </AgentButton>
+          label={'Agent 05'}
+        />
 
         <AgentButton
           setCurrentAgentIndex={setCurrentAgentIndex}
           assignedIndex={3}
           currentAgentIndex={currentAgentIndex}
           setIsReset={setIsReset}
+          label={'Agent 07'}
 
-        >
-          <ButtonLabel>Agent 07</ButtonLabel>
-        </AgentButton>
+        />
 
         <AgentButton
           setCurrentAgentIndex={setCurrentAgentIndex}
           assignedIndex={4}
           currentAgentIndex={currentAgentIndex}
           setIsReset={setIsReset}
-        >
-          <ButtonLabel>Agent 11</ButtonLabel>
-        </AgentButton>
+          label={'Agent 11'}
+        />
       </LeftColumn>
 
       <CenteredRow>
