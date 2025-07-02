@@ -55,6 +55,21 @@ export const BotScene = styled.div`
   }  
 `;
 
+export const SpheresScene = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  margin-top: 0;
+  /* margin-left: -40px; */
+`;
+
 export const LinkContainer = styled.div`
   position: absolute;
   bottom: 30px;

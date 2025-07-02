@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Canvas } from '@react-three/fiber';
-import { CameraShake, Environment, PerspectiveCamera } from '@react-three/drei';
+import { CameraShake, Environment, OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import * as THREE from 'three';
 import { 
   AppContainer,
@@ -15,6 +15,7 @@ import {
   FlexStartRow,
   LeftColumn,
   TitleLarge,
+  SpheresScene,
 } from './App.styles'
 import BeeBot from './components/BeeBot';
 import { useSpring, animated } from '@react-spring/three';
@@ -351,7 +352,7 @@ function App() {
               
           </OutputContainer>
         </InterfaceContainer>
-
+{/* 
         <BotScene>
           <Canvas
             gl={{
@@ -370,7 +371,7 @@ function App() {
             <directionalLight position={[0, -0.5, 1]} color={'#fff'} intensity={0.0025} />
             <directionalLight position={[0.02, -0.5, 1]} color={'#fff'} intensity={0.0025} />
             
-            {/* <animated.group rotation-y={isSpinning ? spinRotation : rotation} position={position.to((x, y, z) => [x, y, z])}>
+            <animated.group rotation-y={isSpinning ? spinRotation : rotation} position={position.to((x, y, z) => [x, y, z])}>
               <BeeBot
                 agentFileName={agents[currentAgentIndex]}
                 position={[0, 0, 0]}
@@ -378,9 +379,7 @@ function App() {
                 scale={1}
                 animationSpeed={inputIsFocused ? 4 : 1}
               />
-            </animated.group>               */}
-            <Sphere args={[1, 32, 32]} position={[0, 0, 0]} scale={1} rotation={[0, 0, 0]} />
-
+            </animated.group>
             <Environment preset="forest" backgroundIntensity={0.2} />
             <CameraShake
               maxYaw={0.1} // Max amount camera can yaw in either direction
@@ -393,8 +392,60 @@ function App() {
               decayRate={0.65} // if decay = true this is the rate at which intensity will reduce at />
             />
           </Canvas>
-        </BotScene>
+        </BotScene> */}
       </CenteredRow>
+
+        <SpheresScene>
+          <Canvas
+            gl={{
+              antialias: true,
+              toneMapping: THREE.ACESFilmicToneMapping
+            }}
+            onCreated={({ gl }) => {
+              gl.toneMapping = THREE.ACESFilmicToneMapping;
+              gl.toneMappingExposure = 1.0;
+              }}
+            >
+            
+            <PerspectiveCamera makeDefault fov={20} position={[0, 0, 10]} />
+
+            <directionalLight position={[0, 0, 5]} color={'#fff'} intensity={1} />
+            {/* <directionalLight position={[0, -0.5, 1]} color={'#fff'} intensity={0.0025} />
+            <directionalLight position={[0.02, -0.5, 1]} color={'#fff'} intensity={0.0025} /> */}
+            
+                    
+            <Sphere position={[-1, 1, 0]} scale={0.25} rotation={[0, 0, 0]} modelFileName={'sphere_gold_1'} />
+            <Sphere position={[-1, 0, 0]} scale={0.2} rotation={[0, 0, 0]} modelFileName={'sphere_gold_2'} />
+            <Sphere position={[-1, -1, 0]} scale={0.2} rotation={[0, 0, 0]} modelFileName={'sphere_gold_7'} />
+
+            <Sphere position={[2, 1, 0]} scale={0.25} rotation={[0, 0, 0]} modelFileName={'sphere_gold_4'} />
+            <Sphere position={[2, 0, 0]} scale={0.25} rotation={[0, 0, 0]} modelFileName={'sphere_gold_5'} />
+            <Sphere position={[2, -1, 0]} scale={0.2} rotation={[0, 0, 0]} modelFileName={'sphere_gold_6'} />
+            {/* <OrbitControls
+              makeDefault
+              minAzimuthAngle={0}
+              maxAzimuthAngle={Math.PI / 2}
+              minPolarAngle={Math.PI / 3}
+              maxPolarAngle={Math.PI / 3}
+              enablePan={true}
+              zoomSpeed={0.3}
+              enableDamping={true}
+              enableZoom={false}
+            /> */}
+
+            <Environment preset="forest" backgroundIntensity={0.2} />
+            {/* <CameraShake
+              maxYaw={0.1} // Max amount camera can yaw in either direction
+              maxPitch={0.05} // Max amount camera can pitch in either direction
+              maxRoll={0.1} // Max amount camera can roll in either direction
+              yawFrequency={0.1} // Frequency of the the yaw rotation
+              pitchFrequency={0.1} // Frequency of the pitch rotation
+              rollFrequency={0.1} // Frequency of the roll rotation
+              intensity={0.5} // initial intensity of the shake
+              decayRate={0.65} // if decay = true this is the rate at which intensity will reduce at />
+            /> */}
+          </Canvas>
+        </SpheresScene>
 
 
       <LinkContainer>
