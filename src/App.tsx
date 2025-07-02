@@ -24,6 +24,7 @@ import { z } from 'zod'
 import Output from './components/Output/Output';
 import { taoTeChing } from './utils/textData';
 import AgentButton from './components/AgentButton/AgentButton';
+import Sphere from './components/Sphere';
 
 const CatSchema = z.array(
   z.object({
@@ -369,15 +370,16 @@ function App() {
             <directionalLight position={[0, -0.5, 1]} color={'#fff'} intensity={0.0025} />
             <directionalLight position={[0.02, -0.5, 1]} color={'#fff'} intensity={0.0025} />
             
-            <animated.group rotation-y={isSpinning ? spinRotation : rotation} position={position.to((x, y, z) => [x, y, z])}>
+            {/* <animated.group rotation-y={isSpinning ? spinRotation : rotation} position={position.to((x, y, z) => [x, y, z])}>
               <BeeBot
                 agentFileName={agents[currentAgentIndex]}
                 position={[0, 0, 0]}
                 rotation={[0, 0, 0]}
-                scale={2.4}
+                scale={1}
                 animationSpeed={inputIsFocused ? 4 : 1}
               />
-            </animated.group>              
+            </animated.group>               */}
+            <Sphere args={[1, 32, 32]} position={[0, 0, 0]} scale={1} rotation={[0, 0, 0]} />
 
             <Environment preset="forest" backgroundIntensity={0.2} />
             <CameraShake
