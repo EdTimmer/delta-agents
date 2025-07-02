@@ -25,7 +25,10 @@ import { z } from 'zod'
 import Output from './components/Output/Output';
 import { taoTeChing } from './utils/textData';
 import AgentButton from './components/AgentButton/AgentButton';
-import Sphere from './components/Sphere';
+import Globe from './components/Globe';
+import LogoGroup from './components/LogoGroup';
+import GlobesLeftGroup from './components/GlobesLeftGroup';
+import GlobesRightGroup from './components/GlobesRightGroup';
 
 const CatSchema = z.array(
   z.object({
@@ -407,21 +410,26 @@ function App() {
               }}
             >
             
-            <PerspectiveCamera makeDefault fov={20} position={[0, 0, 10]} />
+            <PerspectiveCamera makeDefault fov={20} position={[0, 0, 10]} far={13} />
 
             <directionalLight position={[0, 0, 5]} color={'#fff'} intensity={1} />
             {/* <directionalLight position={[0, -0.5, 1]} color={'#fff'} intensity={0.0025} />
             <directionalLight position={[0.02, -0.5, 1]} color={'#fff'} intensity={0.0025} /> */}
             
                     
-            <Sphere position={[-1, 1, 0]} scale={0.25} rotation={[0, 0, 0]} modelFileName={'sphere_gold_1'} />
-            <Sphere position={[-1, 0, 0]} scale={0.2} rotation={[0, 0, 0]} modelFileName={'sphere_gold_2'} />
-            <Sphere position={[-1, -1, 0]} scale={0.2} rotation={[0, 0, 0]} modelFileName={'sphere_gold_7'} />
+            {/* <Globe position={[-1, 1, 0]} scale={0.25} rotation={[0, 0, 0]} modelFileName={'sphere_gold_1'} />
+            <Globe position={[-1, 0, 0]} scale={0.2} rotation={[0, 0, 0]} modelFileName={'sphere_gold_2'} />
+            <Globe position={[-1, -1, 0]} scale={0.2} rotation={[0, 0, 0]} modelFileName={'sphere_gold_7'} />
+            <Globe position={[-1, -1.5, 0]} scale={0.25} rotation={[0, 0, 0]} modelFileName={'sphere_green_1'} /> */}
+            <GlobesLeftGroup separation={3} scale={1} position={[-3, 0, 0]} rotation={[0, Math.PI / 2 + 0.5, 0]} />
+            <GlobesRightGroup separation={3} scale={1} position={[3, 0, 0]} rotation={[0, Math.PI / 2 - 0.5, 0]} />
 
-            <Sphere position={[2, 1, 0]} scale={0.25} rotation={[0, 0, 0]} modelFileName={'sphere_gold_4'} />
-            <Sphere position={[2, 0, 0]} scale={0.25} rotation={[0, 0, 0]} modelFileName={'sphere_gold_5'} />
-            <Sphere position={[2, -1, 0]} scale={0.2} rotation={[0, 0, 0]} modelFileName={'sphere_gold_6'} />
-            {/* <OrbitControls
+            {/* <Globe position={[2, 1, 0]} scale={0.25} rotation={[0, 0, 0]} modelFileName={'sphere_gold_4'} />
+            <Globe position={[2, 0, 0]} scale={0.25} rotation={[0, 0, 0]} modelFileName={'sphere_gold_5'} />
+            <Globe position={[2, -1, 0]} scale={0.2} rotation={[0, 0, 0]} modelFileName={'sphere_gold_6'} />
+            <Globe position={[2, -1.5, 0]} scale={0.25} rotation={[0, 0, 0]} modelFileName={'sphere_green_2'} /> */}
+
+            {/* <OrbitControls,
               makeDefault
               minAzimuthAngle={0}
               maxAzimuthAngle={Math.PI / 2}
