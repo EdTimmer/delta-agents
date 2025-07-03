@@ -410,19 +410,19 @@ function App() {
               }}
             >
             
-            <PerspectiveCamera makeDefault fov={20} position={[0, 0, 10]} far={13} />
+            <PerspectiveCamera makeDefault fov={16} position={[0, 0, 10]} far={15} />
 
-            <directionalLight position={[0, 0, 5]} color={'#fff'} intensity={1} />
-            {/* <directionalLight position={[0, -0.5, 1]} color={'#fff'} intensity={0.0025} />
-            <directionalLight position={[0.02, -0.5, 1]} color={'#fff'} intensity={0.0025} /> */}
+            <directionalLight position={[0, 5, 5]} color={'#fff'} intensity={1} />
+            <directionalLight position={[-3, -3, 5]} color={'#fff'} intensity={0.0025} />
+            <directionalLight position={[3, -3, 1]} color={'#fff'} intensity={0.0025} />
             
                     
             {/* <Globe position={[-1, 1, 0]} scale={0.25} rotation={[0, 0, 0]} modelFileName={'sphere_gold_1'} />
             <Globe position={[-1, 0, 0]} scale={0.2} rotation={[0, 0, 0]} modelFileName={'sphere_gold_2'} />
             <Globe position={[-1, -1, 0]} scale={0.2} rotation={[0, 0, 0]} modelFileName={'sphere_gold_7'} />
             <Globe position={[-1, -1.5, 0]} scale={0.25} rotation={[0, 0, 0]} modelFileName={'sphere_green_1'} /> */}
-            <GlobesLeftGroup separation={3} scale={1} position={[-3, 0, 0]} rotation={[0, Math.PI / 2 + 0.5, 0]} />
-            <GlobesRightGroup separation={3} scale={1} position={[3, 0, 0]} rotation={[0, Math.PI / 2 - 0.5, 0]} />
+            <GlobesLeftGroup separation={0.7} scale={1} position={[-1.4, 1.4, 0]} rotation={[0, -Math.PI / 2 + 0.3, 0]} />
+            <GlobesRightGroup separation={0.7} scale={1} position={[2, -0.8, 0]} rotation={[0.5, Math.PI / 2 - 0.7, 0]} />
 
             {/* <Globe position={[2, 1, 0]} scale={0.25} rotation={[0, 0, 0]} modelFileName={'sphere_gold_4'} />
             <Globe position={[2, 0, 0]} scale={0.25} rotation={[0, 0, 0]} modelFileName={'sphere_gold_5'} />
@@ -442,16 +442,7 @@ function App() {
             /> */}
 
             <Environment preset="forest" backgroundIntensity={0.2} />
-            {/* <CameraShake
-              maxYaw={0.1} // Max amount camera can yaw in either direction
-              maxPitch={0.05} // Max amount camera can pitch in either direction
-              maxRoll={0.1} // Max amount camera can roll in either direction
-              yawFrequency={0.1} // Frequency of the the yaw rotation
-              pitchFrequency={0.1} // Frequency of the pitch rotation
-              rollFrequency={0.1} // Frequency of the roll rotation
-              intensity={0.5} // initial intensity of the shake
-              decayRate={0.65} // if decay = true this is the rate at which intensity will reduce at />
-            /> */}
+s
           </Canvas>
         </SpheresScene>
 

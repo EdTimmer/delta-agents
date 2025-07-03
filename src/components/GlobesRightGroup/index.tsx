@@ -13,27 +13,33 @@ interface Props {
 
 function GlobesRightGroup({ separation = 1, scale = 1, position = [0, 0, 0], rotation = [0, 0, 0] }: Props) {
   const groupRef = useRef<Group>(null);
+  const baseRotation = useRef<[number, number, number]>([0, 0, 0]);
 
-  // Set initial rotation once when component mounts
+  // Set initial rotation and store base rotation
   useEffect(() => {
     if (groupRef.current) {
+      baseRotation.current = [...rotation];
       groupRef.current.rotation.set(rotation[0], rotation[1], rotation[2]);
     }
-  }, []);
+  }, [rotation]);
 
-  useFrame((_state, delta) => {
+  useFrame((state) => {
     if (groupRef.current) {
-      groupRef.current.rotation.z += delta * 0.1; // Rotate the sphere around the z-axis
-      // groupRef.current.rotation.x += delta * 0.05; // Optional: add some rotation on the x-axis
+      // Apply continuous rotation on top of base rotation
+      groupRef.current.rotation.set(
+        baseRotation.current[0],
+        baseRotation.current[1], 
+        baseRotation.current[2] + (state.clock.elapsedTime * 0.015)
+      );
     }
   });
 
   return (
     <group position={position} ref={groupRef} scale={[scale, scale, scale]} rotation={new THREE.Euler(...rotation)}>
-      <Globe position={[-1 * separation, 0, 0]} scale={0.25} rotation={[0, 0, 0]} modelFileName={'sphere_gold_4'} />
-      <Globe position={[0, 1 * separation, 0]} scale={0.25} rotation={[0, 0, 0]} modelFileName={'sphere_gold_5'} />
-      <Globe position={[1 * separation, 0, 0]} scale={0.2} rotation={[0, 0, 0]} modelFileName={'sphere_gold_10'} />
-      <Globe position={[0, -1 * separation, 0]} scale={0.25} rotation={[0, 0, 0]} modelFileName={'sphere_gold_9'} />
+      <Globe position={[-1 * separation, 0, 0]} scale={0.25} rotation={[0, 0, 0]} modelFileName={'sphere_gold_9'} />
+      <Globe position={[0, 1 * separation, 0]} scale={0.25} rotation={[0, 0, 0]} modelFileName={'sphere_gold_1'} />
+      <Globe position={[1 * separation, 0, 0]} scale={0.2} rotation={[0, 0, 0]} modelFileName={'sphere_gold_2'} />
+      <Globe position={[0, -1 * separation, 0]} scale={0.25} rotation={[0, 0, 0]} modelFileName={'sphere_gold_5'} />
     </group>    
   );
 }

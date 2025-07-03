@@ -22,19 +22,18 @@ function GlobesLeftGroup({ separation = 1, scale = 1, position = [0, 0, 0], rota
     }
   }, []);
 
-  useFrame((_state, delta) => {
-    if (groupRef.current) {
-      groupRef.current.rotation.z += delta * 0.1; // Rotate the sphere around the z-axis
-      // groupRef.current.rotation.x += delta * 0.05; // Optional: add some rotation on the x-axis
-    }
-  });
+  // useFrame((_state, delta) => {
+  //   if (groupRef.current) {
+  //     groupRef.current.rotation.z += delta * 0.02; // Rotate the sphere around the z-axis
+  //   }
+  // });
 
   return (
     <group position={position} ref={groupRef} scale={[scale, scale, scale]} rotation={new THREE.Euler(...rotation)}>        
-      <Globe position={[-1 * separation, 0, 0]} scale={0.25} rotation={[0, 0, 0]} modelFileName={'sphere_gold_1'} />
-      <Globe position={[0, 1 * separation, 0]} scale={0.25} rotation={[0, 0, 0]} modelFileName={'sphere_gold_2'} />
-      <Globe position={[1 * separation, 0, 0]} scale={0.25} rotation={[0, 0, 0]} modelFileName={'sphere_gold_11'} />
-      <Globe position={[0, -1 * separation, 0]} scale={0.25} rotation={[0, 0, 0]} modelFileName={'sphere_gold_8'} />
+      {/* <Globe position={[0, 0, 0]} scale={0.45} rotation={[0, 0, 0]} modelFileName={'sphere_gold_1'} /> */}
+      {/* <Globe position={[0, 0, 0]} scale={0.2} rotation={[0, 0, 0]} modelFileName={'sphere_gold_2'} /> */}
+      {/* <Globe position={[1 * separation, 0, 0]} scale={0.2} rotation={[0, 0, 0]} modelFileName={'sphere_gold_11'} /> */}
+      <Globe position={[-1.8, 0, 0]} scale={0.45} rotation={[0, 0, 0]} modelFileName={'sphere_gold_8'} speedX={0.025} speedY={0}/>
     </group>    
   );
 }
