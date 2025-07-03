@@ -412,9 +412,9 @@ function App() {
             
             <PerspectiveCamera makeDefault fov={16} position={[0, 0, 10]} far={15} />
 
-            <directionalLight position={[0, 5, 5]} color={'#fff'} intensity={1} />
+            {/* <directionalLight position={[0, 5, 5]} color={'#fff'} intensity={1} />
             <directionalLight position={[-3, -3, 5]} color={'#fff'} intensity={0.0025} />
-            <directionalLight position={[3, -3, 1]} color={'#fff'} intensity={0.0025} />
+            <directionalLight position={[3, -3, 1]} color={'#fff'} intensity={0.0025} /> */}
             
                     
             {/* <Globe position={[-1, 1, 0]} scale={0.25} rotation={[0, 0, 0]} modelFileName={'sphere_gold_1'} />
