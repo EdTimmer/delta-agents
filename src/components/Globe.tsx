@@ -12,9 +12,10 @@ interface Props {
   modelFileName: string;
   speedY?: number;
   speedX?: number;
+  speedZ?: number;
 }
 
-const Globe = forwardRef<any, Props>(({scale = 1.0, position = [0, 0, 0], rotation = [0, 0, 0], modelFileName, speedX = 0.025, speedY = 0.025}, _ref) => {
+const Globe = forwardRef<any, Props>(({scale = 1.0, position = [0, 0, 0], rotation = [0, 0, 0], modelFileName, speedX = 0.025, speedY = 0.025, speedZ = 0.025}, _ref) => {
   const { nodes, materials } = useGLTF(`../../models/${modelFileName}.glb`) as any  ;
   const groupRef = useRef<THREE.Group>(null);
   
@@ -22,6 +23,7 @@ const Globe = forwardRef<any, Props>(({scale = 1.0, position = [0, 0, 0], rotati
     if (groupRef.current) {
       groupRef.current.rotation.y += delta * speedX; // Rotate the sphere around the y-axis
       groupRef.current.rotation.x += delta * speedY; // Optional: add some rotation on the x-axis
+      groupRef.current.rotation.z += delta * speedZ; // Optional: add some rotation on the z-axis
     }
   });
   

@@ -34,7 +34,7 @@ function GlobesLeftGroup({ separation = 1, scale = 1, position = [0, 0, 0], rota
       {/* <Globe position={[0, 0, 0]} scale={0.2} rotation={[0, 0, 0]} modelFileName={'sphere_gold_2'} /> */}
       {/* <Globe position={[1 * separation, 0, 0]} scale={0.2} rotation={[0, 0, 0]} modelFileName={'sphere_gold_11'} /> */}
       {/* <Globe position={[-1.8, 0, 0]} scale={0.45} rotation={[0, 0, 0]} modelFileName={'sphere_gold_8'} speedX={0.025} speedY={0}/> */}
-      <Globe position={[-1.8, 0, 0]} scale={0.45} rotation={[0, 0, 0]} modelFileName={'green_glass_bumps_2'} speedX={0.025} speedY={0}/>
+      <Globe position={[0, 0, 0]} scale={1.2} rotation={[0, 0, 0]} modelFileName={'green_glass_bumps_2'} speedX={0.025} speedY={0}/>
     </group>    
   );
 }

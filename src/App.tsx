@@ -16,6 +16,7 @@ import {
   LeftColumn,
   TitleLarge,
   SpheresScene,
+  TopLeftGlobeScene,
 } from './App.styles'
 import BeeBot from './components/BeeBot';
 import { useSpring, animated } from '@react-spring/three';
@@ -29,6 +30,7 @@ import Globe from './components/Globe';
 import LogoGroup from './components/LogoGroup';
 import GlobesLeftGroup from './components/GlobesLeftGroup';
 import GlobesRightGroup from './components/GlobesRightGroup';
+import CenterContent from './components/CenterContent/CenterContent';
 
 const CatSchema = z.array(
   z.object({
@@ -183,6 +185,14 @@ function App() {
     'bee_bot12_purple.glb'
   ];
 
+  const leftGlobeModels = [
+   'green_glass_bumps_2',
+   'green_glass_matrix_2',
+   'green_glass_matrix_3',
+   'green_glass_matrix_4',
+   'sphere_gold_7',
+  ];
+
   const { rotation } = useSpring({
     rotation: inputIsFocused ? -Math.PI / 4 : 0,
     config: { mass: 1, tension: 120, friction: 14 } // Adjust these values to control animation feel
@@ -233,7 +243,27 @@ function App() {
 
   return (    
     <AppContainer>
-      <LeftColumn>
+      <TopLeftGlobeScene>
+        <Canvas
+          gl={{
+            antialias: true,
+            toneMapping: THREE.ACESFilmicToneMapping
+          }}
+          onCreated={({ gl }) => {
+            gl.toneMapping = THREE.ACESFilmicToneMapping;
+            gl.toneMappingExposure = 1.0;
+            }}
+          >          
+          <PerspectiveCamera makeDefault fov={20} position={[0, 0, 8]} />
+
+          <Globe position={[-0.35, 0.4, 0]} scale={1.3} rotation={[0, 0, 0]} modelFileName={leftGlobeModels[currentAgentIndex]} speedX={0.025} speedY={0} speedZ={0}/>
+
+
+          <Environment preset="forest" backgroundIntensity={0.2} />
+        </Canvas>
+      </TopLeftGlobeScene>
+        
+      <LeftColumn>       
         <TitleLarge>Design AI</TitleLarge>
         <AgentButton
           setCurrentAgentIndex={setCurrentAgentIndex}
@@ -279,7 +309,7 @@ function App() {
 
       <CenteredRow>
         <InterfaceContainer>
-          <FlexStartRow>
+          {/* <FlexStartRow>
             <StyledForm onSubmit={handleSubmit}>
               <StyledInput
                 type="text"
@@ -303,9 +333,12 @@ function App() {
                 />               
               </SubmitButton>
             </StyledForm>
-          </FlexStartRow>
+          </FlexStartRow> */}
 
-          <OutputContainer>
+          <CenterContent currentAgentIndex={currentAgentIndex} />
+          {/* <OutputContainer
+            style={{borderColor: 'red'}}
+          >
             {!isReset && isSuccess && parsedCatData && currentAgentIndex === 0 &&
               <Output
                 name={parsedCatData[0].breeds[0].name}
@@ -353,7 +386,7 @@ function App() {
             }
             
               
-          </OutputContainer>
+          </OutputContainer> */}
         </InterfaceContainer>
 {/* 
         <BotScene>
@@ -397,7 +430,6 @@ function App() {
           </Canvas>
         </BotScene> */}
       </CenteredRow>
-
         <SpheresScene>
           <Canvas
             gl={{
@@ -411,38 +443,9 @@ function App() {
             >
             
             <PerspectiveCamera makeDefault fov={16} position={[0, 0, 10]} far={15} />
-
-            {/* <directionalLight position={[0, 5, 5]} color={'#fff'} intensity={1} />
-            <directionalLight position={[-3, -3, 5]} color={'#fff'} intensity={0.0025} />
-            <directionalLight position={[3, -3, 1]} color={'#fff'} intensity={0.0025} /> */}
-            
-                    
-            {/* <Globe position={[-1, 1, 0]} scale={0.25} rotation={[0, 0, 0]} modelFileName={'sphere_gold_1'} />
-            <Globe position={[-1, 0, 0]} scale={0.2} rotation={[0, 0, 0]} modelFileName={'sphere_gold_2'} />
-            <Globe position={[-1, -1, 0]} scale={0.2} rotation={[0, 0, 0]} modelFileName={'sphere_gold_7'} />
-            <Globe position={[-1, -1.5, 0]} scale={0.25} rotation={[0, 0, 0]} modelFileName={'sphere_green_1'} /> */}
-            <GlobesLeftGroup separation={0.7} scale={1} position={[-1.4, 1.4, 0]} rotation={[0, -Math.PI / 2 + 0.3, 0]} />
             <GlobesRightGroup separation={0.7} scale={1} position={[2, -0.8, 0]} rotation={[0.5, Math.PI / 2 - 0.7, 0]} />
 
-            {/* <Globe position={[2, 1, 0]} scale={0.25} rotation={[0, 0, 0]} modelFileName={'sphere_gold_4'} />
-            <Globe position={[2, 0, 0]} scale={0.25} rotation={[0, 0, 0]} modelFileName={'sphere_gold_5'} />
-            <Globe position={[2, -1, 0]} scale={0.2} rotation={[0, 0, 0]} modelFileName={'sphere_gold_6'} />
-            <Globe position={[2, -1.5, 0]} scale={0.25} rotation={[0, 0, 0]} modelFileName={'sphere_green_2'} /> */}
-
-            {/* <OrbitControls,
-              makeDefault
-              minAzimuthAngle={0}
-              maxAzimuthAngle={Math.PI / 2}
-              minPolarAngle={Math.PI / 3}
-              maxPolarAngle={Math.PI / 3}
-              enablePan={true}
-              zoomSpeed={0.3}
-              enableDamping={true}
-              enableZoom={false}
-            /> */}
-
             <Environment preset="forest" backgroundIntensity={0.2} />
-s
           </Canvas>
         </SpheresScene>
 

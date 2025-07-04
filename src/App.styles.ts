@@ -67,13 +67,21 @@ export const SpheresScene = styled.div`
   align-items: flex-end;
   flex-wrap: wrap;
   margin-top: 0;
-  /* margin-left: -40px; */
+`;
+
+export const TopLeftGlobeScene = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 600px;
+  height: 600px;
 `;
 
 export const LinkContainer = styled.div`
   position: absolute;
   bottom: 30px;
-  right: 40px;
+  left: 40px;
   font-size: 16px;
   letter-spacing: 1px;
   z-index: 30;
@@ -176,6 +184,8 @@ export const OutputContainer = styled.div`
   width: 100%;
   height: 520px;
   overflow-y: auto; /* Enable scrolling for long outputs */
+  border-width: 1px;
+  border-style: solid;
   &::-webkit-scrollbar {
     width: 8px;
   }

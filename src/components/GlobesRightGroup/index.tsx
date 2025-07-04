@@ -1,7 +1,6 @@
 import { useRef, useEffect } from 'react';
 import { useFrame } from "@react-three/fiber";
 import { Group } from 'three';
-import * as THREE from 'three';
 import Globe from '../Globe'
 
 interface Props {
@@ -13,32 +12,28 @@ interface Props {
 
 function GlobesRightGroup({ separation = 1, scale = 1, position = [0, 0, 0], rotation = [0, 0, 0] }: Props) {
   const groupRef = useRef<Group>(null);
-  const baseRotation = useRef<[number, number, number]>([0, 0, 0]);
+  const initialRotationSet = useRef(false);
 
-  // Set initial rotation and store base rotation
+  // Set initial rotation once when component mounts
   useEffect(() => {
-    if (groupRef.current) {
-      baseRotation.current = [...rotation];
+    if (groupRef.current && !initialRotationSet.current) {
       groupRef.current.rotation.set(rotation[0], rotation[1], rotation[2]);
+      initialRotationSet.current = true;
     }
-  }, [rotation]);
+  }, [rotation[0], rotation[1], rotation[2]]);
 
-  useFrame((state) => {
+  useFrame((_state, delta) => {
     if (groupRef.current) {
-      // Apply continuous rotation on top of base rotation
-      groupRef.current.rotation.set(
-        baseRotation.current[0],
-        baseRotation.current[1], 
-        baseRotation.current[2] + (state.clock.elapsedTime * 0.015)
-      );
+      groupRef.current.rotation.z += delta * 0.025; // Rotate the sphere around the z-axis
+      // groupRef.current.rotation.x += delta * 0.05; // Optional: add some rotation on the x-axis
     }
   });
 
   return (
-    <group position={position} ref={groupRef} scale={[scale, scale, scale]} rotation={new THREE.Euler(...rotation)}>
-      <Globe position={[-1 * separation, 0, 0]} scale={0.25} rotation={[0, 0, 0]} modelFileName={'sphere_gold_9'} />
-      <Globe position={[0, 1 * separation, 0]} scale={0.25} rotation={[0, 0, 0]} modelFileName={'sphere_gold_1'} />
-      <Globe position={[1 * separation, 0, 0]} scale={0.2} rotation={[0, 0, 0]} modelFileName={'sphere_gold_2'} />
+    <group position={position} ref={groupRef} scale={[scale, scale, scale]}>
+      <Globe position={[-1 * separation, 0, 0]} scale={0.25} rotation={[0, 0, 0]} modelFileName={'sphere_gold_12'} />
+      <Globe position={[0, 1 * separation, 0]} scale={0.25} rotation={[0, 0, 0]} modelFileName={'sphere_gold_13'} />
+      <Globe position={[1 * separation, 0, 0]} scale={0.25} rotation={[0, 0, 0]} modelFileName={'sphere_gold_9'} />
       <Globe position={[0, -1 * separation, 0]} scale={0.25} rotation={[0, 0, 0]} modelFileName={'sphere_gold_5'} />
     </group>    
   );
