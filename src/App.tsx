@@ -256,7 +256,7 @@ function App() {
           >          
           <PerspectiveCamera makeDefault fov={20} position={[0, 0, 8]} />
 
-          <Globe position={[-0.35, 0.4, 0]} scale={1.3} rotation={[0, 0, 0]} modelFileName={leftGlobeModels[currentAgentIndex]} speedX={0.025} speedY={0} speedZ={0}/>
+          <Globe position={[-0.35, 0.4, 0]} scale={1.3} rotation={[0, 0, 0]} modelFileName={'green_glass_bumps_2'} speedX={0.025} speedY={0} speedZ={0}/>
 
 
           <Environment preset="forest" backgroundIntensity={0.2} />
