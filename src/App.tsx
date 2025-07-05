@@ -14,6 +14,7 @@ import {
   SpheresScene,
   TopLeftGlobeScene,
   RightColumn,
+  LogoContainer,
 } from './App.styles'
 import BeeBot from './components/BeeBot';
 import { useSpring, animated } from '@react-spring/three';
@@ -29,6 +30,7 @@ import GlobesLeftGroup from './components/GlobesLeftGroup';
 import GlobesRightGroup from './components/GlobesRightGroup';
 import CenterContent from './components/CenterContent/CenterContent';
 import { RectAreaLightUniformsLib } from 'three/addons/lights/RectAreaLightUniformsLib.js'
+import Lights from './components/Lights';
 
 
 const CatSchema = z.array(
@@ -405,6 +407,17 @@ function App() {
               
           </OutputContainer> */}
         </InterfaceContainer>
+
+        <LogoContainer>
+          <Canvas gl={{ antialias: true }}>
+            <PerspectiveCamera makeDefault fov={20} position={[0, 0, 20]} />
+            <ambientLight intensity={1} />
+            <LogoGroup />
+            <Lights />
+            <Environment preset="apartment" backgroundIntensity={2.0} />
+          </Canvas>
+        </LogoContainer>  
+
         <RightColumn />
 {/* 
         <BotScene>

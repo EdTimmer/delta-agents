@@ -10,10 +10,26 @@ import Cyber03 from "/images/cyber03.jpg";
 import Corporate01 from "/images/corporate01.jpg";
 import Corporate02 from "/images/corporate02.jpg";
 import Corporate03 from "/images/corporate03.jpg";
+import Botanical01 from "/images/botanical01.jpg";
+import Botanical02 from "/images/botanical02.jpg";
+import Botanical03 from "/images/botanical03.jpg";
+import Botanical04 from "/images/botanical04.jpg";
+import Botanical05 from "/images/botanical05.jpg";
+import Botanical06 from "/images/botanical06.jpg";
+import Botanical07 from "/images/botanical07.jpg";
+
 
 interface CenterContentProps {
   currentAgentIndex: number;
 }
+
+const imageMap: { [key: number]: string } = {
+  0: Botanical02,
+  1: Botanical03,
+  2: Botanical04,
+  3: Botanical06,
+  4: Botanical07,
+};
 
 const CenterContent = ({ currentAgentIndex }: CenterContentProps) => {
   return (
@@ -23,7 +39,7 @@ const CenterContent = ({ currentAgentIndex }: CenterContentProps) => {
       </FlexStartRow> */}
 
       <ImageContainer>
-        <img src={Corporate03} alt="Landscape" />
+        <img src={imageMap[currentAgentIndex]} alt="Landscape" />
       </ImageContainer>
       <FlexStartRow>
         <Title>Lorem Ipsum Dolor Sit Amet</Title>
