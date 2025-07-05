@@ -7,10 +7,10 @@ export const AppContainer = styled.div`
   z-index: 1;
   font-family: 'Comfortaa', 'Roboto Mono', monospace;
   width: 100vw;
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: flex-start;
 `;
 
@@ -30,11 +30,19 @@ export const LeftColumn = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+  align-self: flex-start;
   margin-top: 20px;
   padding: 20px;
   z-index: 10;
   border-top-right-radius: 20px;
   gap: 20px;
+`;
+
+
+export const RightColumn = styled.div`
+  background-color: transparent;
+  width: 300px;
+  height: 100vh;
 `;
 
 export const BotScene = styled.div`
@@ -102,8 +110,11 @@ export const InterfaceContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 60px;
-  width: 800px;
+  /* margin-top: 60px; */
+  padding: 10px 0;
+  width: 900px;
+  /* height: calc(100vh - 120px); */
+  height: 100%;
   z-index: 10;
   gap: 20px;
 

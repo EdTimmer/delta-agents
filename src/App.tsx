@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Canvas } from '@react-three/fiber';
 import { CameraShake, Environment, OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import * as THREE from 'three';
@@ -13,6 +13,7 @@ import {
   TitleLarge,
   SpheresScene,
   TopLeftGlobeScene,
+  RightColumn,
 } from './App.styles'
 import BeeBot from './components/BeeBot';
 import { useSpring, animated } from '@react-spring/three';
@@ -27,6 +28,8 @@ import LogoGroup from './components/LogoGroup';
 import GlobesLeftGroup from './components/GlobesLeftGroup';
 import GlobesRightGroup from './components/GlobesRightGroup';
 import CenterContent from './components/CenterContent/CenterContent';
+import { RectAreaLightUniformsLib } from 'three/addons/lights/RectAreaLightUniformsLib.js'
+
 
 const CatSchema = z.array(
   z.object({
@@ -87,6 +90,14 @@ function App() {
   const [parsedRandomFactsData, setParsedRandomFactsData] = useState<RandomFactsType>()
   const [isSuccess, setIsSuccess] = useState<boolean>()
   const [isReset, setIsReset] = useState(false);
+
+  const lightRef = useRef<THREE.RectAreaLight>(null)
+  useEffect(() => {
+    RectAreaLightUniformsLib.init()
+    if (lightRef.current) {
+      lightRef.current.lookAt(0, 0, 0)
+    }
+  }, [])
 
   const handleCleanUp = () => {
     setParsedCatData(undefined)
@@ -251,10 +262,20 @@ function App() {
             }}
           >          
           <PerspectiveCamera makeDefault fov={20} position={[0, 0, 8]} />
+          // sphere_gold_7, green_glass_bumps_2, green_plastic_bumps
+          <Globe position={[-0.35, 0.4, 0]} scale={1.3} rotation={[0, 0, 0]} modelFileName={'green_bumps_rough'} speedX={0.025} speedY={0} speedZ={0}/>
 
-          <Globe position={[-0.35, 0.4, 0]} scale={1.3} rotation={[0, 0, 0]} modelFileName={'green_glass_bumps_2'} speedX={0.025} speedY={0} speedZ={0}/>
+          <directionalLight position={[0, 0, 10]} color={'#fff'} intensity={1} />
+          <directionalLight position={[3, -3, 0]} color={'#fff'} intensity={1} />
 
-
+          <rectAreaLight
+            ref={lightRef}
+            width={5}
+            height={3}
+            intensity={1}
+            color={'white'}
+            position={[3, -3, 0]}
+          />
           <Environment preset="forest" backgroundIntensity={0.2} />
         </Canvas>
       </TopLeftGlobeScene>
@@ -303,7 +324,7 @@ function App() {
         />
       </LeftColumn>
 
-      <CenteredRow>
+      {/* <CenteredRow> */}
         <InterfaceContainer>
           {/* <FlexStartRow>
             <StyledForm onSubmit={handleSubmit}>
@@ -384,6 +405,7 @@ function App() {
               
           </OutputContainer> */}
         </InterfaceContainer>
+        <RightColumn />
 {/* 
         <BotScene>
           <Canvas
@@ -425,7 +447,7 @@ function App() {
             />
           </Canvas>
         </BotScene> */}
-      </CenteredRow>
+      {/* </CenteredRow> */}
         <SpheresScene>
           <Canvas
             gl={{
