@@ -9,13 +9,13 @@ interface Props {
   text: string;
   color: string;
 }
-
+// '/fonts/comfortaa/comfortaa_bold.json'
 const LogoTextBold = ({ position, rotation, text, color }: Props) => {
   const [font, setFont] = useState<Font | null>(null);
 
   useEffect(() => {
     const loader = new FontLoader();
-    loader.load('/fonts/comfortaa/comfortaa_bold.json', (loadedFont) => {
+    loader.load('/fonts/mediator_narrow_web_extra_bold_regular.typeface.json', (loadedFont) => {
       setFont(loadedFont);
     });
   }, []);
@@ -24,7 +24,7 @@ const LogoTextBold = ({ position, rotation, text, color }: Props) => {
     if (!font) return null;
     const textOptions = {
       font,
-      size: 1.6,
+      size: 1.8,
       depth: 0.4,
       curveSegments: 12,
       bevelEnabled: false,

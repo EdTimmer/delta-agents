@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { Group } from 'three';
 import * as THREE from 'three';
 import RingBlue from './RingBlue';
-import LogoTextMichroma from '../../LogoGroup/LogoTextMichroma';
+import LogoTextLight from '../../LogoGroup/LogoTextLight';
 
 interface Props {
   isMouseEntered: boolean;
@@ -32,7 +32,7 @@ function ButtonGroup({ isMouseEntered, isFacingUser, assignedIndex, currentAgent
         isFacingUser={isFacingUser}
         assignedIndex={assignedIndex}
       />
-      <LogoTextMichroma
+      <LogoTextLight
         position={[0, 0, 0]}
         text={logoTextOptions[assignedIndex] || 'agent'}
         color={'#000'}

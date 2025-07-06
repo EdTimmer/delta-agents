@@ -16,13 +16,13 @@ interface Props {
   isButtonText?: boolean;
 }
 
-const LogoTextMichroma = ({ position, rotation, text, color, scale, size }: Props) => {
+const LogoTextLight = ({ position, rotation, text, color, scale, size }: Props) => {
   const [font, setFont] = useState<Font | null>(null);
   const groupRef = useRef<Group>(null);
 
   useEffect(() => {
     const loader = new FontLoader();
-    loader.load('/fonts/michroma_regular.json', (loadedFont) => {
+    loader.load('/fonts/open_sans_light_regular.typeface.json', (loadedFont) => {
       setFont(loadedFont);
     });
   }, []);
@@ -71,4 +71,4 @@ const LogoTextMichroma = ({ position, rotation, text, color, scale, size }: Prop
   );
 };
 
-export default LogoTextMichroma;
+export default LogoTextLight;

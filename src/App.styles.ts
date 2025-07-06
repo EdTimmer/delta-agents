@@ -106,13 +106,14 @@ export const LinkContainer = styled.div`
 `;
 
 export const InterfaceContainer = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   /* margin-top: 60px; */
   padding: 10px 0;
-  width: 900px;
+  width: 960px;
   /* height: calc(100vh - 120px); */
   height: 100%;
   z-index: 10;
@@ -230,4 +231,5 @@ export const LogoContainer = styled.div`
   left: 50%;
   transform: translateX(-50%);
   z-index: 30;
+  width: 300px;
 `;  

@@ -1,14 +1,11 @@
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 import { Canvas } from '@react-three/fiber';
-import { CameraShake, Environment, OrbitControls, PerspectiveCamera } from '@react-three/drei';
+import { Environment, PerspectiveCamera } from '@react-three/drei';
 import * as THREE from 'three';
 import { 
   AppContainer,
-  BotScene,
   LinkContainer,
   InterfaceContainer,
-  CenteredRow,
-  FlexStartRow,
   LeftColumn,
   TitleLarge,
   SpheresScene,
@@ -16,20 +13,12 @@ import {
   RightColumn,
   LogoContainer,
 } from './App.styles'
-import BeeBot from './components/BeeBot';
-import { useSpring, animated } from '@react-spring/three';
-import SearchIcon from '@mui/icons-material/Search';
-import colors from './styles/colors';
 import { z } from 'zod'
-import Output from './components/Output/Output';
-import { taoTeChing } from './utils/textData';
 import AgentButton from './components/AgentButton/AgentButton';
 import Globe from './components/Globe';
 import LogoGroup from './components/LogoGroup';
-import GlobesLeftGroup from './components/GlobesLeftGroup';
 import GlobesRightGroup from './components/GlobesRightGroup';
 import CenterContent from './components/CenterContent/CenterContent';
-import { RectAreaLightUniformsLib } from 'three/addons/lights/RectAreaLightUniformsLib.js'
 import Lights from './components/Lights';
 
 
@@ -80,175 +69,25 @@ export type LandscapeType = z.infer<typeof LandscapeSchema>
 export type RandomFactsType = z.infer<typeof RandomFactsSchema>
 
 function App() {
-  const [inputIsFocused, setInputIsFocused] = useState(false);
-  const [inputText, setInputText] = useState('');
-  const [prompt, setPrompt] = useState('');
-  const [isSpinning, setIsSpinning] = useState(false);
   const [currentAgentIndex, setCurrentAgentIndex] = useState(0)
-  const [parsedCatData, setParsedCatData] = useState<CatType>()
-  const [parsedDogData, setParsedDogData] = useState<DogType>()
-  const [parsedFoxData, setParsedFoxData] = useState<FoxType>()
-  const [taoTeChingChapter, setTaoTeChingChapter] = useState<string>();
-  const [parsedRandomFactsData, setParsedRandomFactsData] = useState<RandomFactsType>()
-  const [isSuccess, setIsSuccess] = useState<boolean>()
   const [isReset, setIsReset] = useState(false);
 
-  const lightRef = useRef<THREE.RectAreaLight>(null)
-  useEffect(() => {
-    RectAreaLightUniformsLib.init()
-    if (lightRef.current) {
-      lightRef.current.lookAt(0, 0, 0)
+  const getleftPosition = (index: number) => {  
+    switch (index) {
+      case 0:
+        return '13%';
+      case 1:
+        return '13%';
+      case 2:
+        return '13%';
+      case 3:
+        return '50%';
+      case 4:
+        return '84%';
+      default:
+        return '50%';
     }
-  }, [])
-
-  const handleCleanUp = () => {
-    setParsedCatData(undefined)
-    setParsedDogData(undefined)
-    setParsedFoxData(undefined)
-    setTaoTeChingChapter(undefined)
-    setParsedRandomFactsData(undefined)
-  }
-
-  const catApiKey = import.meta.env.VITE_CAT_API_KEY
-
-  const fetchCat = async () => {
-    handleCleanUp()
-    const data = await fetch(
-      `https://api.thecatapi.com/v1/images/search?has_breeds=1&api_key=${catApiKey}`,
-    ).then((res) => res.json())
-
-    const parsed = CatSchema.safeParse(data)
-    if (parsed.success) {
-      setIsSuccess(true)
-      setParsedCatData(parsed.data)
-    } else {
-      setIsSuccess(false)
-      setParsedCatData([])
-    }
-  }
-
-  const dogApiKey = import.meta.env.VITE_DOG_API_KEY
-  const fetchDog = async () => {
-    handleCleanUp()
-    const data = await fetch(
-      `https://api.thedogapi.com/v1/images/search?has_breeds=1&api_key=${dogApiKey}`,
-    ).then((res) => res.json())
-    const parsed = DogSchema.safeParse(data)
-    if (parsed.success) {
-      setIsSuccess(true)
-      setParsedDogData(parsed.data)
-    } else {
-      setIsSuccess(false)
-      setParsedDogData([])
-    }
-  }
-
-  const fetchFox = async () => {
-    handleCleanUp()
-    const data = await fetch(
-      `https://randomfox.ca/floof/`,
-    ).then((res) => res.json())
-    const parsed = FoxSchema.safeParse(data)
-    if (parsed.success) {
-      setIsSuccess(true)
-      setParsedFoxData(parsed.data)
-    } else {
-      setIsSuccess(false)
-      setParsedFoxData({ image: '' })
-    }
-  }
-
-  const fetchRandomFacts = async () => {
-    handleCleanUp()
-    const data = await fetch(
-      `https://uselessfacts.jsph.pl/random.json?language=en`,
-    ).then((res) => res.json())
-    console.log('data :>> ', data);
-    const parsed = RandomFactsSchema.safeParse(data)
-
-    if (parsed.success) {
-      setIsSuccess(true)
-      setParsedRandomFactsData(parsed.data)
-    } else {
-      setIsSuccess(false)
-      setParsedRandomFactsData({ text: '' })
-    }
-  }
-  
-  const getRandomElementFromArray = (array: string[]) => {
-    const randomIndex = Math.floor(Math.random() * array.length);
-    return array[randomIndex];
-  };
-
-  const setNewTaoTeChingChapter = () => {
-    handleCleanUp()
-    const randomChapter = getRandomElementFromArray(taoTeChing);
-    setTaoTeChingChapter(randomChapter);
-  };
-
-  const agents = [
-    'bee_bot12_blue.glb',
-    'bee_bot12_green.glb',
-    'bee_bot12_yellow.glb',
-    'bee_bot12_red.glb',    
-    'bee_bot12_purple.glb'
-  ];
-
-  const leftGlobeModels = [
-   'green_glass_bumps_2',
-   'green_glass_matrix_2',
-   'green_glass_matrix_3',
-   'green_glass_matrix_4',
-   'sphere_gold_7',
-  ];
-
-  const { rotation } = useSpring({
-    rotation: inputIsFocused ? -Math.PI / 4 : 0,
-    config: { mass: 1, tension: 120, friction: 14 } // Adjust these values to control animation feel
-  });
-
-  const { spinRotation } = useSpring({
-    spinRotation: isSpinning ? Math.PI * 2 : 0,
-    config: { mass: 2.5, tension: 40, friction: 10 },
-    onRest: () => {
-      if (isSpinning) {
-        setIsSpinning(false); // Reset after animation completes
-      }
-    },
-  });
-
-  const { position } = useSpring({
-    position: isSpinning ? [0, -1.2, 1.6] : [0, -1.2, 0],
-    config: {
-      // Different physics based on direction
-      mass: isSpinning ? 2.0 : 5.0,        // Heavier mass for return = slower
-      tension: isSpinning ? 120 : 60,      // Lower tension for return = gentler
-      friction: isSpinning ? 8 : 46        // Higher friction for return = more damping
-    }
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsReset(false);
-    if (currentAgentIndex === 0) {
-      fetchCat();
-    } else if (currentAgentIndex === 1) {
-      fetchDog();
-    } else if (currentAgentIndex === 2) {
-      fetchFox();
-    } else if (currentAgentIndex === 3) {
-      fetchRandomFacts();
-    } else if (currentAgentIndex === 4) {
-      setNewTaoTeChingChapter(); // Default to cat if no specific agent is selected
-    }
-    setIsSpinning(true);
-
-    setPrompt(inputText);
-    setInputText('');
-    if (document.activeElement instanceof HTMLElement) {
-      document.activeElement.blur();
-    }
-  };
+  } 
 
   return (    
     <AppContainer>
@@ -270,14 +109,6 @@ function App() {
           <directionalLight position={[0, 0, 10]} color={'#fff'} intensity={1} />
           <directionalLight position={[3, -3, 0]} color={'#fff'} intensity={1} />
 
-          <rectAreaLight
-            ref={lightRef}
-            width={5}
-            height={3}
-            intensity={1}
-            color={'white'}
-            position={[3, -3, 0]}
-          />
           <Environment preset="forest" backgroundIntensity={0.2} />
         </Canvas>
       </TopLeftGlobeScene>
@@ -406,17 +237,19 @@ function App() {
             
               
           </OutputContainer> */}
+          <LogoContainer style={{ left: getleftPosition(currentAgentIndex) }}>
+            <Canvas gl={{ antialias: true }}>
+              <PerspectiveCamera makeDefault fov={20} position={[0, 0, 20]} />
+              {/* <OrthographicCamera makeDefault position={[0, 0, 5]} zoom={15} /> */}
+              <ambientLight intensity={1} />
+              <LogoGroup currentAgentIndex={currentAgentIndex} />
+              {/* <Lights /> */}
+              <Environment preset="forest" backgroundIntensity={1.0} />
+            </Canvas>
+          </LogoContainer> 
         </InterfaceContainer>
 
-        <LogoContainer>
-          <Canvas gl={{ antialias: true }}>
-            <PerspectiveCamera makeDefault fov={20} position={[0, 0, 20]} />
-            <ambientLight intensity={1} />
-            <LogoGroup />
-            <Lights />
-            <Environment preset="apartment" backgroundIntensity={2.0} />
-          </Canvas>
-        </LogoContainer>  
+ 
 
         <RightColumn />
 {/* 

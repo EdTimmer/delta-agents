@@ -7,7 +7,7 @@ interface Props {
 const CylinderMesh = ({ position, size, color }: Props) => {
   return (
     <mesh position={position}>
-      <cylinderGeometry args={[size, size, 0.45, 32]} />
+      <cylinderGeometry args={[size, size, 0.2, 32]} />
       <meshStandardMaterial
         color={color}
         roughness={0}
