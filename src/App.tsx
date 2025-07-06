@@ -103,13 +103,15 @@ function App() {
             }}
           >          
           <PerspectiveCamera makeDefault fov={20} position={[0, 0, 8]} />
-          // sphere_gold_7, green_glass_bumps_2, green_plastic_bumps
-          <Globe position={[-0.35, 0.4, 0]} scale={1.3} rotation={[0, 0, 0]} modelFileName={'green_bumps_rough'} speedX={0.025} speedY={0} speedZ={0}/>
+          // sphere_gold_7, green_glass_bumps_2, green_plastic_bumps, green_bumps_rough
+          <Globe position={[-0.6, 0.4, 0]} scale={0.8} rotation={[0, 0, 0]} modelFileName={'sphere_gold_8'} speedX={0.02} speedY={0} speedZ={0}/>
 
-          <directionalLight position={[0, 0, 10]} color={'#fff'} intensity={1} />
-          <directionalLight position={[3, -3, 0]} color={'#fff'} intensity={1} />
+          <Globe position={[0.4, -0.6, 0]} scale={0.2} rotation={[0, 0, 0]} modelFileName={'green_glass_2'} />
 
-          <Environment preset="forest" backgroundIntensity={0.2} />
+          {/* <directionalLight position={[0, 0, 10]} color={'#fff'} intensity={1} />
+          <directionalLight position={[3, -3, 0]} color={'#fff'} intensity={1} /> */}
+
+          <Environment preset="forest" backgroundIntensity={1.0} />
         </Canvas>
       </TopLeftGlobeScene>
         
@@ -307,7 +309,7 @@ function App() {
             >
             
             <PerspectiveCamera makeDefault fov={16} position={[0, 0, 10]} far={15} />
-            <GlobesRightGroup separation={0.7} scale={1} position={[2, -0.8, 0]} rotation={[0.5, Math.PI / 2 - 0.7, 0]} />
+            <GlobesRightGroup separation={0.7} scale={1} position={[0, -0.7, 0]} rotation={[0.5, Math.PI / 2 - 0.7, 0]} />
 
             <Environment preset="forest" backgroundIntensity={0.2} />
           </Canvas>

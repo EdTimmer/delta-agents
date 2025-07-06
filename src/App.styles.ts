@@ -66,9 +66,9 @@ export const BotScene = styled.div`
 export const SpheresScene = styled.div`
   position: absolute;
   top: 0;
-  left: 0;
+  right: 0;
   z-index: 0;
-  width: 100%;
+  width: 800px;
   height: 100%;
   flex-direction: row;
   justify-content: center;
@@ -79,11 +79,11 @@ export const SpheresScene = styled.div`
 
 export const TopLeftGlobeScene = styled.div`
   position: absolute;
-  top: 0;
-  left: 0;
+  top: -240px;
+  left: -80px;
   z-index: 0;
-  width: 600px;
-  height: 600px;
+  width: 900px;
+  height: 900px;
 `;
 
 export const LinkContainer = styled.div`

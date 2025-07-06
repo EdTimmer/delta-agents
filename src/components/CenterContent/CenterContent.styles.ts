@@ -20,7 +20,7 @@ export const MainContainer = styled.div<Props>`
   border-color: ${props => props.$currentAgentIndex !== -1 ? borderColorMap[props.$currentAgentIndex] : colors.frenchGray}; */
   width: 100%;
   height: 100%;
-  padding: 20px;
+  padding: 40px;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
@@ -40,7 +40,8 @@ export const ImageContainer = styled.div`
     /* max-height: 100%; */
     object-fit: cover;
     overflow: hidden;
-    border-radius: 10px;
+    /* border-radius: 10px; */
+    border: 1px solid ${colors.black};
   }
 `;
 
