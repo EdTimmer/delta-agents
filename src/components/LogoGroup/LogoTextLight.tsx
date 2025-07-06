@@ -47,7 +47,7 @@ const LogoTextLight = ({ position, rotation, text, color, scale, size }: Props) 
     geometry.center();
 
     return geometry;
-  }, [font]);
+  }, [font, text, size]);
 
   if (!font || !textGeometry) return null;
 

@@ -227,7 +227,7 @@ export const TitleLarge = styled.h1`
 
 export const LogoContainer = styled.div`
   position: absolute;
-  top: 20px;
+  top: 50px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 30;

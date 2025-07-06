@@ -103,10 +103,10 @@ function App() {
             }}
           >          
           <PerspectiveCamera makeDefault fov={20} position={[0, 0, 8]} />
-          // sphere_gold_7, green_glass_bumps_2, green_plastic_bumps, green_bumps_rough
+          {/* sphere_gold_7, green_glass_bumps_2, green_plastic_bumps, green_bumps_rough */}
           <Globe position={[-0.6, 0.4, 0]} scale={0.8} rotation={[0, 0, 0]} modelFileName={'sphere_gold_8'} speedX={0.02} speedY={0} speedZ={0}/>
 
-          <Globe position={[0.4, -0.6, 0]} scale={0.2} rotation={[0, 0, 0]} modelFileName={'green_glass_2'} />
+          <Globe position={[0.4, -1, 0]} scale={0.3} rotation={[0, 0, 0]} modelFileName={'dark_green_glass'} />
 
           {/* <directionalLight position={[0, 0, 10]} color={'#fff'} intensity={1} />
           <directionalLight position={[3, -3, 0]} color={'#fff'} intensity={1} /> */}
@@ -130,7 +130,7 @@ function App() {
           assignedIndex={1}
           currentAgentIndex={currentAgentIndex}
           setIsReset={setIsReset}
-          label={'Agent 03'}
+          label={'Agent 02'}
         />
 
         <AgentButton
@@ -138,7 +138,7 @@ function App() {
           assignedIndex={2}
           currentAgentIndex={currentAgentIndex}
           setIsReset={setIsReset}
-          label={'Agent 05'}
+          label={'Agent 03'}
         />
 
         <AgentButton
@@ -146,7 +146,7 @@ function App() {
           assignedIndex={3}
           currentAgentIndex={currentAgentIndex}
           setIsReset={setIsReset}
-          label={'Agent 07'}
+          label={'Agent 04'}
 
         />
 
@@ -155,7 +155,7 @@ function App() {
           assignedIndex={4}
           currentAgentIndex={currentAgentIndex}
           setIsReset={setIsReset}
-          label={'Agent 11'}
+          label={'Agent 05'}
         />
       </LeftColumn>
 

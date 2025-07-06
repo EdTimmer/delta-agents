@@ -14,10 +14,10 @@ interface Props {
 
 const LogoTextComfortaa = ({ position, rotation, text, color, scale, size }: Props) => {
   const [font, setFont] = useState<Font | null>(null);
-
+  // '/fonts/comfortaa/comfortaa_light_regular.json'
   useEffect(() => {
     const loader = new FontLoader();
-    loader.load('/fonts/comfortaa/comfortaa_light_regular.json', (loadedFont) => {
+    loader.load('/fonts/michroma_regular.json', (loadedFont) => {
       setFont(loadedFont);
     });
   }, []);
@@ -42,7 +42,7 @@ const LogoTextComfortaa = ({ position, rotation, text, color, scale, size }: Pro
       geometry.center();
 
       return geometry;
-    }, [font]);
+    }, [font, text, size]);
   
     if (!font || !textGeometry) return null;
 

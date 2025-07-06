@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { Group } from 'three';
 import * as THREE from 'three';
@@ -7,10 +7,22 @@ import LogoTextLight from './LogoTextLight';
 import LogoTextBold from './LogoTextBold';
 import SpheresGroup from './SpheresGroup';
 
+const agentNames = [
+  '01',
+  '02',
+  '03',
+  '04',
+  '05',
+];
+
 function LogoGroup({ currentAgentIndex = 0 }: { currentAgentIndex?: number }) {
   const logoGroupRef = useRef<Group>(null);
 
-  // Gentle rocking animation with pauses
+  // Directly derive the agent number from the prop instead of using state
+  const validIndex = Math.max(0, Math.min(currentAgentIndex, agentNames.length - 1));
+  const agentNumber = agentNames[validIndex] || '01';
+
+  console.log('LogoGroup render - currentAgentIndex:', currentAgentIndex, 'agentNumber:', agentNumber);
   useFrame((state) => {
     if (logoGroupRef.current) {
       const time = state.clock.getElapsedTime();
@@ -34,26 +46,17 @@ function LogoGroup({ currentAgentIndex = 0 }: { currentAgentIndex?: number }) {
     }
   });
 
-  // const agentNames = [
-  //   'Delta Flow / Agent 01',
-  //   'Delta Flow / Agent 02',
-  //   'Delta Flow / Agent 03',
-  //   'Delta Flow / Agent 04',
-  //   'Delta Flow / Agent 05',
-  // ]
   // const getXposition = (index: number) => {
   //   if (index === 0) return -6;
   //   return 0;
   // }
-  // useEffect(() => {
-  //   if (logoGroupRef.current) {
-  //     logoGroupRef.current.position.set(getXposition(currentAgentIndex), 0, 0);
-  //   }
-  // }, [currentAgentIndex]);
+  
   return (
-    <group position={[0, 0, 0]} ref={logoGroupRef} rotation={new THREE.Euler(0, 0, 0)}>        
-      <LogoTextBold text={'Delta'} position={[-0.35, 1.1, 0]} rotation={new THREE.Euler(0, 0, 0)} color={'#ffffff'} />
-      <LogoTextLight text={'Organic'} position={[-0.2, -1.1, 0]} rotation={new THREE.Euler(0, 0, 0)} color={'#0e0e0e'} scale={[1.0, 1.0, 1.0]} size={1.3} />
+    <group position={[0, 0, 0]} ref={logoGroupRef} rotation={new THREE.Euler(0, 0, 0)}>     
+    <LogoTextLight text={'agent'} position={[0, 1.1, 0]} rotation={new THREE.Euler(0, 0, 0)} color={'#0e0e0e'} scale={[1.0, 1.0, 1.0]} size={1.3} />   
+      {/* <LogoTextBold text={agentNumber} position={[-0.35, -1.1, 0]} rotation={new THREE.Euler(0, 0, 0)} color={'#ffffff'} /> */}
+      <LogoTextComfortaa text={agentNumber} position={[0, -1.1, 0]} rotation={new THREE.Euler(0, 0, 0)} color={'#ffffff'} scale={[1.0, 1.0, 1.0]} size={1.9} />
+
       {/* <SpheresGroup position={[-10, 0, 0]} radius={0.8} speed={0.12} rotation={new THREE.Euler(Math.PI / 2, 0, 0)} sphereSize={0.5} color={'#646464'} /> */}
     </group>    
   );

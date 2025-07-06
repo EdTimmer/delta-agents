@@ -40,7 +40,7 @@ const LogoTextBold = ({ position, rotation, text, color }: Props) => {
     geometry.center();
 
     return geometry;
-  }, [font]);
+  }, [font, text]);
 
   if (!font || !textGeometry) return null;
 
