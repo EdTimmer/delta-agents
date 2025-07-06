@@ -10,7 +10,7 @@ interface StyledButtonProps {
 
 const borderColorMap = [
     colors.blenderBotBlue,
-    colors.yellowGreen,
+    colors.green,
     colors.blenderBotYellow,
     colors.blenderBotRed,
     colors.blenderBotPurple,
@@ -31,7 +31,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
     /* border-top-color: ${props => props.$currentAgentIndex === props.$assignedIndex
       ? borderColorMap[props.$assignedIndex] : colors.onyx}; */
     border-bottom-color: ${props => props.$currentAgentIndex === props.$assignedIndex
-      ? colors.yellowGreen : colors.frenchGray};
+      ? colors.green : colors.frenchGray};
     border-left: none;
     border-right: none;
     border-top: none;
@@ -46,7 +46,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
       /* background-color: ${colors.eerieBlack}; Lighter shade on hover */
       /* border-bottom-width: 2px;
       border-bottom-style: solid; */
-      border-bottom-color: ${colors.yellowGreen}; /* Change border color on hover */
+      border-bottom-color: ${colors.green}; /* Change border color on hover */
     }
 
     &:focus {

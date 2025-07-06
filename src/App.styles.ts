@@ -5,7 +5,7 @@ export const AppContainer = styled.div`
   background-color: #fff;
   position: relative;
   z-index: 1;
-  font-family: 'Comfortaa', 'Roboto Mono', monospace;
+  font-family: 'Open Sans', 'Roboto Mono', monospace;
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -23,18 +23,26 @@ export const CenteredRow = styled.div`
 `;
 
 export const LeftColumn = styled.div`
+  position: relative;
   background-color: ${colors.lightBlue};
   width: 300px;
   height: calc(100vh - 20px);
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: flex-start;
-  align-self: flex-start;
   margin-top: 20px;
   padding: 20px;
   z-index: 10;
   border-top-right-radius: 20px;
+  gap: 20px;
+`;
+
+export const NavSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
   gap: 20px;
 `;
 
@@ -57,8 +65,8 @@ export const BotScene = styled.div`
   margin-left: -40px;
 
   @media (max-width: 1500px) {
-    width: 400px;
-    height: 400px;
+    width: 600px;
+    height: 600px;
     margin-left: -30px;
   }  
 `;
@@ -86,6 +94,15 @@ export const TopLeftGlobeScene = styled.div`
   height: 900px;
 `;
 
+export const LightGlobeScene = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+  width: 900px;
+  height: 900px;
+`;
+
 export const LinkContainer = styled.div`
   position: absolute;
   bottom: 30px;
@@ -98,10 +115,24 @@ export const LinkContainer = styled.div`
     color: #6c757dff;
     text-decoration: underline;
     text-underline-offset: 4px;
+    font-size: 16px;
+    letter-spacing: 1px;
 
     &:hover {
       color: #fff;
     }
+  }
+`;
+
+export const Link = styled.a`
+  color: #6c757dff;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  font-size: 16px;
+  letter-spacing: 1px;
+
+  &:hover {
+    color: #000;
   }
 `;
 

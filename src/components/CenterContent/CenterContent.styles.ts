@@ -29,6 +29,7 @@ export const MainContainer = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  z-index: 10;
 `;
 
 export const ImageContainer = styled.div`

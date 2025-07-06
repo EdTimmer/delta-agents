@@ -12,6 +12,9 @@ import {
   TopLeftGlobeScene,
   RightColumn,
   LogoContainer,
+  NavSection,
+  Link,
+  LightGlobeScene,
 } from './App.styles'
 import { z } from 'zod'
 import AgentButton from './components/AgentButton/AgentButton';
@@ -106,17 +109,42 @@ function App() {
           {/* sphere_gold_7, green_glass_bumps_2, green_plastic_bumps, green_bumps_rough */}
           <Globe position={[-0.6, 0.4, 0]} scale={0.8} rotation={[0, 0, 0]} modelFileName={'sphere_gold_8'} speedX={0.02} speedY={0} speedZ={0}/>
 
-          <Globe position={[0.4, -1, 0]} scale={0.3} rotation={[0, 0, 0]} modelFileName={'dark_green_glass'} />
+          {/* <Globe position={[0.25, -1, 0]} scale={0.3} rotation={[0, 0, 0]} modelFileName={'green_glass_4'} speedZ={0} speedY={0}/> */}
 
-          {/* <directionalLight position={[0, 0, 10]} color={'#fff'} intensity={1} />
-          <directionalLight position={[3, -3, 0]} color={'#fff'} intensity={1} /> */}
+          <directionalLight position={[0, 0, 10]} color={'#fff'} intensity={1} />
+          {/* <directionalLight position={[3, -3, 0]} color={'#fff'} intensity={1} /> */}
 
           <Environment preset="forest" backgroundIntensity={1.0} />
         </Canvas>
       </TopLeftGlobeScene>
+
+      <LightGlobeScene>
+        <Canvas
+          gl={{
+            antialias: true,
+            toneMapping: THREE.ACESFilmicToneMapping
+          }}
+          onCreated={({ gl }) => {
+            gl.toneMapping = THREE.ACESFilmicToneMapping;
+            gl.toneMappingExposure = 1.0;
+            }}
+          >          
+          <PerspectiveCamera makeDefault fov={20} position={[0, 0, 8]} />
+          {/* sphere_gold_7, green_glass_bumps_2, green_plastic_bumps, green_bumps_rough */}
+          {/* <Globe position={[-0.6, 0.4, 0]} scale={0.8} rotation={[0, 0, 0]} modelFileName={'sphere_gold_8'} speedX={0.02} speedY={0} speedZ={0}/> */}
+
+          <Globe position={[0, -1, 0]} scale={0.3} rotation={[-0.4, Math.PI / 2, Math.PI]} modelFileName={'light_green_3'} speedZ={0} speedY={0} speedX={0.08} />
+
+          <directionalLight position={[0, -3, 0]} color={'#fff'} intensity={1} />
+          <directionalLight position={[3, -3, 3]} color={'#fff'} intensity={0.5} />
+
+          <Environment preset="forest" backgroundIntensity={1.0} />
+        </Canvas>
+      </LightGlobeScene>
         
-      <LeftColumn>       
-        <TitleLarge>Design AI</TitleLarge>
+      <LeftColumn>
+        <NavSection>
+        <TitleLarge>Delta Flow</TitleLarge>
         <AgentButton
           setCurrentAgentIndex={setCurrentAgentIndex}
           assignedIndex={0}
@@ -157,6 +185,11 @@ function App() {
           setIsReset={setIsReset}
           label={'Agent 05'}
         />
+        </NavSection>
+
+        <NavSection>
+          <Link href="https://www.edtimmer.com/" target="_blank" aria-label="Link to portfolio" title="Link to portfolio">edtimmer.com</Link>
+        </NavSection>
       </LeftColumn>
 
       {/* <CenteredRow> */}
@@ -314,11 +347,6 @@ function App() {
             <Environment preset="forest" backgroundIntensity={0.2} />
           </Canvas>
         </SpheresScene>
-
-
-      <LinkContainer>
-        <a href="https://www.edtimmer.com/" target="_blank" aria-label="Link to portfolio" title="Link to portfolio">edtimmer.com</a>
-      </LinkContainer>
     </AppContainer>    
   )
 }
