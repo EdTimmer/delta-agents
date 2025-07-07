@@ -26,7 +26,7 @@ export const LeftColumn = styled.div`
   position: relative;
   background-color: ${colors.lightBlue};
   width: 300px;
-  height: calc(100vh - 20px);
+  height: calc(100% - 20px);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -36,6 +36,16 @@ export const LeftColumn = styled.div`
   z-index: 10;
   border-top-right-radius: 20px;
   gap: 20px;
+  pointer-events: auto;
+
+  * {
+    pointer-events: auto;
+  }
+
+  @media (max-width: 1600px) {
+    width: 200px;
+    margin-right: 20px;
+  }
 `;
 
 export const NavSection = styled.div`
@@ -92,15 +102,25 @@ export const TopLeftGlobeScene = styled.div`
   z-index: 0;
   width: 900px;
   height: 900px;
+  pointer-events: none;
 `;
 
 export const LightGlobeScene = styled.div`
   position: absolute;
   bottom: 0;
   left: 0;
-  z-index: 0;
+  z-index: 20;
   width: 900px;
   height: 900px;
+  pointer-events: none;
+
+  * {
+    pointer-events: none !important;
+  }
+
+  @media (max-width: 1600px) {
+    left: -200px;
+  }
 `;
 
 export const LinkContainer = styled.div`
@@ -147,13 +167,13 @@ export const InterfaceContainer = styled.div`
   width: 960px;
   /* height: calc(100vh - 120px); */
   height: 100%;
-  z-index: 10;
+  z-index: 30;
   gap: 20px;
 
-  @media (max-width: 1500px) {
+  /* @media (max-width: 1500px) {
     width: 600px;
     padding: 0 20px;
-  }
+  } */
 `;
 
 export const StyledForm = styled.form`
@@ -240,13 +260,13 @@ export const OutputContainer = styled.div`
     background-color: ${colors.onyx};
   }
 
-  @media (min-width: 1500px) {
+  /* @media (min-width: 1500px) {
     height: 620px;
   }
   @media (max-width: 600px) {
     width: 100%;
     max-width: 100%;
-  }
+  } */
 `;
 
 export const TitleLarge = styled.h1`

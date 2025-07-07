@@ -63,6 +63,11 @@ export const StyledButton = styled.button<StyledButtonProps>`
         color:  ${colors.eerieBlack}; /* Lighter shade when disabled */
         cursor: default;
     }
+
+    @media (max-width: 1600px) {
+      width: 160px;
+      margin-right: 20px;
+    }
 `;
 
 export const ButtonLabel = styled.p`
