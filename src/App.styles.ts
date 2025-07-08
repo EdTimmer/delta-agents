@@ -7,7 +7,7 @@ export const AppContainer = styled.div`
   z-index: 1;
   font-family: 'Open Sans', 'Roboto Mono', monospace;
   width: 100vw;
-  height: 100vh;
+  /* height: 100%; */
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -27,6 +27,7 @@ export const LeftColumn = styled.div`
   background-color: ${colors.lightBlue};
   width: 300px;
   height: calc(100% - 20px);
+  min-height: calc(100vh - 20px);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -35,6 +36,7 @@ export const LeftColumn = styled.div`
   padding: 20px;
   z-index: 10;
   border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
   gap: 20px;
   pointer-events: auto;
 
