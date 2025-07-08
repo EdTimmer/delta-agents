@@ -74,7 +74,7 @@ function App() {
             }}
           >          
           <PerspectiveCamera makeDefault fov={20} position={[0, 0, 8]} />
-          <Globe position={[0, -1, 0]} scale={0.3} rotation={[0, Math.PI / 2, Math.PI]} modelFileName={'light_green_3'} speedZ={0} speedY={0} speedX={0.08} />
+          <Globe position={[0, -0.9, 0]} scale={0.3} rotation={[0, Math.PI / 2, Math.PI]} modelFileName={'light_green_3'} speedZ={0} speedY={0} speedX={0.08} />
 
           <directionalLight position={[0, -3, 0]} color={'#fff'} intensity={1} />
           <directionalLight position={[3, -3, 3]} color={'#fff'} intensity={0.5} />
@@ -85,7 +85,7 @@ function App() {
         
       <LeftColumn>
         <NavSection>
-        <TitleLarge>Delta Flow</TitleLarge>
+        <TitleLarge>Delta agents</TitleLarge>
         <AgentButton
           setCurrentAgentIndex={setCurrentAgentIndex}
           assignedIndex={0}
