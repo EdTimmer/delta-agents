@@ -28,7 +28,7 @@ function GlobesRightGroup({ separation = 1, scale = 1, position = [0, 0, 0], rot
 
   useFrame((_state, delta) => {
     if (groupRef.current) {
-      groupRef.current.rotation.z += delta * 0.015; // Rotate the sphere around the z-axis
+      groupRef.current.rotation.z += delta * 0.01; // Rotate the sphere around the z-axis
       // groupRef.current.rotation.x += delta * 0.05; // Optional: add some rotation on the x-axis
     }
   });

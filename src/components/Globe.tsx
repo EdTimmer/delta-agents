@@ -14,7 +14,7 @@ interface Props {
   speedZ?: number;
 }
 
-const Globe = forwardRef<THREE.Group, Props>(({scale = 1.0, position = [0, 0, 0], rotation = [0, 0, 0], modelFileName, speedX = 0.025, speedY = 0.025, speedZ = 0.025}) => {
+const Globe = forwardRef<THREE.Group, Props>(({scale = 1.0, position = [0, 0, 0], rotation = [0, 0, 0], modelFileName, speedX = 0.015, speedY = 0.015, speedZ = 0.015}) => {
   const { nodes, materials } = useGLTF(`../../models/${modelFileName}.glb`);
   const groupRef = useRef<THREE.Group>(null);
   
