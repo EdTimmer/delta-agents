@@ -60,10 +60,10 @@ function GlobesRightGroup({ currentAgentIndex, separation = 1, scale = 1, positi
 
   return (
     <group position={position} ref={groupRef} scale={[scale, scale, scale]}>
-      <Globe position={[-1 * separation, 0, 0]} scale={0.25} rotation={[0, 0, 0]} modelFileName={'sphere_gold_12'} />
-      <Globe position={[0, 1 * separation, 0]} scale={0.25} rotation={[0, 0, 0]} modelFileName={'sphere_gold_13'} />
-      <Globe position={[1 * separation, 0, 0]} scale={0.25} rotation={[0, 0, 0]} modelFileName={'sphere_gold_9'} />
-      <Globe position={[0, -1 * separation, 0]} scale={0.25} rotation={[0, 0, 0]} modelFileName={'sphere_gold_5'} />
+      <Globe position={[-1 * separation, 0, 0]} scale={0.25} rotation={[0, 0, 0]} modelFileName={'sphere_gold_12'} speedX={0} speedY={0.02} speedZ={0} />
+      <Globe position={[0, 1 * separation, 0]} scale={0.25} rotation={[0, 0, 0]} modelFileName={'sphere_gold_13'} speedX={0} speedY={0.02} speedZ={0} />
+      <Globe position={[1 * separation, 0, 0]} scale={0.25} rotation={[0, 0, 0]} modelFileName={'sphere_gold_9'} speedX={0} speedY={0.02} speedZ={0} />
+      <Globe position={[0, -1 * separation, 0]} scale={0.25} rotation={[0, 0, 0]} modelFileName={'sphere_gold_5'} speedX={0} speedY={0.02} speedZ={0} />
     </group>    
   );
 }
