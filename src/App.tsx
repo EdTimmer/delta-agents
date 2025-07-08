@@ -152,7 +152,7 @@ function App() {
               }}
             >
             <PerspectiveCamera makeDefault fov={16} position={[0, 0, 10]} far={15} />
-            <GlobesRightGroup separation={0.7} scale={1} position={[0, -0.7, 0]} rotation={[0.5, Math.PI / 2 - 0.7, 0]} />
+            <GlobesRightGroup separation={0.7} scale={1} position={[0, -0.7, 0]} rotation={[0.5, Math.PI / 2 - 0.7, 0]} currentAgentIndex={currentAgentIndex} />
             <Environment preset="forest" backgroundIntensity={0.2} />
           </Canvas>
         </RightSpheresScene>
