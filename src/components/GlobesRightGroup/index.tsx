@@ -42,7 +42,7 @@ function GlobesRightGroup({ currentAgentIndex, separation = 1, scale = 1, positi
   useFrame((_state, delta) => {
     if (groupRef.current && isAnimating.current) {
       const elapsed = Date.now() - (animationStartTime.current || 0);
-      const animationDuration = 4000;
+      const animationDuration = 3000;
 
       if (elapsed < animationDuration) {
         const progress = elapsed / animationDuration;
