@@ -81,7 +81,7 @@ export const BotScene = styled.div`
   }  
 `;
 
-export const SpheresScene = styled.div`
+export const RightSpheresScene = styled.div`
   position: absolute;
   top: 0;
   right: 0;
@@ -93,6 +93,10 @@ export const SpheresScene = styled.div`
   align-items: flex-end;
   flex-wrap: wrap;
   margin-top: 0;
+
+  @media (max-width: 1600px) {
+    right: -200px;
+  }
 `;
 
 export const TopLeftGlobeScene = styled.div`
@@ -162,18 +166,11 @@ export const InterfaceContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* margin-top: 60px; */
   padding: 10px 0;
   width: 960px;
-  /* height: calc(100vh - 120px); */
   height: 100%;
   z-index: 30;
   gap: 20px;
-
-  /* @media (max-width: 1500px) {
-    width: 600px;
-    padding: 0 20px;
-  } */
 `;
 
 export const StyledForm = styled.form`
@@ -196,7 +193,6 @@ export const StyledInput = styled.input`
   font-size: 16px;
 
   &:focus {
-    /* border: 1px solid #4a90e2; */
     outline: none;
   }
 `; 
@@ -208,7 +204,7 @@ export const FlexStartRow = styled.div`
   justify-content: flex-start;
   align-items: center;
   width: 100%;
-  gap: 20px;;
+  gap: 20px;
 `;
 
 export const SubmitButton = styled.button`
@@ -217,56 +213,22 @@ export const SubmitButton = styled.button`
   top: 6px;
   background-color: ${colors.lightBlue};
   border: none;
-  /* border: 1px solid ${colors.onyx}; */
-  /* background-color: #fff; */
   border-radius: 8px;
   margin: 0;
   padding: 6px;
-  max-height: 48px;;
+  max-height: 48px;
   &:hover {
     cursor: pointer;
-    /* border: 1px solid #4a90e2; */
   }
   &:disabled {
     cursor: default;
   }
   &:focus {
     outline: none;
-    // box-shadow: 0 0 0 1px rgba(108, 117, 125, 0.5); /* Focus ring */
   }
   &:active {
-    /* background-color: ${colors.veryDark}; Even darker shade when clicked */
-    transform: scale(0.98); /* Slight scale down effect */
+    transform: scale(0.98);
   }
-`;
-
-export const OutputContainer = styled.div`
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 12px;
-  width: 100%;
-  height: 520px;
-  overflow-y: auto; /* Enable scrolling for long outputs */
-  border-width: 1px;
-  border-style: solid;
-  &::-webkit-scrollbar {
-    width: 8px;
-  }
-  &::-webkit-scrollbar-thumb {
-    background-color: ${colors.frenchGray2};
-    border-radius: 12px;
-  }
-  &::-webkit-scrollbar-track {
-    background-color: ${colors.onyx};
-  }
-
-  /* @media (min-width: 1500px) {
-    height: 620px;
-  }
-  @media (max-width: 600px) {
-    width: 100%;
-    max-width: 100%;
-  } */
 `;
 
 export const TitleLarge = styled.h1`

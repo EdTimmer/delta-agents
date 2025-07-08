@@ -5,7 +5,6 @@ import * as THREE from 'three';
 
 interface Props {
   children?: React.ReactNode;
-  [key: string]: any;
   scale: number;
   position: [number, number, number];
   rotation: [number, number, number];
@@ -15,8 +14,8 @@ interface Props {
   speedZ?: number;
 }
 
-const Globe = forwardRef<any, Props>(({scale = 1.0, position = [0, 0, 0], rotation = [0, 0, 0], modelFileName, speedX = 0.025, speedY = 0.025, speedZ = 0.025}, _ref) => {
-  const { nodes, materials } = useGLTF(`../../models/${modelFileName}.glb`) as any  ;
+const Globe = forwardRef<THREE.Group, Props>(({scale = 1.0, position = [0, 0, 0], rotation = [0, 0, 0], modelFileName, speedX = 0.025, speedY = 0.025, speedZ = 0.025}) => {
+  const { nodes, materials } = useGLTF(`../../models/${modelFileName}.glb`);
   const groupRef = useRef<THREE.Group>(null);
   
   useFrame((_state, delta) => {
@@ -30,17 +29,20 @@ const Globe = forwardRef<any, Props>(({scale = 1.0, position = [0, 0, 0], rotati
   return (
     <group position={position} rotation={rotation} ref={groupRef}>
       {Object.values(nodes)
-        .filter((n) => n instanceof THREE.Mesh)
-        .map((mesh) => (
-          <mesh
-            key={mesh.uuid}
-            geometry={mesh.geometry}
-            material={materials[mesh.material.name]}
-            castShadow
-            receiveShadow
-            scale={scale}
-          />
-        ))}
+        .filter((n): n is THREE.Mesh => n instanceof THREE.Mesh)
+        .map((mesh) => {
+          const material = Array.isArray(mesh.material) ? mesh.material[0] : mesh.material;
+          return (
+            <mesh
+              key={mesh.uuid}
+              geometry={mesh.geometry}
+              material={materials[material.name]}
+              castShadow
+              receiveShadow
+              scale={scale}
+            />
+          );
+        })}
     </group>
   );
 });

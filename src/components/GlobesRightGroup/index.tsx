@@ -14,13 +14,17 @@ function GlobesRightGroup({ separation = 1, scale = 1, position = [0, 0, 0], rot
   const groupRef = useRef<Group>(null);
   const initialRotationSet = useRef(false);
 
+  const rotX = rotation[0];
+  const rotY = rotation[1];
+  const rotZ = rotation[2];
+
   // Set initial rotation once when component mounts
   useEffect(() => {
     if (groupRef.current && !initialRotationSet.current) {
-      groupRef.current.rotation.set(rotation[0], rotation[1], rotation[2]);
+      groupRef.current.rotation.set(rotX, rotY, rotZ);
       initialRotationSet.current = true;
     }
-  }, [rotation[0], rotation[1], rotation[2]]);
+  }, [rotX, rotY, rotZ]);
 
   useFrame((_state, delta) => {
     if (groupRef.current) {

@@ -1,14 +1,6 @@
 import styled from 'styled-components';
 import colors from '../../styles/colors';
 
-const borderColorMap = [
-    colors.blenderBotBlue,
-    colors.blenderBotGreen,
-    colors.blenderBotYellow,
-    colors.blenderBotRed,
-    colors.blenderBotPurple,
-];
-
 export const ComponentWrapper = styled.div`
   width: 100%;
   height: 100%;

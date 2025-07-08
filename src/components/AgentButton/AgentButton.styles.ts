@@ -8,13 +8,7 @@ interface StyledButtonProps {
   $currentAgentIndex: number;
 }
 
-const borderColorMap = [
-    colors.blenderBotBlue,
-    colors.green,
-    colors.blenderBotYellow,
-    colors.blenderBotRed,
-    colors.blenderBotPurple,
-];
+
   
 export const StyledButton = styled.button<StyledButtonProps>`
     background: transparent;
@@ -23,13 +17,9 @@ export const StyledButton = styled.button<StyledButtonProps>`
     cursor: pointer;
     color: ${colors.black};
     font-size: 16px;
-    /* border-top-width: 1px; */
     border: 2px solid transparent;
     border-bottom-width: 2px;
-    /* border-top-style: solid; */
     border-bottom-style: solid;
-    /* border-top-color: ${props => props.$currentAgentIndex === props.$assignedIndex
-      ? borderColorMap[props.$assignedIndex] : colors.onyx}; */
     border-bottom-color: ${props => props.$currentAgentIndex === props.$assignedIndex
       ? colors.green : colors.frenchGray};
     border-left: none;
@@ -43,24 +33,20 @@ export const StyledButton = styled.button<StyledButtonProps>`
     align-items: center;
 
     &:hover {
-      /* background-color: ${colors.eerieBlack}; Lighter shade on hover */
-      /* border-bottom-width: 2px;
-      border-bottom-style: solid; */
       border-bottom-color: ${colors.green}; /* Change border color on hover */
     }
 
     &:focus {
         outline: none;
-        // box-shadow: 0 0 0 1px rgba(108, 117, 125, 0.5); /* Focus ring */
     }
 
     &:active {
-        background-color: ${colors.white}; /* Even darker shade when clicked */
-        transform: scale(0.98); /* Slight scale down effect */
+        background-color: ${colors.white};
+        transform: scale(0.98);
     }
 
     &:disabled {
-        color:  ${colors.eerieBlack}; /* Lighter shade when disabled */
+        color:  ${colors.eerieBlack};
         cursor: default;
     }
 
