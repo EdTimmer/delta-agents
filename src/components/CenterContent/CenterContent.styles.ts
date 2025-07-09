@@ -32,9 +32,10 @@ export const ImageContainer = styled.div`
   align-items: center;
 
   img {
-    max-width: 100%;
+    /* max-width: 100%; */
     /* max-height: 100%; */
-    min-height: 614px;
+    min-width: 100%;
+    height: 614px;
     object-fit: cover;
     overflow: hidden;
     border-radius: 10px;
