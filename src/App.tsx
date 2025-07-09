@@ -20,6 +20,7 @@ import Globe from './components/Globe';
 import LogoGroup from './components/LogoGroup';
 import GlobesRightGroup from './components/GlobesRightGroup';
 import CenterContent from './components/CenterContent/CenterContent';
+import OneGlobeGroup from './components/OneGlobeGroup';
 
 function App() {
   const [currentAgentIndex, setCurrentAgentIndex] = useState(0)
@@ -74,10 +75,8 @@ function App() {
             }}
           >          
           <PerspectiveCamera makeDefault fov={20} position={[0, 0, 8]} />
-          <Globe position={[0, -0.9, 0]} scale={0.3} rotation={[0, Math.PI / 2, Math.PI]} modelFileName={'light_green_3'} speedZ={0} speedY={0} speedX={0.08} />
-
-          <directionalLight position={[0, -3, 0]} color={'#fff'} intensity={1} />
-          <directionalLight position={[3, -3, 3]} color={'#fff'} intensity={0.5} />
+          <OneGlobeGroup currentAgentIndex={currentAgentIndex} scale={0.3} position={[0, -0.9, 0]} rotation={[0, 0, 0]} />
+          <directionalLight position={[0, 0, 5]} color={'#fff'} intensity={0.2} />
 
           <Environment preset="forest" backgroundIntensity={1.0} />
         </Canvas>
