@@ -127,36 +127,36 @@ function App() {
         </NavSection>
       </LeftColumn>
 
-        <InterfaceContainer>
-          <CenterContent currentAgentIndex={currentAgentIndex} />
-          <LogoContainer style={{ left: getleftPosition(currentAgentIndex) }}>
-            <Canvas gl={{ antialias: true }}>
-              <PerspectiveCamera makeDefault fov={20} position={[0, 0, 20]} />
-              <ambientLight intensity={1} />
-              <LogoGroup currentAgentIndex={currentAgentIndex} />
-              <Environment preset="forest" backgroundIntensity={1.0} />
-            </Canvas>
-          </LogoContainer> 
-        </InterfaceContainer>
-
-        <RightColumn />
-        <RightSpheresScene>
-          <Canvas
-            gl={{
-              antialias: true,
-              toneMapping: THREE.ACESFilmicToneMapping
-            }}
-            onCreated={({ gl }) => {
-              gl.toneMapping = THREE.ACESFilmicToneMapping;
-              gl.toneMappingExposure = 1.0;
-              }}
-            >
-            <PerspectiveCamera makeDefault fov={16} position={[0, 0, 10]} far={15} />
-            <GlobesRightGroup separation={0.8} scale={1} position={[0, -0.7, 0]} rotation={[0.5, Math.PI / 2 - 0.7, 0]} currentAgentIndex={currentAgentIndex} />
-            <directionalLight position={[-5, 0, 0]} color={'#fff'} intensity={1} />
-            <Environment preset="forest" backgroundIntensity={0.2} />
+      <InterfaceContainer>
+        <CenterContent currentAgentIndex={currentAgentIndex} />
+        <LogoContainer style={{ left: getleftPosition(currentAgentIndex) }}>
+          <Canvas gl={{ antialias: true }}>
+            <PerspectiveCamera makeDefault fov={20} position={[0, 0, 20]} />
+            <ambientLight intensity={1} />
+            <LogoGroup currentAgentIndex={currentAgentIndex} />
+            <Environment preset="forest" backgroundIntensity={1.0} />
           </Canvas>
-        </RightSpheresScene>
+        </LogoContainer> 
+      </InterfaceContainer>
+
+      <RightColumn />
+      <RightSpheresScene>
+        <Canvas
+          gl={{
+            antialias: true,
+            toneMapping: THREE.ACESFilmicToneMapping
+          }}
+          onCreated={({ gl }) => {
+            gl.toneMapping = THREE.ACESFilmicToneMapping;
+            gl.toneMappingExposure = 1.0;
+            }}
+          >
+          <PerspectiveCamera makeDefault fov={16} position={[0, 0, 10]} far={15} />
+          <GlobesRightGroup separation={0.8} scale={1} position={[0, -0.7, 0]} rotation={[0.9, Math.PI / 2 - 0.7, 0]} currentAgentIndex={currentAgentIndex} />
+          <directionalLight position={[-5, 0, 0]} color={'#fff'} intensity={1} />
+          <Environment preset="forest" backgroundIntensity={0.2} />
+        </Canvas>
+      </RightSpheresScene>
     </AppContainer>    
   )
 }

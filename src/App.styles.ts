@@ -7,32 +7,24 @@ export const AppContainer = styled.div`
   z-index: 1;
   font-family: 'Open Sans', 'Roboto Mono', monospace;
   width: 100vw;
-  /* height: 100%; */
+  height: 100vh;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
-`;
-
-export const CenteredRow = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: flex-start;
-  width: 100%;
+  padding-top: 20px;
+  padding-bottom: 20px;
 `;
 
 export const LeftColumn = styled.div`
   position: relative;
   background-color: ${colors.lightBlue};
   width: 300px;
-  height: calc(100% - 20px);
-  min-height: calc(100vh - 20px);
+  height: calc(100vh - 40px);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
-  margin-top: 20px;
   padding: 20px;
   z-index: 10;
   border-top-right-radius: 20px;
@@ -62,7 +54,7 @@ export const NavSection = styled.div`
 export const RightColumn = styled.div`
   background-color: transparent;
   width: 300px;
-  height: 100vh;
+  height: 100%;
 `;
 
 export const BotScene = styled.div`
@@ -168,7 +160,6 @@ export const InterfaceContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 10px 0;
   width: 960px;
   height: 100%;
   z-index: 30;
