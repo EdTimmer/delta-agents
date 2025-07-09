@@ -44,7 +44,7 @@ function LogoGroup({ currentAgentIndex = 0 }: { currentAgentIndex?: number }) {
   
   return (
     <group position={[0, 0, 0]} ref={logoGroupRef} rotation={new THREE.Euler(0, 0, 0)}>     
-      <LogoTextLight text={'agent'} position={[0, 1.1, 0]} rotation={new THREE.Euler(0, 0, 0)} color={'#0e0e0e'} scale={[1.0, 1.0, 1.0]} size={1.3} />   
+      <LogoTextLight text={'module'} position={[0, 1.1, 0]} rotation={new THREE.Euler(0, 0, 0)} color={'#0e0e0e'} scale={[1.0, 1.0, 1.0]} size={1.3} />   
       <LogoTextMichroma text={agentNumber} position={[0, -1.1, 0]} rotation={new THREE.Euler(0, 0, 0)} color={'#ffffff'} scale={[1.0, 1.0, 1.0]} size={1.9} />
     </group>    
   );

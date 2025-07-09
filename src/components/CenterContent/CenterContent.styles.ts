@@ -34,6 +34,7 @@ export const ImageContainer = styled.div`
   img {
     max-width: 100%;
     /* max-height: 100%; */
+    min-height: 614px;
     object-fit: cover;
     overflow: hidden;
     border-radius: 10px;
@@ -51,8 +52,8 @@ export const FlexStartRow = styled.div`
 `;
 
 export const Title = styled.h1`
-  font-size: 22px;
-  font-weight: 800;
+  font-size: 24px;
+  font-weight: 600;
   font-family: 'Open Sans', 'Roboto Mono', monospace;
   color: ${colors.black};
   margin-bottom: 10px;

@@ -59,7 +59,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
 export const ButtonLabel = styled.p`
   color: ${colors.onyx};
   font-family: 'Open Sans', 'Comfortaa', 'Roboto Mono', monospace;
-  font-size: 14px;
+  font-size: 16px;
   margin: 0;
   padding: 0;
   text-align: center;

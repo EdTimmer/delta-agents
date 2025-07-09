@@ -226,14 +226,14 @@ export const SubmitButton = styled.button`
 
 export const TitleLarge = styled.h1`
   font-size: 24px;
-  font-weight: 800;
+  font-weight: 600;
   font-family: 'Open Sans', 'Roboto Mono', monospace;
   color: ${colors.black};
 `;
 
 export const LogoContainer = styled.div`
   position: absolute;
-  top: 50px;
+  top: 30px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 30;

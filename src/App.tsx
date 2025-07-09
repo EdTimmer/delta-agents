@@ -28,13 +28,13 @@ function App() {
   const getleftPosition = (index: number) => {  
     switch (index) {
       case 0:
-        return '13%';
+        return '16%';
       case 1:
-        return '13%';
+        return '16%';
       case 2:
-        return '13%';
+        return '16%'; //84
       case 3:
-        return '50%';
+        return '16%';
       case 4:
         return '84%';
       default:
@@ -84,40 +84,40 @@ function App() {
         
       <LeftColumn>
         <NavSection>
-        <TitleLarge>Delta agents</TitleLarge>
+        <TitleLarge>Zen Dreams</TitleLarge>
         <AgentButton
           setCurrentAgentIndex={setCurrentAgentIndex}
           assignedIndex={0}
           currentAgentIndex={currentAgentIndex}
-          label={'Agent 01'}
+          label={'Module 01'}
         />
 
         <AgentButton
           setCurrentAgentIndex={setCurrentAgentIndex}
           assignedIndex={1}
           currentAgentIndex={currentAgentIndex}
-          label={'Agent 02'}
+          label={'Module 02'}
         />
 
         <AgentButton
           setCurrentAgentIndex={setCurrentAgentIndex}
           assignedIndex={2}
           currentAgentIndex={currentAgentIndex}
-          label={'Agent 03'}
+          label={'Module 03'}
         />
 
         <AgentButton
           setCurrentAgentIndex={setCurrentAgentIndex}
           assignedIndex={3}
           currentAgentIndex={currentAgentIndex}
-          label={'Agent 04'}
+          label={'Module 04'}
         />
 
         <AgentButton
           setCurrentAgentIndex={setCurrentAgentIndex}
           assignedIndex={4}
           currentAgentIndex={currentAgentIndex}
-          label={'Agent 05'}
+          label={'Module 05'}
         />
         </NavSection>
 

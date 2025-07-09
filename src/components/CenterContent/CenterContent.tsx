@@ -1,21 +1,20 @@
 import { MainContainer, ImageContainer, Title, Text, FlexStartRow, ComponentWrapper } from "./CenterContent.styles";
-import Botanical02 from "/images/botanical02.jpg";
-import Botanical03 from "/images/botanical03.jpg";
-import Botanical04 from "/images/botanical04.jpg";
-import Botanical06 from "/images/botanical06.jpg";
-import Botanical07 from "/images/botanical07.jpg";
-
+import Zen01 from "/images/zen01.jpg";
+import Zen05 from "/images/zen05.jpg";
+import Zen06 from "/images/zen06.jpg";
+import Zen11 from "/images/zen11.jpg";
+import Zen12 from "/images/zen12.jpg";
 
 interface CenterContentProps {
   currentAgentIndex: number;
 }
 
 const imageMap: { [key: number]: string } = {
-  0: Botanical02,
-  1: Botanical03,
-  2: Botanical04,
-  3: Botanical06,
-  4: Botanical07,
+  0: Zen06,
+  1: Zen05,
+  2: Zen12,
+  3: Zen01,
+  4: Zen11,
 };
 
 const CenterContent = ({ currentAgentIndex }: CenterContentProps) => {
