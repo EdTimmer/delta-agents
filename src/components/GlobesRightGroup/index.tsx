@@ -42,10 +42,17 @@ function GlobesRightGroup({ currentAgentIndex, separation = 1, scale = 1, positi
   useFrame((_state, delta) => {
     if (groupRef.current && isAnimating.current) {
       const elapsed = Date.now() - (animationStartTime.current || 0);
-      const animationDuration = 2000;
+      const delayDuration = 0;
+      const animationDuration = 5000; //2 sec
+      const totalDuration = delayDuration + animationDuration;
 
-      if (elapsed < animationDuration) {
-        const progress = elapsed / animationDuration;
+      if (elapsed < delayDuration) {
+        // During delay period, do nothing
+        return;
+      } else if (elapsed < totalDuration) {
+        // Animation period
+        const animationElapsed = elapsed - delayDuration;
+        const progress = animationElapsed / animationDuration;
         // Ease out cubic: 1 - (1 - x)^3
         const easeOut = 1 - Math.pow(1 - progress, 3);
         // Invert the easing to start fast and slow down

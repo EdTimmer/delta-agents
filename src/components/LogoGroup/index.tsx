@@ -1,5 +1,4 @@
-import { useRef } from 'react';
-import { useFrame } from '@react-three/fiber';
+import { useRef, useMemo } from 'react';
 import { Group } from 'three';
 import * as THREE from 'three';
 import LogoTextMichroma from './LogoTextMichroma';
@@ -13,39 +12,40 @@ const agentNames = [
   '05',
 ];
 
-function LogoGroup({ currentAgentIndex = 0 }: { currentAgentIndex?: number }) {
+interface LogoGroupProps {
+  currentAgentIndex?: number;
+  position?: [number, number, number];
+  rotation?: [number, number, number]; // Not used in this component
+  textTop: string;
+  textBottom: string;
+}
+
+function LogoGroup({ currentAgentIndex = 0, position = [0, 0, 0], textTop, textBottom }: LogoGroupProps) {
   const logoGroupRef = useRef<Group>(null);
+  // compute base rotation so local +Z (text front) points outward from center
+  const baseRotationY = useMemo(() => {
+    const [x, , z] = position;
+    // rotate around Y so local +Z aligns with world vector (x, z)
+    return Math.atan2(x, z);
+  }, [position]);
+  // static rotation around Z axis (45 degrees)
+  const baseRotationZ = Math.PI / 2;
 
   const validIndex = Math.max(0, Math.min(currentAgentIndex, agentNames.length - 1));
   const agentNumber = agentNames[validIndex] || '01';
 
   console.log('LogoGroup render - currentAgentIndex:', currentAgentIndex, 'agentNumber:', agentNumber);
-  useFrame((state) => {
-    if (logoGroupRef.current) {
-      const time = state.clock.getElapsedTime();
-      const cycleLength = 16;
-      const pauseDuration = 7;
-      const rockingDuration = cycleLength - pauseDuration;
-      
-      const cycleTime = time % cycleLength;
-      
-      if (cycleTime < rockingDuration) {
-        // Rocking phase
-        const rockingTime = cycleTime;
-        const normalizedTime = (rockingTime / rockingDuration) * Math.PI * 2; // Complete sine cycle
-        const rockingAngle = Math.sin(normalizedTime) * 0.05; // Gentle amplitude
-        logoGroupRef.current.rotation.y = rockingAngle;
-      } else {
-        // Pause phase - hold the last position
-        logoGroupRef.current.rotation.y = 0; // Return to neutral position during pause
-      }
-    }
-  });
+  // No animation: set static orientation facing outward
   
+
   return (
-    <group position={[0, 0, 0]} ref={logoGroupRef} rotation={new THREE.Euler(0, 0, 0)}>     
-      <LogoTextLight text={'module'} position={[0, 1.1, 0]} rotation={new THREE.Euler(0, 0, 0)} color={'#0e0e0e'} scale={[1.0, 1.0, 1.0]} size={1.3} />   
-      <LogoTextMichroma text={agentNumber} position={[0, -1.1, 0]} rotation={new THREE.Euler(0, 0, 0)} color={'#ffffff'} scale={[1.0, 1.0, 1.0]} size={1.9} />
+    <group
+      position={[...position]}
+      ref={logoGroupRef}
+      rotation={new THREE.Euler(0, baseRotationY, baseRotationZ)}
+    >
+      <LogoTextLight text={textTop} position={[0, 1.1, 0]} rotation={new THREE.Euler(0, 0, 0)} color={'#0e0e0e'} scale={[1.0, 1.0, 1.0]} size={1.3} />
+      <LogoTextMichroma text={textBottom} position={[0, -1.1, 0]} rotation={new THREE.Euler(0, 0, 0)} color={'#ffffff'} scale={[1.0, 1.0, 1.0]} size={1.9} />
     </group>    
   );
 }

@@ -21,8 +21,9 @@ export function getPentagonRotations(): [number, number, number][] {
     for (let i = 0; i < numVertices; i++) {
         // angle from +X axis for this vertex
         const angle = i * angleStep;
-        // add π so the mesh faces back toward the origin
-        const rotationY = (3 * Math.PI / 2) - angle;
+        // Rotate so the text faces outward from the center: map local +Z to outward vector
+        // rotationY so local +Z points along the outward vector (x,z)
+        const rotationY = angle - (Math.PI / 2);
         rotations.push([0, rotationY, 0]);
     }
 

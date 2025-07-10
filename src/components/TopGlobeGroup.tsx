@@ -41,21 +41,14 @@ function OneGlobeGroup({ currentAgentIndex, scale = 1, position = [0, 0, 0], rot
   useFrame((_state, delta) => {
     if (groupRef.current && isAnimating.current) {
       const elapsed = Date.now() - (animationStartTime.current || 0);
-      const delayDuration = 300;
-      const animationDuration = 7000;
-      const totalDuration = delayDuration + animationDuration;
+      const animationDuration = 4000;
 
-      if (elapsed < delayDuration) {
-        // During delay period, do nothing
-        return;
-      } else if (elapsed < totalDuration) {
-        // Animation period
-        const animationElapsed = elapsed - delayDuration;
-        const progress = animationElapsed / animationDuration;
+      if (elapsed < animationDuration) {
+        const progress = elapsed / animationDuration;
         // Ease out cubic: 1 - (1 - x)^3
         const easeOut = 1 - Math.pow(1 - progress, 3);
         // Invert the easing to start fast and slow down
-        const rotationSpeed = 2.5 * (1 - easeOut);
+        const rotationSpeed = 1.5 * (1 - easeOut);
         groupRef.current.rotation.y += delta * rotationSpeed;
       } else {
         isAnimating.current = false;
@@ -66,7 +59,7 @@ function OneGlobeGroup({ currentAgentIndex, scale = 1, position = [0, 0, 0], rot
 
   return (
     <group position={position} ref={groupRef} scale={[scale, scale, scale]}>
-      <Globe position={[0, 0, 0]} scale={1} rotation={[0, 0, 0]} modelFileName={'light_green_3'} speedZ={0} speedY={0} speedX={0} />
+      <Globe position={[0, 0, 0]} scale={1} rotation={[0, 0, 0]} modelFileName={'sphere_gold_8'} speedZ={0} speedY={0} speedX={0} />
     </group>    
   );
 }

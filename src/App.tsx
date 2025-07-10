@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Canvas } from '@react-three/fiber';
-import { Environment, PerspectiveCamera } from '@react-three/drei';
+import { Environment, OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import * as THREE from 'three';
 import { 
   AppContainer,
@@ -21,6 +21,8 @@ import LogoGroup from './components/LogoGroup';
 import GlobesRightGroup from './components/GlobesRightGroup';
 import CenterContent from './components/CenterContent/CenterContent';
 import OneGlobeGroup from './components/OneGlobeGroup';
+import TopGlobeGroup from './components/TopGlobeGroup';
+import FiveLogosGroup from './components/FiveLogosGroup';
 
 function App() {
   const [currentAgentIndex, setCurrentAgentIndex] = useState(0)
@@ -30,7 +32,7 @@ function App() {
       case 0:
         return '16%';
       case 1:
-        return '16%';
+        return '84%';
       case 2:
         return '16%'; //84
       case 3:
@@ -54,9 +56,10 @@ function App() {
             gl.toneMapping = THREE.ACESFilmicToneMapping;
             gl.toneMappingExposure = 1.0;
             }}
-          >          
+          >          s
           <PerspectiveCamera makeDefault fov={20} position={[0, 0, 8]} />
-          <Globe position={[-0.6, 0.4, 0]} scale={0.8} rotation={[0, 0, 0]} modelFileName={'sphere_gold_8'} speedX={0.02} speedY={0} speedZ={0}/>
+          {/* <Globe position={[-0.6, 0.4, 0]} scale={0.8} rotation={[0, 0, 0]} modelFileName={'sphere_gold_8'} speedX={0.02} speedY={0} speedZ={0}/> */}
+          <TopGlobeGroup currentAgentIndex={currentAgentIndex} scale={0.7} position={[-0.4, 0.4, 0]} rotation={[0, 0, 0]} />
           <directionalLight position={[0, 0, 10]} color={'#fff'} intensity={1} />
 
           <Environment preset="forest" backgroundIntensity={1.0} />
@@ -128,12 +131,16 @@ function App() {
 
       <InterfaceContainer>
         <CenterContent currentAgentIndex={currentAgentIndex} />
-        <LogoContainer style={{ left: getleftPosition(currentAgentIndex) }}>
+
+        <LogoContainer>
           <Canvas gl={{ antialias: true }}>
-            <PerspectiveCamera makeDefault fov={20} position={[0, 0, 20]} />
+            <PerspectiveCamera makeDefault fov={20} position={[0, 0, 20]} far={18}/>
             <ambientLight intensity={1} />
-            <LogoGroup currentAgentIndex={currentAgentIndex} />
+            {/* <LogoGroup currentAgentIndex={currentAgentIndex} /> */}
+            <FiveLogosGroup currentAgentIndex={currentAgentIndex} />
+            {/* <OneGlobeGroup currentAgentIndex={currentAgentIndex} scale={1.2} position={[0, 0, 0]} rotation={[0, 0, 0]} /> */}
             <Environment preset="forest" backgroundIntensity={1.0} />
+            <OrbitControls />
           </Canvas>
         </LogoContainer> 
       </InterfaceContainer>
