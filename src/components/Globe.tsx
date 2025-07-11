@@ -1,6 +1,6 @@
 import { useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { forwardRef, useRef } from "react";
+import { useRef } from "react";
 import * as THREE from 'three';
 
 interface Props {
@@ -14,15 +14,15 @@ interface Props {
   speedZ?: number;
 }
 
-const Globe = forwardRef<THREE.Group, Props>(({scale = 1.0, position = [0, 0, 0], rotation = [0, 0, 0], modelFileName, speedX = 0.015, speedY = 0.015, speedZ = 0.015}) => {
+const Globe = ({ scale = 1.0, position = [0, 0, 0], rotation = [0, 0, 0], modelFileName, speedX = 0.015, speedY = 0.015, speedZ = 0.015 }: Props) => {
   const { nodes, materials } = useGLTF(`../../models/${modelFileName}.glb`);
   const groupRef = useRef<THREE.Group>(null);
   
   useFrame((_state, delta) => {
     if (groupRef.current) {
-      groupRef.current.rotation.y += delta * speedX; // Rotate the sphere around the y-axis
-      groupRef.current.rotation.x += delta * speedY; // Optional: add some rotation on the x-axis
-      groupRef.current.rotation.z += delta * speedZ; // Optional: add some rotation on the z-axis
+      groupRef.current.rotation.y += delta * speedX;
+      groupRef.current.rotation.x += delta * speedY;
+      groupRef.current.rotation.z += delta * speedZ;
     }
   });
   
@@ -45,6 +45,6 @@ const Globe = forwardRef<THREE.Group, Props>(({scale = 1.0, position = [0, 0, 0]
         })}
     </group>
   );
-});
+};
 
 export default Globe;

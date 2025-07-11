@@ -50,7 +50,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
         cursor: default;
     }
 
-    @media (max-width: 1600px) {
+    @media (max-width: 1650px) {
       width: 160px;
       margin-right: 20px;
     }

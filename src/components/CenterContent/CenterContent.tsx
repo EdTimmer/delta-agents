@@ -1,17 +1,7 @@
 import { MainContainer, ImageContainer, Title, Text, FlexStartRow, ComponentWrapper } from "./CenterContent.styles";
-import Abst02 from "/images/abst02.jpg";
-import Abst03 from "/images/abst03.jpg";
-import Abst04 from "/images/abst04.jpg";
-import Abst05 from "/images/abst05.jpg";
-import Abst06 from "/images/abst06.jpg";
-import Corporate03 from "/images/corporate03.jpg";
 import Office01 from "/images/office01.jpg";
-import Office02 from "/images/office02.jpg";
 import Office03 from "/images/office03.jpg";
-import Office04 from "/images/office04.jpg";
-import Office05 from "/images/office05.jpg";
 import Office06 from "/images/office06.jpg";
-import Office07 from "/images/office07.jpg";
 import Office08 from "/images/office08.jpg";
 import Office09 from "/images/office09.jpg";
 

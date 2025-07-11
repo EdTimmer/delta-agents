@@ -12,8 +12,7 @@ export const AppContainer = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding: 20px;
 `;
 
 export const LeftColumn = styled.div`
@@ -27,8 +26,7 @@ export const LeftColumn = styled.div`
   align-items: flex-start;
   padding: 20px;
   z-index: 10;
-  border-top-right-radius: 20px;
-  border-bottom-right-radius: 20px;
+  border-radius: 20px;
   gap: 20px;
   pointer-events: auto;
 
@@ -36,7 +34,7 @@ export const LeftColumn = styled.div`
     pointer-events: auto;
   }
 
-  @media (max-width: 1600px) {
+  @media (max-width: 1650px) {
     width: 200px;
     margin-right: 20px;
   }
@@ -164,6 +162,10 @@ export const InterfaceContainer = styled.div`
   height: 100%;
   z-index: 30;
   gap: 20px;
+
+  @media (max-width: 1600px) {
+    width: 700px;
+  }
 `;
 
 export const StyledForm = styled.form`
@@ -231,12 +233,42 @@ export const TitleLarge = styled.h1`
   color: ${colors.black};
 `;
 
-export const LogoContainer = styled.div`
+export const LogoContainerRight = styled.div`
   position: absolute;
   top: -200px;
-  right: -600px;
+  right: -580px;
   /* transform: translateX(-50%); */
   z-index: 30;
   width: 800px;
   height: 800px;
+  z-index: 0;
+  pointer-events: none;
+
+  * {
+    pointer-events: none !important;
+  }
+
+  @media (max-width: 1270px) {
+    display: none;
+  }
+`;
+
+export const LogoContainerLeft = styled.div`
+  position: absolute;
+  top: -140px;
+  left: -700px;
+  z-index: 30;
+  width: 900px;
+  height: 900px;
+  z-index: 0;
+  pointer-events: none;
+
+  * {
+    pointer-events: none !important;
+  }
+
+  @media (max-width: 2300px) {
+    top: 140px;
+    left: -600px;
+  }
 `;  

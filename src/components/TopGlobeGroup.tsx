@@ -41,7 +41,7 @@ function OneGlobeGroup({ currentAgentIndex, scale = 1, position = [0, 0, 0], rot
   useFrame((_state, delta) => {
     if (groupRef.current && isAnimating.current) {
       const elapsed = Date.now() - (animationStartTime.current || 0);
-      const animationDuration = 4000;
+      const animationDuration = 5000;
 
       if (elapsed < animationDuration) {
         const progress = elapsed / animationDuration;

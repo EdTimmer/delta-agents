@@ -4,7 +4,6 @@ import colors from '../../styles/colors';
 export const ComponentWrapper = styled.div`
   width: 100%;
   height: 100%;
-  padding-top: 10px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -32,14 +31,15 @@ export const ImageContainer = styled.div`
   align-items: center;
 
   img {
-    /* max-width: 100%; */
-    /* max-height: 100%; */
     min-width: 100%;
     height: 614px;
     object-fit: cover;
     overflow: hidden;
     border-radius: 10px;
-    border: 1px solid ${colors.black};
+
+    @media (max-width: 1600px) {
+      height: 400px;
+    }
   }
 `;
 

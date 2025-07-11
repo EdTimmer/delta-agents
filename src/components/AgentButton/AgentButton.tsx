@@ -26,7 +26,6 @@ const AgentButton = (
   ];
 
   const handleButtonClick = (assignedIndex: number) => {
-    console.log('AgentButton clicked - setting currentAgentIndex to:', assignedIndex);
     setCurrentAgentIndex(assignedIndex);
     setIsReset?.(true);
   };
