@@ -17,6 +17,7 @@ function GlobesRightGroup({ currentAgentIndex, separation = 1, scale = 1, positi
   const animationStartTime = useRef<number | null>(null);
   const isAnimating = useRef(false);
   const previousAgentIndex = useRef<number>(currentAgentIndex);
+  const directionRef = useRef<number>(1);
 
   const rotX = rotation[0];
   const rotY = rotation[1];
@@ -33,6 +34,8 @@ function GlobesRightGroup({ currentAgentIndex, separation = 1, scale = 1, positi
   // Start animation when currentAgentIndex changes
   useEffect(() => {
     if (previousAgentIndex.current !== currentAgentIndex) {
+      // determine spin direction: forward or backward
+      directionRef.current = currentAgentIndex > previousAgentIndex.current ? 1 : -1;
       isAnimating.current = true;
       animationStartTime.current = Date.now();
       previousAgentIndex.current = currentAgentIndex;
@@ -57,7 +60,8 @@ function GlobesRightGroup({ currentAgentIndex, separation = 1, scale = 1, positi
         const easeOut = 1 - Math.pow(1 - progress, 3);
         // Invert the easing to start fast and slow down
         const rotationSpeed = 1.5 * (1 - easeOut);
-        groupRef.current.rotation.z += delta * rotationSpeed;
+        // apply directional rotation
+        groupRef.current.rotation.z += delta * rotationSpeed * directionRef.current;
       } else {
         isAnimating.current = false;
         animationStartTime.current = null;

@@ -18,7 +18,7 @@ function Demo3DGroup({ currentAgentIndex = 0 }: { currentAgentIndex?: number }) 
         from: { spinRotation: 0 },
         to: { spinRotation: direction * Math.PI * 2 },
         reset: true,
-        config: { mass: 2.5, tension: 40, friction: 10 },
+        config: { mass: 4, tension: 40, friction: 10 },
         onRest: () => {
           // reset value after each spin
           spinApi.set({ spinRotation: 0 });

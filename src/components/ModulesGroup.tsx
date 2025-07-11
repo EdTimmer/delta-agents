@@ -19,10 +19,11 @@ function ModulesGroup({ currentAgentIndex = 0 }: { currentAgentIndex?: number })
 
   // set initial rotation on mount
   useEffect(() => {
+    // set initial rotation on mount only
     if (logoGroupRef.current) {
-      logoGroupRef.current.rotation.y = targetRotationY;
+      logoGroupRef.current.rotation.y = (currentAgentIndex * ((2 * Math.PI) / positions.length)) - Math.PI / 2;
     }
-  }, [targetRotationY]);
+  }, []);
 
   // animate rotation towards target when currentAgentIndex changes
   useFrame((_, delta) => {
@@ -31,7 +32,7 @@ function ModulesGroup({ currentAgentIndex = 0 }: { currentAgentIndex?: number })
     logoGroupRef.current.rotation.y = THREE.MathUtils.lerp(
       currentY,
       targetRotationY,
-      delta * 5
+      delta * 2  // slower rotation speed
     );
   });
    
