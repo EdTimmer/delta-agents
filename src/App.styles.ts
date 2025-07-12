@@ -75,19 +75,14 @@ export const BotScene = styled.div`
 
 export const RightSpheresScene = styled.div`
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 400px;
+  right: -800px;
   z-index: 0;
   width: 800px;
-  height: 100%;
-  flex-direction: row;
-  justify-content: center;
-  align-items: flex-end;
-  flex-wrap: wrap;
-  margin-top: 0;
+  height: 800px;
 
   @media (max-width: 1600px) {
-    right: -200px;
+    right: -600px;
   }
 `;
 

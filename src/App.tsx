@@ -113,26 +113,27 @@ function App() {
             <OrbitControls />
           </Canvas>
         </LogoContainerRight> 
+
+        <RightSpheresScene>
+          <Canvas
+            gl={{
+              antialias: true,
+              toneMapping: THREE.ACESFilmicToneMapping
+            }}
+            onCreated={({ gl }) => {
+              gl.toneMapping = THREE.ACESFilmicToneMapping;
+              gl.toneMappingExposure = 1.0;
+              }}
+            >
+            <PerspectiveCamera makeDefault fov={16} position={[0, 0, 10]} far={15} />
+            <GlobesRightGroup separation={0.8} scale={1.35} position={[0, 0, 0]} rotation={[0.9, Math.PI / 2 - 0.7, 0]} currentAgentIndex={currentAgentIndex} />
+            <directionalLight position={[-5, 0, 0]} color={'#fff'} intensity={1} />
+            <Environment preset="forest" backgroundIntensity={0.2} />
+          </Canvas>
+        </RightSpheresScene>
       </InterfaceContainer>
 
       <RightColumn />
-      <RightSpheresScene>
-        <Canvas
-          gl={{
-            antialias: true,
-            toneMapping: THREE.ACESFilmicToneMapping
-          }}
-          onCreated={({ gl }) => {
-            gl.toneMapping = THREE.ACESFilmicToneMapping;
-            gl.toneMappingExposure = 1.0;
-            }}
-          >
-          <PerspectiveCamera makeDefault fov={16} position={[0, 0, 10]} far={15} />
-          <GlobesRightGroup separation={0.8} scale={1} position={[0, -0.7, 0]} rotation={[0.9, Math.PI / 2 - 0.7, 0]} currentAgentIndex={currentAgentIndex} />
-          <directionalLight position={[-5, 0, 0]} color={'#fff'} intensity={1} />
-          <Environment preset="forest" backgroundIntensity={0.2} />
-        </Canvas>
-      </RightSpheresScene>
     </AppContainer>    
   )
 }
