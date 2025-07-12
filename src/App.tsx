@@ -88,10 +88,6 @@ function App() {
         <NavSection>
           <Link href="https://www.edtimmer.com/" target="_blank" aria-label="Link to portfolio" title="Link to portfolio">edtimmer.com</Link>
         </NavSection>
-      </LeftColumn>
-
-      <InterfaceContainer>
-        <CenterContent currentAgentIndex={currentAgentIndex} />
 
         <LogoContainerLeft>
           <Canvas gl={{ antialias: true }}>
@@ -103,6 +99,10 @@ function App() {
             <OrbitControls />
           </Canvas>
         </LogoContainerLeft>
+      </LeftColumn>
+
+      <InterfaceContainer>
+        <CenterContent currentAgentIndex={currentAgentIndex} />
 
         <LogoContainerRight>
           <Canvas gl={{ antialias: true }}>

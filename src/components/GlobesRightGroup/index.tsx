@@ -1,7 +1,7 @@
 import { useRef, useEffect } from 'react';
 import { useFrame } from "@react-three/fiber";
 import { Group } from 'three';
-import Globe from '../Globe'
+import Globe from '../Globe';
 
 interface Props {
   currentAgentIndex: number;
@@ -69,12 +69,41 @@ function GlobesRightGroup({ currentAgentIndex, separation = 1, scale = 1, positi
     }
   });
 
+  // Create positions for a regular pentagon on the x/y plane
+  const positions: [number, number, number][] = [];
+  const numVertices = 5;
+  const angleStep = (2 * Math.PI) / numVertices;
+  
+  for (let i = 0; i < numVertices; i++) {
+    const angle = i * angleStep;
+    const x = separation * Math.cos(angle);
+    const y = separation * Math.sin(angle);
+    positions.push([x, y, 0]); // Note: z=0 for x/y plane
+  }
+  
+  // Model files for each globe
+  const modelFiles = [
+    'light_12',
+    'squares_light_purple',
+    'light_9',
+    'dimples_light_purple',
+    'spirals_light_purple' // Added a fifth model
+  ];
+
   return (
     <group position={position} ref={groupRef} scale={[scale, scale, scale]}>
-      <Globe position={[-1 * separation, 0, 0]} scale={0.25} rotation={[0, 0, 0]} modelFileName={'light_12'} speedX={0} speedY={0} speedZ={0} />
-      <Globe position={[0, 1 * separation, 0]} scale={0.25} rotation={[0, 0, 0]} modelFileName={'sphere_gold_13'} speedX={0} speedY={0} speedZ={0} />
-      <Globe position={[1 * separation, 0, 0]} scale={0.25} rotation={[0, 0, 0]} modelFileName={'light_9'} speedX={0} speedY={0} speedZ={0} />
-      <Globe position={[0, -1 * separation, 0]} scale={0.25} rotation={[0, 0, 0]} modelFileName={'sphere_gold_5'} speedX={0} speedY={0} speedZ={0} />
+      {positions.map((pos, index) => (
+        <Globe 
+          key={index}
+          position={pos}
+          scale={0.25}
+          rotation={[0, 0, 0]}
+          modelFileName={modelFiles[index]}
+          speedX={0}
+          speedY={0}
+          speedZ={0}
+        />
+      ))}
     </group>    
   );
 }

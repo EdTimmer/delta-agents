@@ -37,12 +37,12 @@ function Demo3DGroup({ currentAgentIndex = 0 }: { currentAgentIndex?: number }) 
       rotation-y={spinRotation as unknown as number}
     >
       <LogoTextMichromaVertical
-        position={[0, 1.2, 0]}
+        position={[0, 0, 0]}
         rotation={new THREE.Euler(0, 0, 0)}
         text="DEMO—3D"
         color="#ffffff"
         scale={[1, 1, 1]}
-        size={0.4}
+        size={0.7}
         letterSpacing={0.2}
       />
     </animated.group>

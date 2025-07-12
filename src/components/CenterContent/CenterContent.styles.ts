@@ -66,3 +66,19 @@ export const Text = styled.p`
   font-family: 'Open Sans', 'Roboto Mono', monospace;
   color: ${colors.black};
 `;
+
+export const BottomGlobeScene = styled.div`
+  position: absolute;
+  bottom: -500px;
+  left: -400px;
+  width: 900px;
+  height: 900px;
+  z-index: 0;
+  pointer-events: none;
+  * {
+    pointer-events: none !important;
+  }
+  @media (max-width: 1600px) {
+    display: none;
+  }
+`;

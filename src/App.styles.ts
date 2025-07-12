@@ -250,20 +250,19 @@ export const LogoContainerRight = styled.div`
 
 export const LogoContainerLeft = styled.div`
   position: absolute;
-  top: -140px;
-  left: -700px;
+  top: 360px;
+  right: -86px;
   z-index: 30;
-  width: 900px;
-  height: 900px;
-  z-index: 0;
+  width: 500px;
+  height: 500px;
+  z-index: 50;
   pointer-events: none;
 
   * {
     pointer-events: none !important;
   }
 
-  @media (max-width: 2300px) {
-    top: 140px;
-    left: -600px;
+  @media (max-width: 1650px) {
+    right: -136px;
   }
 `;  
