@@ -63,7 +63,7 @@ function OneGlobeGroup({ currentAgentIndex, scale = 1, position = [0, 0, 0], rot
 
   return (
     <group position={position} ref={groupRef} scale={[scale, scale, scale]}>
-      <Globe position={[0, 0, 0]} scale={1} rotation={[0, 0, 0]} modelFileName={'bumps_light_purple'} speedZ={0} speedY={0} speedX={0} />
+      <Globe position={[0, 0, 0]} scale={1} rotation={[0, 0, 0]} modelFileName={'sphere_gold_8'} speedZ={0} speedY={0} speedX={0} />
     </group>    
   );
 }

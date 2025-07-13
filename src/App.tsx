@@ -7,27 +7,33 @@ import {
   InterfaceContainer,
   LeftColumn,
   RightSpheresScene,
-  TopLeftGlobeScene,
+  // TopLeftGlobeScene,
   RightColumn,
   LogoContainerRight,
   NavSection,
   Link,
   LogoContainerLeft,
   LinkContainer,
+  // LeftGlobesContainer,
+  // BottomGlobeScene,
+  TitleLarge,
+  TopLeftScene,
 } from './App.styles'
 import AgentButton from './components/AgentButton/AgentButton';
 import GlobesRightGroup from './components/GlobesRightGroup';
 import CenterContent from './components/CenterContent/CenterContent';
-import TopGlobeGroup from './components/TopGlobeGroup';
+// import TopGlobeGroup from './components/TopGlobeGroup';
 import ModulesGroup from './components/ModulesGroup';
 import Demo3DGroup from './components/Demo3DGroup';
+import GlobesLeftGroup from './components/GlobesLeftGroup';
+// import TopGlobeGroup from './components/TopGlobeGroup';
 
 function App() {
   const [currentAgentIndex, setCurrentAgentIndex] = useState(0);
 
   return (    
     <AppContainer>
-      <TopLeftGlobeScene>
+      <TopLeftScene>
         <Canvas
           gl={{
             antialias: true,
@@ -39,16 +45,20 @@ function App() {
             }}
           >
           <PerspectiveCamera makeDefault fov={20} position={[0, 0, 8]} />
-          <TopGlobeGroup currentAgentIndex={currentAgentIndex} scale={0.7} position={[-0.4, 0.4, 0]} rotation={[0, 0, 0]} />
-          {/* <directionalLight position={[0, 0, 10]} color={'#fff'} intensity={1} /> */}
-          <directionalLight position={[2, -2, 5]} color={'#fff'} intensity={1} />
+          {/* <TopGlobeGroup currentAgentIndex={currentAgentIndex} scale={0.7} position={[-0.4, 0.4, 0]} rotation={[0, 0, 0]} /> */}
+          <GlobesLeftGroup separation={0.48} scale={1.2} position={[0, 1, 0]} rotation={[0, 0, 0]} currentAgentIndex={currentAgentIndex} />
+
+          {/* <directionalLight position={[2, -2, 5]} color={'#fff'} intensity={1} /> */}
+          <directionalLight position={[0, -1, 5]} color={'#fff'} intensity={0.5} />
+          <directionalLight position={[-2, 0, 5]} color={'#fff'} intensity={0.5} />
 
           <Environment preset="forest" backgroundIntensity={1.0} />
         </Canvas>
-      </TopLeftGlobeScene>
+      </TopLeftScene>
         
       <LeftColumn>
         <NavSection>
+          <TitleLarge>Demo - 3D</TitleLarge>
           <AgentButton
             setCurrentAgentIndex={setCurrentAgentIndex}
             assignedIndex={0}
@@ -94,6 +104,27 @@ function App() {
             <Environment preset="forest" backgroundIntensity={0.5} />
           </Canvas>
         </LogoContainerLeft>
+
+        {/* <LeftGlobesContainer>
+          <BottomGlobeScene>
+            <Canvas
+              gl={{
+                antialias: true,
+                toneMapping: THREE.ACESFilmicToneMapping
+              }}
+              onCreated={({ gl }) => {
+                gl.toneMapping = THREE.ACESFilmicToneMapping;
+                gl.toneMappingExposure = 1.0;
+                }}
+              >
+              <PerspectiveCamera makeDefault fov={20} position={[0, 0, 8]} />
+              <GlobesLeftGroup separation={0.5} scale={1.2} position={[0, 1, 0]} rotation={[0, 0, 0]} currentAgentIndex={currentAgentIndex} />
+              <directionalLight position={[-4, -4, 10]} color={'#fff'} intensity={1.5} />
+
+              <Environment preset="forest" backgroundIntensity={1.0} />
+            </Canvas>
+          </BottomGlobeScene>
+        </LeftGlobesContainer> */}
       </LeftColumn>
 
       <InterfaceContainer>

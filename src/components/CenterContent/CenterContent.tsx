@@ -1,5 +1,5 @@
 import { Canvas } from "@react-three/fiber";
-import { MainContainer, ImageContainer, Title, Text, FlexStartRow, ComponentWrapper, BottomGlobeScene, BottomGlobeContainer } from "./CenterContent.styles";
+import { MainContainer, ImageContainer, Title, Text, FlexStartRow, ComponentWrapper } from "./CenterContent.styles";
 import Office01 from "/images/office01.jpg";
 import Office03 from "/images/office03.jpg";
 import Office06 from "/images/office06.jpg";
@@ -46,29 +46,7 @@ const CenterContent = ({ currentAgentIndex }: CenterContentProps) => {
         <Text>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur non rutrum ipsum, quis ornare augue. Nam facilisis quam quis pulvinar convallis. Etiam rutrum metus ac mauris pretium, et blandit lectus sagittis. Sed vulputate lobortis velit, nec convallis arcu imperdiet vitae. Vivamus vehicula fringilla massa, sit amet consectetur magna volutpat eu. Duis scelerisque euismod nunc, vitae molestie eros finibus non. Sed ut nisl finibus, gravida velit eu, consequat augue. Phasellus id odio ut mauris mollis laoreet sit amet sed leo. Nullam pellentesque, justo eget posuere vulputate, lacus metus lacinia dui, ut maximus dolor sapien vitae dolor. Pellentesque interdum sollicitudin lacus.
         </Text>
-      </MainContainer>
-
-      <BottomGlobeContainer>
-        <BottomGlobeScene>
-          <Canvas
-            gl={{
-              antialias: true,
-              toneMapping: THREE.ACESFilmicToneMapping
-            }}
-            onCreated={({ gl }) => {
-              gl.toneMapping = THREE.ACESFilmicToneMapping;
-              gl.toneMappingExposure = 1.0;
-              }}
-            >
-            <PerspectiveCamera makeDefault fov={20} position={[0, 0, 8]} />
-            {/* <BottomGlobeGroup currentAgentIndex={currentAgentIndex} scale={0.4} position={[-0.4, 0.4, 0]} /> */}
-            <GlobesLeftGroup separation={0.5} scale={1.25} position={[0, 0, 0]} rotation={[0.3, Math.PI / 2 - 0.4, 0]} currentAgentIndex={currentAgentIndex} />
-            <directionalLight position={[-4, -4, 10]} color={'#fff'} intensity={1.5} />
-
-            <Environment preset="forest" backgroundIntensity={1.0} />
-          </Canvas>
-        </BottomGlobeScene>
-      </BottomGlobeContainer>
+      </MainContainer>      
     </ComponentWrapper>
   );
 };

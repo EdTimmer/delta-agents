@@ -80,7 +80,7 @@ function GlobesRightGroup({ currentAgentIndex, separation = 1, scale = 1, positi
     'grooves_light_blue_2',
     'light_12',
     'squares_light_red',
-    'spirals_light_yellow',
+    'six_grooves_yellow',
     'dimples_light_purple',
   ];
 

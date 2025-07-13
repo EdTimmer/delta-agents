@@ -27,7 +27,7 @@ export const LeftColumn = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   padding: 20px;
-  padding-top: 580px;
+  /* padding-top: 580px; */
   z-index: 10;
   border-radius: 20px;
   gap: 20px;
@@ -83,16 +83,17 @@ export const RightSpheresScene = styled.div`
   z-index: 0;
   width: 800px;
   height: 800px;
+  opacity: 1;
 
   @media (max-width: 1600px) {
     right: -600px;
   }
 `;
 
-export const TopLeftGlobeScene = styled.div`
+export const TopLeftScene = styled.div`
   position: absolute;
-  top: -240px;
-  left: -80px;
+  top: -100px;
+  left: 300px;
   z-index: 0;
   width: 900px;
   height: 900px;
@@ -253,8 +254,8 @@ export const LogoContainerRight = styled.div`
 
 export const LogoContainerLeft = styled.div`
   position: absolute;
-  top: 40px;
-  right: -86px;
+  top: 400px;
+  right: -90px;
   z-index: 30;
   width: 500px;
   height: 500px;
@@ -268,4 +269,36 @@ export const LogoContainerLeft = styled.div`
   @media (max-width: 1650px) {
     right: -136px;
   }
-`;  
+`;
+
+export const LeftGlobesContainer = styled.div`
+  position: absolute;
+  top: -300px;
+  right: -1000px;
+  width: 1200px;
+  height: 1200px;
+  overflow: hidden;
+  z-index: -10;
+  pointer-events: none;
+  opacity: 1;
+  * {
+    pointer-events: none !important;
+  }
+  @media (max-width: 1600px) {
+    display: none;
+  }
+`;
+
+export const BottomGlobeScene = styled.div`
+  width: 1200px;
+  height: 1200px;
+  /* z-index: -10; */
+  pointer-events: none;
+
+  * {
+    pointer-events: none !important;
+  }
+  @media (max-width: 1600px) {
+    display: none;
+  }
+`;

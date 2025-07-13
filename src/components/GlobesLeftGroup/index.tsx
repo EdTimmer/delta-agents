@@ -83,7 +83,7 @@ function GlobesLeftGroup({ currentAgentIndex, separation = 1, scale = 1, positio
   
   // Model files for each globe
   const modelFiles = [
-    'spirals_light_yellow',
+    'six_grooves_yellow',
     'dimples_light_purple',
     'grooves_light_blue_2',
     'light_12',

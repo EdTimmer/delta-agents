@@ -66,34 +66,3 @@ export const Text = styled.p`
   font-family: 'Open Sans', 'Roboto Mono', monospace;
   color: ${colors.black};
 `;
-
-export const BottomGlobeContainer = styled.div`
-  position: absolute;
-  bottom: 0;
-  left: -800px;
-  width: 600px;
-  height: 600px;
-  overflow: hidden;
-  z-index: 0;
-  pointer-events: none;
-  * {
-    pointer-events: none !important;
-  }
-  @media (max-width: 1600px) {
-    display: none;
-  }
-`;
-
-export const BottomGlobeScene = styled.div`
-  width: 600px;
-  height: 600px;
-  z-index: 0;
-  pointer-events: none;
-
-  * {
-    pointer-events: none !important;
-  }
-  @media (max-width: 1600px) {
-    display: none;
-  }
-`;
