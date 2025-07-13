@@ -1,13 +1,9 @@
-import { Canvas } from "@react-three/fiber";
 import { MainContainer, ImageContainer, Title, Text, FlexStartRow, ComponentWrapper } from "./CenterContent.styles";
 import Office01 from "/images/office01.jpg";
 import Office03 from "/images/office03.jpg";
 import Office06 from "/images/office06.jpg";
 import Office08 from "/images/office08.jpg";
 import Office09 from "/images/office09.jpg";
-import * as THREE from "three";
-import { Environment, PerspectiveCamera } from "@react-three/drei";
-import GlobesLeftGroup from "../GlobesLeftGroup";
 
 interface CenterContentProps {
   currentAgentIndex: number;
