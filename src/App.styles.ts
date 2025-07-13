@@ -88,6 +88,10 @@ export const RightSpheresScene = styled.div`
   @media (max-width: 1600px) {
     right: -600px;
   }
+
+  @media (max-width: 1270px) {
+    display: none;
+  }
 `;
 
 export const TopLeftScene = styled.div`
@@ -98,6 +102,14 @@ export const TopLeftScene = styled.div`
   width: 900px;
   height: 900px;
   pointer-events: none;
+
+  @media (max-width: 2800px) {
+    left: 100px;
+  }
+
+  @media (max-width: 1600px) {
+    display: none;
+  }
 `;
 
 export const LightGlobeScene = styled.div`
@@ -246,7 +258,9 @@ export const LogoContainerRight = styled.div`
   * {
     pointer-events: none !important;
   }
-
+  @media (max-width: 1850px) {
+    right: -600px;
+  }
   @media (max-width: 1270px) {
     display: none;
   }
