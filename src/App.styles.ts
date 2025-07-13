@@ -8,11 +8,13 @@ export const AppContainer = styled.div`
   font-family: 'Open Sans', 'Roboto Mono', monospace;
   width: 100vw;
   height: 100vh;
+  box-sizing: border-box;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
   padding: 20px;
+  overflow-x: hidden;
 `;
 
 export const LeftColumn = styled.div`
@@ -22,9 +24,10 @@ export const LeftColumn = styled.div`
   height: calc(100vh - 40px);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: flex-start;
   padding: 20px;
+  padding-top: 580px;
   z-index: 10;
   border-radius: 20px;
   gap: 20px;
@@ -75,7 +78,7 @@ export const BotScene = styled.div`
 
 export const RightSpheresScene = styled.div`
   position: absolute;
-  top: 400px;
+  top: 350px;
   right: -800px;
   z-index: 0;
   width: 800px;
@@ -117,7 +120,7 @@ export const LightGlobeScene = styled.div`
 export const LinkContainer = styled.div`
   position: absolute;
   bottom: 30px;
-  left: 40px;
+  right: 100px;
   font-size: 16px;
   letter-spacing: 1px;
   z-index: 30;
@@ -230,8 +233,8 @@ export const TitleLarge = styled.h1`
 
 export const LogoContainerRight = styled.div`
   position: absolute;
-  top: -200px;
-  right: -580px;
+  top: -300px;;
+  right: -700px;
   /* transform: translateX(-50%); */
   z-index: 30;
   width: 800px;
@@ -250,7 +253,7 @@ export const LogoContainerRight = styled.div`
 
 export const LogoContainerLeft = styled.div`
   position: absolute;
-  top: 360px;
+  top: 40px;
   right: -86px;
   z-index: 30;
   width: 500px;

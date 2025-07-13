@@ -45,17 +45,11 @@ function GlobesRightGroup({ currentAgentIndex, separation = 1, scale = 1, positi
   useFrame((_state, delta) => {
     if (groupRef.current && isAnimating.current) {
       const elapsed = Date.now() - (animationStartTime.current || 0);
-      const delayDuration = 0;
       const animationDuration = 5000;
-      const totalDuration = delayDuration + animationDuration;
 
-      if (elapsed < delayDuration) {
-        // During delay period, do nothing
-        return;
-      } else if (elapsed < totalDuration) {
+      if (elapsed < animationDuration) {
         // Animation period
-        const animationElapsed = elapsed - delayDuration;
-        const progress = animationElapsed / animationDuration;
+        const progress = elapsed / animationDuration;
         // Ease out cubic: 1 - (1 - x)^3
         const easeOut = 1 - Math.pow(1 - progress, 3);
         // Invert the easing to start fast and slow down
@@ -83,11 +77,11 @@ function GlobesRightGroup({ currentAgentIndex, separation = 1, scale = 1, positi
   
   // Model files for each globe
   const modelFiles = [
+    'grooves_light_blue_2',
     'light_12',
-    'squares_light_purple',
-    'light_9',
+    'squares_light_red',
+    'spirals_light_yellow',
     'dimples_light_purple',
-    'spirals_light_purple' // Added a fifth model
   ];
 
   return (

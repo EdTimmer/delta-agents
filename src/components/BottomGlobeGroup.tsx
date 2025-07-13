@@ -63,7 +63,7 @@ function BottomGlobeGroup({ currentAgentIndex, scale = 1, position = [0, 0, 0], 
 
   return (
     <group position={position} ref={groupRef} scale={[scale, scale, scale]} rotation={[0, 0, 0]}>
-      <Globe position={[0, 0, 0]} scale={1} rotation={[0, 0, 0]} modelFileName={'spirals_light_yellow'} speedZ={0} speedY={0} speedX={0} />
+      <Globe position={[0, 0, 0]} scale={1} rotation={[0, 0, 0]} modelFileName={'spirals_green'} speedZ={0} speedY={0} speedX={0} />
     </group>    
   );
 }
