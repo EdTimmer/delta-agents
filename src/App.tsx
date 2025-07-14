@@ -46,12 +46,7 @@ function App() {
           >
           <PerspectiveCamera makeDefault fov={20} position={[0, 0, 8]} />
           {/* <TopGlobeGroup currentAgentIndex={currentAgentIndex} scale={0.7} position={[-0.4, 0.4, 0]} rotation={[0, 0, 0]} /> */}
-          <GlobesLeftGroup separation={0.48} scale={1.2} position={[0, 1, 0]} rotation={[0, 0, 0]} currentAgentIndex={currentAgentIndex} />
-
-          {/* <directionalLight position={[2, -2, 5]} color={'#fff'} intensity={1} /> */}
-          <directionalLight position={[0, -1, 5]} color={'#fff'} intensity={0.5} />
-          <directionalLight position={[-2, 0, 5]} color={'#fff'} intensity={0.5} />
-
+          <GlobesLeftGroup separation={0.35} scale={1.2} position={[0, 1, 0]} rotation={[0, 0, 0]} currentAgentIndex={currentAgentIndex} />
           <Environment preset="forest" backgroundIntensity={1.0} />
         </Canvas>
       </TopLeftScene>

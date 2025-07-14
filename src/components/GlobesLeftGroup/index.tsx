@@ -82,13 +82,22 @@ function GlobesLeftGroup({ currentAgentIndex, separation = 1, scale = 1, positio
   }
   
   // Model files for each globe
+  // const modelFiles = [
+  //   'six_grooves_yellow',
+  //   'dimples_light_purple',
+  //   'grooves_light_blue_2',
+  //   'light_12',
+  //   'squares_light_red',
+  // ];
+
   const modelFiles = [
-    'six_grooves_yellow',
-    'dimples_light_purple',
-    'grooves_light_blue_2',
-    'light_12',
-    'squares_light_red',
+    'grooves_gold',
+    'ribs_gold',
+    'squares_gold',
+    'stripes_gold',
+    'dimples_gold',
   ];
+
 
   return (
     <group position={position} ref={groupRef} scale={[scale, scale, scale]}>
@@ -96,7 +105,7 @@ function GlobesLeftGroup({ currentAgentIndex, separation = 1, scale = 1, positio
         <Globe 
           key={index}
           position={pos}
-          scale={0.25}
+          scale={0.15}
           rotation={[0, 0, 0]}
           modelFileName={modelFiles[index]}
           speedX={0}
