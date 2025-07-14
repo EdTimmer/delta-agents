@@ -46,7 +46,7 @@ function App() {
           >
           <PerspectiveCamera makeDefault fov={20} position={[0, 0, 8]} />
           {/* <TopGlobeGroup currentAgentIndex={currentAgentIndex} scale={0.7} position={[-0.4, 0.4, 0]} rotation={[0, 0, 0]} /> */}
-          <GlobesLeftGroup separation={0.35} scale={1.2} position={[0, 1, 0]} rotation={[0, 0, 0]} currentAgentIndex={currentAgentIndex} />
+          <GlobesLeftGroup separation={0.35} scale={1.2} position={[0, 1, 0]} rotation={[0, Math.PI, 0]} currentAgentIndex={currentAgentIndex} />
           <Environment preset="forest" backgroundIntensity={1.0} />
         </Canvas>
       </TopLeftScene>
@@ -96,7 +96,7 @@ function App() {
             <ambientLight intensity={0.5} />
             {/* <LogoTextMichromaVertical position={[0, 1.2, 0]} rotation={new THREE.Euler(0, 0, 0)} text="DEMO—3D" color="#ffffff" scale={[1, 1, 1]} size={0.35} letterSpacing={0.2} /> */}
             <Demo3DGroup currentAgentIndex={currentAgentIndex} />
-            <Environment preset="forest" backgroundIntensity={0.5} />
+            <Environment preset="forest" backgroundIntensity={0.2} />
           </Canvas>
         </LogoContainerLeft>
 

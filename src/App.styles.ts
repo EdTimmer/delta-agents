@@ -96,7 +96,7 @@ export const RightSpheresScene = styled.div`
 
 export const TopLeftScene = styled.div`
   position: absolute;
-  top: -100px;
+  top: 0;
   left: 300px;
   z-index: 0;
   width: 900px;
