@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { Canvas } from '@react-three/fiber';
 import { Environment, PerspectiveCamera } from '@react-three/drei';
 import * as THREE from 'three';
+import LoadingIndicator from './components/LoadingIndicator/LoadingIndicator';
+import LoadingManager from './components/LoadingManager/LoadingManager';
 import { 
   AppContainer,
   InterfaceContainer,
@@ -30,9 +32,21 @@ import GlobesLeftGroup from './components/GlobesLeftGroup';
 
 function App() {
   const [currentAgentIndex, setCurrentAgentIndex] = useState(0);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [loadingProgress, setLoadingProgress] = useState(0);
+  
+  // Track loading progress from each Canvas component
+  const handleProgress = (progress: number) => {
+    // Update with the latest progress
+    setLoadingProgress((prevProgress) => 
+      // Take the highest progress value
+      Math.max(prevProgress, Math.round(progress))
+    );
+  };
 
   return (    
     <AppContainer>
+      {!isLoaded && <LoadingIndicator progress={loadingProgress} />}
       <TopLeftScene>
         <Canvas
           gl={{
@@ -44,10 +58,12 @@ function App() {
             gl.toneMappingExposure = 1.0;
             }}
           >
-          <PerspectiveCamera makeDefault fov={20} position={[0, 0, 8]} />
-          {/* <TopGlobeGroup currentAgentIndex={currentAgentIndex} scale={0.7} position={[-0.4, 0.4, 0]} rotation={[0, 0, 0]} /> */}
-          <GlobesLeftGroup separation={0.35} scale={1.2} position={[0, 1, 0]} rotation={[0, Math.PI, 0]} currentAgentIndex={currentAgentIndex} />
-          <Environment preset="forest" backgroundIntensity={1.0} />
+          <LoadingManager setIsLoaded={setIsLoaded} setProgress={handleProgress}>
+            <PerspectiveCamera makeDefault fov={20} position={[0, 0, 8]} />
+            {/* <TopGlobeGroup currentAgentIndex={currentAgentIndex} scale={0.7} position={[-0.4, 0.4, 0]} rotation={[0, 0, 0]} /> */}
+            <GlobesLeftGroup separation={0.35} scale={1.2} position={[0, 1, 0]} rotation={[0, Math.PI, 0]} currentAgentIndex={currentAgentIndex} />
+            <Environment preset="forest" backgroundIntensity={1.0} />
+          </LoadingManager>
         </Canvas>
       </TopLeftScene>
         
@@ -92,11 +108,13 @@ function App() {
 
         <LogoContainerLeft>
           <Canvas gl={{ antialias: true }}>
-            <PerspectiveCamera makeDefault fov={20} position={[0, 0, 20]} far={180}/>
-            <ambientLight intensity={0.5} />
-            {/* <LogoTextMichromaVertical position={[0, 1.2, 0]} rotation={new THREE.Euler(0, 0, 0)} text="DEMO—3D" color="#ffffff" scale={[1, 1, 1]} size={0.35} letterSpacing={0.2} /> */}
-            <Demo3DGroup currentAgentIndex={currentAgentIndex} />
-            <Environment preset="forest" backgroundIntensity={0.2} />
+            <LoadingManager setIsLoaded={setIsLoaded} setProgress={handleProgress}>
+              <PerspectiveCamera makeDefault fov={20} position={[0, 0, 20]} far={22}/>
+              <ambientLight intensity={0.5} />
+              {/* <LogoTextMichromaVertical position={[0, 1.2, 0]} rotation={new THREE.Euler(0, 0, 0)} text="DEMO—3D" color="#ffffff" scale={[1, 1, 1]} size={0.35} letterSpacing={0.2} /> */}
+              <Demo3DGroup currentAgentIndex={currentAgentIndex} />
+              <Environment preset="forest" backgroundIntensity={0.2} />
+            </LoadingManager>
           </Canvas>
         </LogoContainerLeft>
 
@@ -127,10 +145,12 @@ function App() {
 
         <LogoContainerRight>
           <Canvas gl={{ antialias: true }}>
-            <PerspectiveCamera makeDefault fov={20} position={[0, 0, 20]} far={18}/>
-            <ambientLight intensity={1} />
-            <ModulesGroup currentAgentIndex={currentAgentIndex} />
-            <Environment preset="forest" backgroundIntensity={1.0} />
+            <LoadingManager setIsLoaded={setIsLoaded} setProgress={handleProgress}>
+              <PerspectiveCamera makeDefault fov={20} position={[0, 0, 20]} far={18}/>
+              <ambientLight intensity={1} />
+              <ModulesGroup currentAgentIndex={currentAgentIndex} />
+              <Environment preset="forest" backgroundIntensity={1.0} />
+            </LoadingManager>
           </Canvas>
         </LogoContainerRight> 
 
@@ -145,11 +165,13 @@ function App() {
               gl.toneMappingExposure = 1.0;
               }}
             >
-            <PerspectiveCamera makeDefault fov={16} position={[0, 0, 10]} far={15} />
-            <GlobesRightGroup separation={0.8} scale={1.35} position={[0, 0, 0]} rotation={[0.9, Math.PI / 2 - 0.7, 0]} currentAgentIndex={currentAgentIndex} />
-            <directionalLight position={[0, -1, 5]} color={'#fff'} intensity={0.5} />
-            <directionalLight position={[-2, 0, 5]} color={'#fff'} intensity={0.5} />
-            <Environment preset="forest" backgroundIntensity={0.2} />
+            <LoadingManager setIsLoaded={setIsLoaded} setProgress={handleProgress}>
+              <PerspectiveCamera makeDefault fov={16} position={[0, 0, 10]} far={15} />
+              <GlobesRightGroup separation={0.8} scale={1.35} position={[0, 0, 0]} rotation={[0.9, Math.PI / 2 - 0.7, 0]} currentAgentIndex={currentAgentIndex} />
+              <directionalLight position={[0, -1, 5]} color={'#fff'} intensity={0.5} />
+              <directionalLight position={[-2, 0, 5]} color={'#fff'} intensity={0.5} />
+              <Environment preset="forest" backgroundIntensity={0.2} />
+            </LoadingManager>
           </Canvas>
         </RightSpheresScene>
       </InterfaceContainer>
